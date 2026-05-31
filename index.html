@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrandCraft Studio | Command Center & Premium Agency Website</title>
+    <title>BrandCraft Studio | Premium Graphic Design & Brand Identity Agency</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons for Beautiful UI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Alpine.js -->
+    <!-- Alpine.js for Smooth Interactive Magic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
@@ -28,10 +28,7 @@
                         darkCard: '#141414',
                         darkBorder: '#222222',
                         neonAccent: '#CCFF00', 
-                        neonGlow: '#CCFF0033',
-                        adminBg: '#0F111A',
-                        adminCard: '#161925',
-                        adminBorder: '#23293F'
+                        neonGlow: '#CCFF0033'
                     }
                 }
             }
@@ -50,7 +47,6 @@
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #0B0B0B;
@@ -64,52 +60,49 @@
         }
     </style>
 </head>
-<body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" 
-      x-data="clientApp()">
+<body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="clientApp()">
 
-    <!-- Glowing Background Gradients -->
     <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
-        <div class="absolute top-[1200px] right-10 w-[600px] h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
+    <div class="absolute top-[1200px] right-10 w-[600px] h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
-        <!-- Navigation Bar -->
-        <header class="fixed top-0 left-0 w-full z-40 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <!-- Brand Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-xl transition-transform duration-300 group-hover:rotate-12">
-                        BC
-                    </div>
-                    <span class="font-heading font-bold text-xl tracking-wide group-hover:text-neonAccent transition-colors">
-                        Brand<span class="text-neonAccent">Craft</span>
-                    </span>
-                </a>
-
-                <!-- Desktop Nav Links -->
-                <nav class="hidden md:flex items-center gap-8 font-medium">
-                    <a href="#services" class="text-gray-300 hover:text-neonAccent transition-colors">Services</a>
-                    <a href="#portfolio" class="text-gray-300 hover:text-neonAccent transition-colors">Portfolio</a>
-                    <a href="#philosophy" class="text-gray-300 hover:text-neonAccent transition-colors">Our Philosophy</a>
-                    <a href="#pricing" class="text-gray-300 hover:text-neonAccent transition-colors">Pricing & Plans</a>
-                    <a href="#style-quiz" class="text-neonAccent hover:underline transition-colors flex items-center gap-2">
-                        <span class="animate-pulse w-2 h-2 rounded-full bg-neonAccent"></span> Style Quiz
-                    </a>
-                </nav>
-
-                <!-- CTA Desktop Button -->
-                <div class="hidden md:flex items-center gap-4">
-                    <a href="admin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Admin Control</a>
-                    <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(204,255,0,0.2)] hover:shadow-[0_0_25px_rgba(204,255,0,0.4)]">
-                        Free Consultation <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </a>
+    <header class="fixed top-0 left-0 w-full z-40 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-xl transition-transform duration-300 group-hover:rotate-12">
+                    BC
                 </div>
+                <span class="font-heading font-bold text-xl tracking-wide group-hover:text-neonAccent transition-colors">
+                    Brand<span class="text-neonAccent">Craft</span>
+                </span>
+            </a>
 
-                <!-- Mobile Navigation Toggle -->
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden text-2xl focus:outline-none text-white hover:text-neonAccent">
-                    <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars-staggered'"></i>
-                </button>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium">
+                <a href="#services" class="text-gray-300 hover:text-neonAccent transition-colors">Services</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-neonAccent transition-colors">Portfolio</a>
+                <a href="#philosophy" class="text-gray-300 hover:text-neonAccent transition-colors">Our Philosophy</a>
+                <a href="#pricing" class="text-gray-300 hover:text-neonAccent transition-colors">Pricing & Plans</a>
+                <a href="#style-quiz" class="text-neonAccent hover:underline transition-colors flex items-center gap-2">
+                    <span class="animate-pulse w-2 h-2 rounded-full bg-neonAccent"></span> Style Quiz
+                </a>
+            </nav>
+
+            <!-- CTA Desktop Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="admin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Admin Control</a>
+                <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(204,255,0,0.2)] hover:shadow-[0_0_25px_rgba(204,255,0,0.4)]">
+                    Free Consultation <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
             </div>
 
-            <!-- Mobile Drawer -->
+            <!-- Mobile Navigation Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-2xl focus:outline-none text-white hover:text-neonAccent">
+                <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars-staggered'"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
         <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-10" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10" class="md:hidden absolute top-20 left-0 w-full bg-darkBg border-b border-darkBorder py-8 px-6 shadow-2xl flex flex-col gap-6" style="display: none;">
             <a @click="mobileMenu = false" href="#services" class="text-lg text-gray-300 hover:text-neonAccent">Services</a>
             <a @click="mobileMenu = false" href="#portfolio" class="text-lg text-gray-300 hover:text-neonAccent">Portfolio</a>
@@ -118,825 +111,796 @@
             <a @click="mobileMenu = false" href="admin.html" class="text-lg text-gray-300 hover:text-neonAccent">Admin Panel</a>
             <a @click="mobileMenu = false" href="#style-quiz" class="text-lg text-neonAccent font-semibold">Take Brand Style Quiz</a>
             <hr class="border-darkBorder">
-                <a @click="mobileMenu = false" href="#contact" class="bg-neonAccent text-black text-center py-3 rounded-full font-semibold">
-                    Get Free Consultation
-                </a>
-            </div>
-        </header>
+            <a @click="mobileMenu = false" href="#contact" class="bg-neonAccent text-black text-center py-3 rounded-full font-semibold">
+                Get Free Consultation
+            </a>
+        </div>
+    </header>
 
-        <!-- HERO SECTION -->
-        <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Left Info Column -->
-                <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkCard border border-darkBorder w-max mx-auto lg:mx-0 shadow-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-neonAccent animate-ping"></span>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Not Just Designs, We Build Lasting Brands</span>
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Info Column -->
+            <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkCard border border-darkBorder w-max mx-auto lg:mx-0 shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full bg-neonAccent animate-ping"></span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Not Just Designs, We Build Lasting Brands</span>
+                </div>
+                <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                    Design That Builds <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-neonAccent text-glow">Brands People Trust.</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0">
+                    Aapka brand sirf graphics nahi, aapke business ka chehra hai. Hum aapko paise se <span class="text-white font-semibold underline decoration-neonAccent">kahin zyada quality</span> aur 100% genuine growth-focused design assets deliver karte hain.
+                </p>
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0 mt-2">
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-rotate-left text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">unlimited reviews</span>
                     </div>
-                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                        Design That Builds <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-neonAccent text-glow">Brands People Trust.</span>
-                    </h1>
-                    <p class="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0">
-                        Aapka brand sirf graphics nahi, aapke business ka chehra hai. Hum aapko paise se <span class="text-white font-semibold underline decoration-neonAccent">kahin zyada quality</span> aur 100% genuine growth-focused design assets deliver karte hain.
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">100% Satisfaction</span>
+                    </div>
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-handshake text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">No-Compromise Trust</span>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 justify-center lg:justify-start">
+                    <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(204,255,0,0.15)] hover:shadow-[0_0_30px_rgba(204,255,0,0.4)] transform hover:-translate-y-1">
+                        Book Free Strategy Call
+                    </a>
+                    <a href="#portfolio" class="border border-darkBorder hover:border-neonAccent bg-darkCard/50 hover:bg-darkCard text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto text-center transform hover:-translate-y-1">
+                        Explore Showcase <i class="fa-solid fa-arrow-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Dashboard Mock -->
+            <div class="lg:col-span-5 relative mt-8 lg:mt-0">
+                <div class="bg-darkCard border border-darkBorder p-6 rounded-2xl relative shadow-2xl overflow-hidden box-glow">
+                    <div class="flex items-center gap-1.5 mb-6">
+                        <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+                        <span class="text-xs text-gray-500 ml-2">brandcraft_dashboard.design</span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-darkBorder pb-4 mb-6">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest">Client Satisfaction Rate</p>
+                            <h3 class="font-heading text-2xl font-bold text-neonAccent animate-pulse">99.8%</h3>
+                        </div>
+                        <div class="bg-neonAccent/10 text-neonAccent px-3 py-1 rounded-full text-xs font-semibold">
+                            <i class="fa-solid fa-star mr-1"></i> Highly Recommended
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                                    <i class="fa-solid fa-shapes"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Interactive Logo Guidelines</h4>
+                                    <p class="text-xs text-gray-500">Vector files & Palette ready</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                        </div>
+                        <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">High-Converting UI Mockups</h4>
+                                    <p class="text-xs text-gray-500">Fully responsive dynamic screens</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-darkBorder text-center">
+                        <p class="text-xs text-gray-400">
+                            <i class="fa-solid fa-quote-left text-neonAccent mr-1"></i>
+                            Hum sirf pixel nahi, trust design karte hain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-darkBg relative border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Domain Expertise</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">What We Create For You</h2>
+                    <p class="text-gray-400 text-sm mt-3 max-w-lg">Aapka visual communication handle karne ke liye hum 6 core segments me bespoke design services provide karte hain.</p>
+                </div>
+                <div>
+                    <a href="#style-quiz" class="inline-flex items-center gap-2 group text-neonAccent hover:text-white transition-colors">
+                        <span class="text-sm font-semibold">Confused on where to start? Let's take the quiz</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1: Logo Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Logo Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Ek unique aur high-impact icon jo aapki brand message ko first look me client tak pohochaye.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Original Design Concepts</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-resolution formats (SVG, PDF, PNG)</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Request Logo Concept <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 2: Brand Identity -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Brand Identity</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Consistent brand book, customized corporate color palettes, perfect mood boards, and guidelines.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> In-depth color system & guidelines</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Customized typography specs</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Establish Brand Identity <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 3: Social Media Designs -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Social Media Designs</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Scroll-stopping banners, dynamic templates, and promotional graphics that guarantee engagement.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Custom post layout configurations</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Ready-to-edit Figma/Canva templates</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Upgrade Your Feed <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 4: Printing & Marketing -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Printing & Marketing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Flawless, print-ready corporate brochures, marketing flyers, sleek letterheads, and packaging.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> CMYK Print-ready layouts included</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-quality digital representation</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Order Print Deliverables <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 5: UI/UX Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Modern website wireframes, engaging landing pages, and intuitive visual user flows.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Organized Figma master components</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Fully responsive dynamic screen guides</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Wireframe My Product <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 6: Custom Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Custom Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Aise requirements jo standard slots me nahi aate. Custom vector arts, merchandising designs, etc.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored processing logic</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Uncompromised artistic supervision</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Share Custom Brief <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="style-quiz" class="py-20 bg-darkCard border-y border-darkBorder relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Interactive Engagement</span>
+                <h2 class="font-heading text-3xl font-bold mt-2">Find Your Brand's Visual Vibe</h2>
+                <p class="text-gray-400 text-sm mt-3">Confused about your visual aesthetics? Take our 3-question quiz to receive a customized professional match suggestion.</p>
+            </div>
+
+            <div class="bg-darkBg border border-darkBorder p-8 rounded-2xl shadow-2xl">
+                <!-- Step 0: Welcome -->
+                <div x-show="activeQuizStep === 0" class="text-center py-6">
+                    <div class="w-16 h-16 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Just takes 30 seconds to decode.</h3>
+                    <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Find out if your company needs a sleek corporate layout, a bold futuristic neon style, or a hand-crafted artistic theme.</p>
+                    <button @click="activeQuizStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors shadow-lg">
+                        Start Aesthetic Quiz
+                    </button>
+                </div>
+
+                <!-- Step 1: Industry Selection -->
+                <div x-show="activeQuizStep === 1" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 1 OF 3</span>
+                        <span class="text-xs text-gray-500">33% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">What best describes your business niche?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.industry = 'tech'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Tech, Software, AI & Fintech</span>
+                            <span class="text-xs text-gray-400">Needs cutting-edge, clean, futuristic branding.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'lifestyle'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Lifestyle, Fashion & Food</span>
+                            <span class="text-xs text-gray-400">Needs sophisticated, emotional, artistic vibes.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'traditional'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Real Estate, Finance & Corporate</span>
+                            <span class="text-xs text-gray-400">Needs stable, highly trustworthy, secure look.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'creator'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Content Creator & Agency</span>
+                            <span class="text-xs text-gray-400">Needs bold, trendy, highly interactive designs.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Primary Brand Emotion -->
+                <div x-show="activeQuizStep === 2" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 2 OF 3</span>
+                        <span class="text-xs text-gray-500">66% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">What primary emotion should your audience feel first?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.emotion = 'modern'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">"Wow, these guys are futuristic!"</span>
+                            <span class="text-xs text-gray-400">Bold layouts, deep dark aesthetics, high tech.</span>
+                        </button>
+                        <button @click="quizAnswers.emotion = 'trust'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">"These are highly professional."</span>
+                            <span class="text-xs text-gray-400">Minimalistic, geometric, classic layouts.</span>
+                        </button>
+                    </div>
+                    <button @click="activeQuizStep = 1" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
+                </div>
+
+                <!-- Step 3: Audience Focus -->
+                <div x-show="activeQuizStep === 3" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 3 OF 3</span>
+                        <span class="text-xs text-gray-500">99% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">Who is your target crowd?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.audience = 'genz'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; if(quizAnswers.industry === 'tech') recommendedPlan = 'Growth Edge'; else recommendedPlan = 'Kickstarter'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Gen-Z & Trendy Millennials</span>
+                            <span class="text-xs text-gray-400">Requires trendy, high contrast visual patterns.</span>
+                        </button>
+                        <button @click="quizAnswers.audience = 'b2b'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; recommendedPlan = 'Elite Brand'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">B2B Enterprises & Decision Makers</span>
+                            <span class="text-xs text-gray-400">Requires structural clarity and robust grids.</span>
+                        </button>
+                    </div>
+                    <button @click="activeQuizStep = 2" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
+                </div>
+
+                <!-- Loading State -->
+                <div x-show="activeQuizStep === 4 && quizLoading" class="text-center py-12" style="display: none;">
+                    <div class="w-12 h-12 border-4 border-neonAccent border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <p class="text-gray-400">Analyzing brand archetype parameters...</p>
+                </div>
+
+                <!-- Quiz Results -->
+                <div x-show="activeQuizStep === 4 && showQuizResult" class="text-center py-4" style="display: none;">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonAccent/15 text-neonAccent font-bold text-xs uppercase mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Aesthetic Decoded
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Your Brand Vibe: <span class="text-neonAccent">Modern Neo-Minimalist</span></h3>
+                    <p class="text-gray-300 text-sm max-w-lg mx-auto mb-8">
+                        Aapka industry segment aur audience target standard designs ke mukable aapse <strong class="text-neonAccent">sleek layouts aur strong geometric consistency</strong> demand karta hai.
                     </p>
-                    <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0 mt-2">
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-rotate-left text-neonAccent text-lg mb-1"></i>
-                            <span class="text-xs text-gray-400 text-center font-medium">unlimited reviews</span>
-                        </div>
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-neonAccent text-lg mb-1"></i>
-                            <span class="text-xs text-gray-400 text-center font-medium">100% Satisfaction</span>
-                        </div>
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-handshake text-neonAccent text-lg mb-1"></i>
-                            <span class="text-xs text-gray-400 text-center font-medium">No-Compromise Trust</span>
-                        </div>
+
+                    <!-- Matched Offer Plan -->
+                    <div class="p-6 bg-darkCard border border-darkBorder rounded-xl max-w-md mx-auto mb-8">
+                        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Best Matched Plan For You</p>
+                        <h4 class="text-xl font-bold text-white" x-text="recommendedPlan"></h4>
+                        <p class="text-xs text-gray-500 mt-2">Perfect match with 100% Satisfaction Guarantee and customized design loops.</p>
+                        <a :href="'#'+recommendedPlan.toLowerCase().replace(' ', '-')" class="inline-block mt-4 text-xs font-bold bg-neonAccent text-black px-6 py-2 rounded-full hover:bg-white transition-colors">
+                            Explore Plan Details
+                        </a>
                     </div>
-                    <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 justify-center lg:justify-start">
-                        <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(204,255,0,0.15)] hover:shadow-[0_0_30px_rgba(204,255,0,0.4)] transform hover:-translate-y-1">
-                            Book Free Strategy Call
-                        </a>
-                        <a href="#portfolio" class="border border-darkBorder hover:border-neonAccent bg-darkCard/50 hover:bg-darkCard text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto text-center transform hover:-translate-y-1">
-                            Explore Showcase <i class="fa-solid fa-arrow-down ml-2"></i>
-                        </a>
+
+                    <div class="flex justify-center gap-4">
+                        <button @click="activeQuizStep = 0; showQuizResult = false; quizAnswers = {}" class="text-xs text-gray-400 hover:text-white underline">
+                            Retake Quiz
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Right Visual Dashboard Mock -->
-                <div class="lg:col-span-5 relative mt-8 lg:mt-0">
-                    <div class="bg-darkCard border border-darkBorder p-6 rounded-2xl relative shadow-2xl overflow-hidden box-glow">
-                        <div class="flex items-center gap-1.5 mb-6">
-                            <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
-                            <span class="text-xs text-gray-500 ml-2">brandcraft_dashboard.design</span>
+    <section id="portfolio" class="py-24 bg-darkBg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center md:text-left md:flex items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Work Portfolio</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Designs That Deliver Value</h2>
+                    <p class="text-gray-400 text-sm mt-3 max-w-lg">Hum real-world visual identity projects represent kar rahe hain. (Synced directly with Admin Portal!).</p>
+                </div>
+
+                <!-- Tab filters -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0 justify-center">
+                    <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">All Projects</button>
+                    <button @click="activeTab = 'branding'" :class="activeTab === 'branding' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Brand Identity</button>
+                    <button @click="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">UI/UX Design</button>
+                    <button @click="activeTab = 'social'" :class="activeTab === 'social' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Social Media</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="proj in projects" :key="proj.id">
+                    <div x-show="activeTab === 'all' || activeTab === proj.category" 
+                         x-transition:enter="transition ease-out duration-300"
+                         class="group bg-darkCard border border-darkBorder rounded-2xl overflow-hidden transition-all duration-300 hover:border-neonAccent/40">
+                        
+                        <!-- Custom Art Header -->
+                        <div class="h-64 relative flex items-center justify-center p-8 overflow-hidden"
+                             :class="'bg-gradient-to-tr ' + proj.gradient">
+                            <div class="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                            
+                            <template x-if="proj.initial || (!proj.isApp && !proj.isSocial)">
+                                <div class="w-24 h-24 rounded-full border-4 border-white/20 flex items-center justify-center z-10 animate-pulse">
+                                    <span class="font-heading text-4xl font-extrabold text-white" x-text="proj.initial || proj.title.charAt(0)"></span>
+                                </div>
+                            </template>
+
+                            <template x-if="proj.isApp">
+                                <div class="w-full h-full flex flex-col justify-between border border-white/20 rounded-xl p-4 bg-black/30 backdrop-blur-sm z-10">
+                                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                        <span class="text-xs font-heading font-semibold text-white">Live App Prototype</span>
+                                        <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-neonAccent"></span><span class="w-2 h-2 rounded-full bg-gray-500"></span></div>
+                                    </div>
+                                    <div class="h-8 w-full bg-neonAccent/10 border border-neonAccent/30 rounded mt-2 flex items-center justify-center text-[10px] text-neonAccent font-bold">Interactive System</div>
+                                </div>
+                            </template>
+
+                            <template x-if="proj.isSocial">
+                                <div class="grid grid-cols-2 gap-3 w-full max-w-xs z-10">
+                                    <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
+                                        <i class="fa-brands fa-instagram text-neonAccent text-lg mb-1"></i>
+                                        <span class="text-[9px] text-gray-300">Layout Post</span>
+                                    </div>
+                                    <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
+                                        <i class="fa-brands fa-linkedin text-neonAccent text-lg mb-1"></i>
+                                        <span class="text-[9px] text-gray-300">Banner Pack</span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gray-300 z-10 border border-white/10" x-text="proj.time"></div>
                         </div>
-                        <div class="flex items-center justify-between border-b border-darkBorder pb-4 mb-6">
-                            <div>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest">Client Satisfaction Rate</p>
-                                <h3 class="font-heading text-2xl font-bold text-neonAccent animate-pulse">99.8%</h3>
+
+                        <!-- Text Content -->
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-neonAccent uppercase tracking-wide" x-text="proj.category"></span>
+                                <span class="text-xs text-gray-500">Delivered</span>
                             </div>
-                            <div class="bg-neonAccent/10 text-neonAccent px-3 py-1 rounded-full text-xs font-semibold">
-                                <i class="fa-solid fa-star mr-1"></i> Highly Recommended
-                            </div>
+                            <h4 class="font-heading text-xl font-bold text-white mb-2 group-hover:text-neonAccent transition-colors" x-text="proj.title"></h4>
+                            <p class="text-gray-400 text-xs" x-text="proj.text"></p>
                         </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-24 bg-darkCard border-t border-darkBorder relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="bg-darkBg border border-darkBorder rounded-3xl p-8 relative overflow-hidden box-glow">
+                    <i class="fa-solid fa-quote-left absolute -top-4 -left-2 text-[150px] text-neonAccent/5 pointer-events-none"></i>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Unbreakable Oath</span>
+                        <h3 class="font-heading text-2xl sm:text-3xl font-bold mt-2 mb-6">"Paisa baad me, pehle aapka absolute trust."</h3>
+                        
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                            BrandCraft Studio ka core motto ye nahi hai ki humne paise le liye aur project deliver kar diya. Hum mante hain ki aap apni hard-earned savings hum par trust karke lagate hain. Isliye humara target hota hai ki hum <strong class="text-neonAccent font-semibold">aapko aapke investment se 5 guna zyada values</strong> deliver karein.
+                        </p>
+
                         <div class="flex flex-col gap-4">
-                            <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-                                        <i class="fa-solid fa-shapes"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-semibold text-white">Interactive Logo Guidelines</h4>
-                                        <p class="text-xs text-gray-500">Vector files & Palette ready</p>
-                                    </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-heart"></i>
                                 </div>
-                                <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Satisfaction or Infinite Revisions</h4>
+                                    <p class="text-xs text-gray-400">Jab tak aapko apne brand design me wahi perfection nahi milta jo aap chahte hain, hum rukaenge nahi.</p>
+                                </div>
                             </div>
-                            <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400">
-                                        <i class="fa-solid fa-mobile-screen"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-semibold text-white">High-Converting UI Mockups</h4>
-                                        <p class="text-xs text-gray-500">Fully responsive dynamic screens</p>
-                                    </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-circle-nodes"></i>
                                 </div>
-                                <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Word-Of-Mouth Strategy</h4>
+                                    <p class="text-xs text-gray-400">Hum chahte hain ki aapka project itna flawless ho ki aap hume khud apne social circle me recommend karein. Referral hi asli kamaai hai.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-darkBorder text-center">
-                            <p class="text-xs text-gray-400">
-                                <i class="fa-solid fa-quote-left text-neonAccent mr-1"></i>
-                                Hum sirf pixel nahi, trust design karte hain.
-                            </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">A Legacy Philosophy</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold">Why We Give More Value Than We Charge</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed text-justify">
+                        Industry me bohot saari agencies hain jo limited design previews deti hain aur uske baad revision charge karti hain. Hum is system ko break karna chahte hain. All layered files, high resolution output vectors, custom brand guides are standard handover rules for us.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Zero Hidden Costs
+                            </h4>
+                            <p class="text-xs text-gray-400 mt-2">Hum jo plan lock karenge uske baad aapko ek rupee bhi extra pay nahi karna hai.</p>
+                        </div>
+                        <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Premium Source Assets
+                            </h4>
+                            <p class="text-xs text-gray-400 mt-2">Aapko layered high-res Figma, Illustrator formats with infinite rights handover milenge.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- CORE SERVICES Grid -->
-        <section id="services" class="py-24 bg-darkBg relative border-t border-darkBorder">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+    <section id="estimator" class="py-20 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Value & Cost Calculator</span>
+                <h2 class="font-heading text-3xl font-bold mt-2">Estimate Your True Design Value</h2>
+                <p class="text-gray-400 text-sm mt-3">Humare premium pricing sliders use karein aur dekhiye ki aapke total budget ke mutabik hum kitna massive output value generate karenge.</p>
+            </div>
+
+            <div class="bg-darkCard border border-darkBorder p-8 rounded-2xl shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     <div>
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Domain Expertise</span>
-                        <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">What We Create For You</h2>
-                        <p class="text-gray-400 text-sm mt-3 max-w-lg">Aapka visual communication handle karne ke liye hum 6 core segments me bespoke design services provide karte hain.</p>
+                        <h3 class="text-lg font-heading font-bold mb-4">Adjust Your Budget</h3>
+                        <p class="text-xs text-gray-400 mb-6">Slide your estimated design budget to reveal the exact delivery value pack we custom engineer for you.</p>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-semibold text-gray-300 mb-2">
+                                <span>Design Budget</span>
+                                <span class="text-neonAccent font-bold" x-text="'₹ ' + clientBudget.toLocaleString() + '/-'"></span>
+                            </div>
+                            <input type="range" min="7999" max="50000" step="1000" x-model="clientBudget" class="w-full h-2 bg-darkBg border border-darkBorder rounded-lg appearance-none cursor-pointer accent-neonAccent">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>Min: ₹ 7,999/-</span>
+                                <span>Max: ₹ 50,000/-</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-darkBg p-4 border border-darkBorder rounded-xl">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Standard Agency Cost</span>
+                                <span class="text-xs text-red-400 font-semibold line-through" x-text="'₹ ' + Math.round(clientBudget * 2.5).toLocaleString() + '/-'"></span>
+                            </div>
+                            <div class="flex justify-between items-center mt-2 pt-2 border-t border-darkBorder">
+                                <span class="text-xs text-white font-bold">Your Saved Budget Value</span>
+                                <span class="text-xs text-green-400 font-bold" x-text="'₹ ' + Math.round(clientBudget * 1.5).toLocaleString() + ' Saved'"></span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="bg-darkBg border border-darkBorder p-6 rounded-xl flex flex-col justify-between h-full min-h-[220px]">
+                        <div>
+                            <span class="text-[10px] bg-neonAccent/15 text-neonAccent font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Extra Perks Handed Over</span>
+                            <h4 class="text-lg font-bold text-white mt-3">What You Truly Get:</h4>
+                            
+                            <ul class="text-xs text-gray-400 space-y-3 mt-4">
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Custom competitor positioning study (<span class="text-white font-medium">Worth ₹10,000/- Free</span>)</li>
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Clean structural source delivery formats</li>
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Unlimited revision warranty validation</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-darkBorder flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Total Delivery Pack Worth:</p>
+                                <span class="text-lg font-heading font-extrabold text-neonAccent" x-text="'₹ ' + Math.round(clientBudget * 2.8).toLocaleString() + '*'"></span>
+                            </div>
+                            <a href="#contact" class="bg-neonAccent text-black text-xs font-bold px-4 py-2.5 rounded-full hover:bg-white transition-colors">
+                                Book This Deal <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Transparent Investments</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Choose Your Scale Package</h2>
+                <p class="text-gray-400 text-sm mt-3 max-w-lg mx-auto">No confusing estimates. Prices are synchronized instantly from the Admin Command Center!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plan 1: Kickstarter -->
+                <div id="kickstarter" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
                     <div>
-                        <a href="#style-quiz" class="inline-flex items-center gap-2 group text-neonAccent hover:text-white transition-colors">
-                            <span class="text-sm font-semibold">Confused on where to start? Let's take the quiz</span>
-                            <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 1: Kickstarter</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.kickstarter.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Perfect for early stage startups wishing to set their baseline logo standards with clean styling parameters.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Professional Logo</strong> (3 Concepts)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Standard Business Stationery Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Custom Social Media Graphics</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 4 Design Revisions included</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="showModal = true; modalPlanName = 'Kickstarter Plan (₹' + pricing.kickstarter + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Choose Kickstarter Pack
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 2: Growth Edge -->
+                <div id="growth-edge" class="group bg-darkCard border-2 border-neonAccent rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.1)] relative transform hover:-translate-y-1">
+                    <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-neonAccent text-black text-[10px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                        Most Popular (Best Value)
+                    </span>
+                    <div>
+                        <div class="flex items-center justify-between mb-4 mt-2">
+                            <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Plan 2: Growth Edge</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.growthEdge.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-6">Best designed value pack targeted directly towards growing startups wanting complete consistent makeover.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-200 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Master Logo Package</strong> (5 Concepts)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Complete Brand Identity Guidelines</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 10 Custom Social Media Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Unlimited Revisions (Satisfaction Guarantee)</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="showModal = true; modalPlanName = 'Growth Edge Plan (₹' + pricing.growthEdge + ')';" class="w-full bg-neonAccent hover:bg-white text-black py-3 rounded-xl text-xs font-extrabold transition-all shadow-md">
+                            Lock Growth Edge Deal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 3: Elite Brand -->
+                <div id="elite-brand" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 3: Elite Brand</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.eliteBrand.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Designed primarily for established corporate domains wishing premium styling assets and UI platforms.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Premium Logo + Trademark Guidelines</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Full UI/UX Concept</strong> (5 High-fidelity screens)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 20 Social media posts layout + Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 1-Month priority active support timeline</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="showModal = true; modalPlanName = 'Elite Brand Plan (₹' + pricing.eliteBrand + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Acquire Elite Experience
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 4: Custom Pricing -->
+                <div id="custom-pricing" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 4: Bespoke</span>
+                        </div>
+                        <h3 class="font-heading text-3xl font-bold text-white mb-2">
+                            Custom<span class="text-sm font-normal text-gray-400"> Pricing</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Aise businesses jinhe custom requirement specifications, retainers ya complex corporate branding designs ki need ho.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored Scope of Work Blueprint</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Long term design retainer integrations</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Dedicated creative design lead direct access</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <a href="#contact" class="block w-full text-center bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Inquire Custom Proposal
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Service 1: Logo Design -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-pen-nib"></i>
+    <section id="contact" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <!-- Information Text Column -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Let's Discuss Creative Projects</span>
+                <h2 class="font-heading text-4xl font-bold">Have an Idea? Let's Turn It Into a Real Brand.</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Koi tension ki baat nahi hai, agar aapka proposal completely detailed nahi hai, tab bhi hum free schedule call par screen-share kar ke simple ideas discuss kar sakte hain. Free of cost advice call.
+                </p>
+                <div class="flex flex-col gap-4 mt-4">
+                    <div class="flex items-center gap-4 p-4 border border-darkBorder bg-darkCard/40 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-neonAccent/10 text-neonAccent flex items-center justify-center font-bold">
+                            01
                         </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Logo Design</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Ek unique aur high-impact icon jo aapki brand message ko first look me client tak pohochaye.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Original Design Concepts</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-resolution formats (SVG, PDF, PNG)</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Request Logo Concept <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-                    </div>
-
-                    <!-- Service 2: Brand Identity -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-id-card"></i>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">30-Min Free Branding Discovery</h4>
+                            <p class="text-xs text-gray-500">Hum screen coordinate pe ideas evaluate karte hain.</p>
                         </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Brand Identity</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Consistent brand book, customized corporate color palettes, perfect mood boards, and guidelines.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> In-depth color system & guidelines</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Customized typography specs</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Establish Brand Identity <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-                    </div>
-
-                    <!-- Service 3: Social Media Designs -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-hashtag"></i>
-                        </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Social Media Designs</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Scroll-stopping banners, dynamic templates, and promotional graphics that guarantee engagement.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Custom post layout configurations</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Ready-to-edit Figma/Canva templates</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Upgrade Your Feed <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-                    </div>
-
-                    <!-- Service 4: Printing & Marketing -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-print"></i>
-                        </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Printing & Marketing</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Flawless, print-ready corporate brochures, marketing flyers, sleek letterheads, and packaging.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> CMYK Print-ready layouts included</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-quality digital representation</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Order Print Deliverables <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-                    </div>
-
-                    <!-- Service 5: UI/UX Design -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">UI/UX Design</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Modern website wireframes, engaging landing pages, and intuitive visual user flows.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Organized Figma master components</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Fully responsive dynamic screen guides</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Wireframe My Product <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-                    </div>
-
-                    <!-- Service 6: Custom Design -->
-                    <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Custom Design</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Aise requirements jo standard slots me nahi aate. Custom vector arts, merchandising designs, etc.</p>
-                        <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored processing logic</li>
-                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Uncompromised artistic supervision</li>
-                        </ul>
-                        <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Share Custom Brief <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- STYLE QUIZ SECTION -->
-        <section id="style-quiz" class="py-20 bg-darkCard border-y border-darkBorder relative overflow-hidden">
-            <div class="max-w-4xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-12">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Interactive Engagement</span>
-                    <h2 class="font-heading text-3xl font-bold mt-2">Find Your Brand's Visual Vibe</h2>
-                    <p class="text-gray-400 text-sm mt-3">Confused about your visual aesthetics? Take our 3-question quiz to receive a customized professional match suggestion.</p>
-                </div>
-
-                <div class="bg-darkBg border border-darkBorder p-8 rounded-2xl shadow-2xl">
-                    <!-- Step 0: Welcome -->
-                    <div x-show="activeQuizStep === 0" class="text-center py-6">
-                        <div class="w-16 h-16 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center text-2xl mx-auto mb-6">
-                            <i class="fa-solid fa-circle-question"></i>
+            <!-- Sleek Form Layout Column -->
+            <div class="lg:col-span-7">
+                <div class="bg-darkCard border border-darkBorder p-8 rounded-3xl shadow-2xl relative">
+                    <!-- Success screen state -->
+                    <div x-show="contactSuccess" class="text-center py-12" style="display: none;">
+                        <div class="w-16 h-16 rounded-full bg-neonAccent/15 text-neonAccent flex items-center justify-center text-3xl mx-auto mb-6">
+                            <i class="fa-solid fa-circle-check"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Just takes 30 seconds to decode.</h3>
-                        <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Find out if your company needs a sleek corporate layout, a bold futuristic neon style, or a hand-crafted artistic theme.</p>
-                        <button @click="activeQuizStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors shadow-lg">
-                            Start Aesthetic Quiz
+                        <h3 class="text-2xl font-bold mb-3">Brief Submitted Successfully!</h3>
+                        <p class="text-gray-300 text-sm max-w-sm mx-auto mb-6">
+                            Awesome! Humare senior design advisor ke paas aapki details pohoch gayi hain. Hum 2 ghante ke andar aapse response call/WhatsApp par touch-base karenge.
+                        </p>
+                        <button @click="contactSuccess = false" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
+                            Submit Another Brief
                         </button>
                     </div>
 
-                    <!-- Step 1: Industry Selection -->
-                    <div x-show="activeQuizStep === 1" style="display: none;">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="text-xs text-neonAccent font-bold">QUESTION 1 OF 3</span>
-                            <span class="text-xs text-gray-500">33% Complete</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-6">What best describes your business niche?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <button @click="quizAnswers.industry = 'tech'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">Tech, Software, AI & Fintech</span>
-                                <span class="text-xs text-gray-400">Needs cutting-edge, clean, futuristic branding.</span>
-                            </button>
-                            <button @click="quizAnswers.industry = 'lifestyle'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">Lifestyle, Fashion & Food</span>
-                                <span class="text-xs text-gray-400">Needs sophisticated, emotional, artistic vibes.</span>
-                            </button>
-                            <button @click="quizAnswers.industry = 'traditional'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">Real Estate, Finance & Corporate</span>
-                                <span class="text-xs text-gray-400">Needs stable, highly trustworthy, secure look.</span>
-                            </button>
-                            <button @click="quizAnswers.industry = 'creator'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">Content Creator & Agency</span>
-                                <span class="text-xs text-gray-400">Needs bold, trendy, highly interactive designs.</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Primary Brand Emotion -->
-                    <div x-show="activeQuizStep === 2" style="display: none;">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="text-xs text-neonAccent font-bold">QUESTION 2 OF 3</span>
-                            <span class="text-xs text-gray-500">66% Complete</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-6">What primary emotion should your audience feel first?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <button @click="quizAnswers.emotion = 'modern'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">"Wow, these guys are futuristic!"</span>
-                                <span class="text-xs text-gray-400">Bold layouts, deep dark aesthetics, high tech.</span>
-                            </button>
-                            <button @click="quizAnswers.emotion = 'trust'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">"These are highly professional."</span>
-                                <span class="text-xs text-gray-400">Minimalistic, geometric, classic layouts.</span>
-                            </button>
-                        </div>
-                        <button @click="activeQuizStep = 1" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
-                    </div>
-
-                    <!-- Step 3: Audience Focus -->
-                    <div x-show="activeQuizStep === 3" style="display: none;">
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="text-xs text-neonAccent font-bold">QUESTION 3 OF 3</span>
-                            <span class="text-xs text-gray-500">99% Complete</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-6">Who is your target crowd?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <button @click="quizAnswers.audience = 'genz'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; if(quizAnswers.industry === 'tech') recommendedPlan = 'Growth Edge'; else recommendedPlan = 'Kickstarter'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">Gen-Z & Trendy Millennials</span>
-                                <span class="text-xs text-gray-400">Requires trendy, high contrast visual patterns.</span>
-                            </button>
-                            <button @click="quizAnswers.audience = 'b2b'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; recommendedPlan = 'Elite Brand'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
-                                <span class="font-bold text-white block">B2B Enterprises & Decision Makers</span>
-                                <span class="text-xs text-gray-400">Requires structural clarity and robust grids.</span>
-                            </button>
-                        </div>
-                        <button @click="activeQuizStep = 2" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
-                    </div>
-
-                    <!-- Loading State -->
-                    <div x-show="activeQuizStep === 4 && quizLoading" class="text-center py-12" style="display: none;">
-                        <div class="w-12 h-12 border-4 border-neonAccent border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-                        <p class="text-gray-400">Analyzing brand archetype parameters...</p>
-                    </div>
-
-                    <!-- Quiz Results -->
-                    <div x-show="activeQuizStep === 4 && showQuizResult" class="text-center py-4" style="display: none;">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonAccent/15 text-neonAccent font-bold text-xs uppercase mb-4">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Aesthetic Decoded
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Your Brand Vibe: <span class="text-neonAccent">Modern Neo-Minimalist</span></h3>
-                        <p class="text-gray-300 text-sm max-w-lg mx-auto mb-8">
-                            Aapka industry segment aur audience target standard designs ke mukable aapse <strong class="text-neonAccent">sleek layouts aur strong geometric consistency</strong> demand karta hai.
-                        </p>
-
-                        <!-- Matched Offer Plan -->
-                        <div class="p-6 bg-darkCard border border-darkBorder rounded-xl max-w-md mx-auto mb-8">
-                            <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Best Matched Plan For You</p>
-                            <h4 class="text-xl font-bold text-white" x-text="recommendedPlan"></h4>
-                            <p class="text-xs text-gray-500 mt-2">Perfect match with 100% Satisfaction Guarantee and customized design loops.</p>
-                            <a :href="'#'+recommendedPlan.toLowerCase().replace(' ', '-')" class="inline-block mt-4 text-xs font-bold bg-neonAccent text-black px-6 py-2 rounded-full hover:bg-white transition-colors">
-                                Explore Plan Details
-                            </a>
-                        </div>
-
-                        <div class="flex justify-center gap-4">
-                            <button @click="activeQuizStep = 0; showQuizResult = false; quizAnswers = {}" class="text-xs text-gray-400 hover:text-white underline">
-                                Retake Quiz
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO / PROJECTS SECTION -->
-        <section id="portfolio" class="py-24 bg-darkBg relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center md:text-left md:flex items-end justify-between mb-16">
-                    <div>
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Work Portfolio</span>
-                        <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Designs That Deliver Value</h2>
-                        <p class="text-gray-400 text-sm mt-3 max-w-lg">Hum real-world visual identity projects represent kar rahe hain. (Synced directly with Admin Portal! Any additions there reflect here instantly).</p>
-                    </div>
-
-                    <!-- Tab filters -->
-                    <div class="flex flex-wrap gap-2 mt-6 md:mt-0 justify-center">
-                        <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">All Projects</button>
-                        <button @click="activeTab = 'branding'" :class="activeTab === 'branding' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Brand Identity</button>
-                        <button @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">UI/UX Design</button>
-                        <button @click="activeTab = 'social'" :class="activeTab === 'social' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Social Media</button>
-                    </div>
-                </div>
-
-                <!-- Dynamic Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <template x-for="proj in projects" :key="proj.id">
-                        <div x-show="activeTab === 'all' || activeTab === proj.category" 
-                             x-transition:enter="transition ease-out duration-300"
-                             class="group bg-darkCard border border-darkBorder rounded-2xl overflow-hidden transition-all duration-300 hover:border-neonAccent/40">
-                            
-                            <!-- Custom Art Header -->
-                            <div class="h-64 relative flex items-center justify-center p-8 overflow-hidden"
-                                 :class="'bg-gradient-to-tr ' + proj.gradient">
-                                <div class="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
-                                
-                                <template x-if="proj.initial || (!proj.isApp && !proj.isSocial)">
-                                    <div class="w-24 h-24 rounded-full border-4 border-white/20 flex items-center justify-center z-10 animate-pulse">
-                                        <span class="font-heading text-4xl font-extrabold text-white" x-text="proj.initial || proj.title.charAt(0)"></span>
-                                    </div>
-                                </template>
-
-                                <template x-if="proj.isApp">
-                                    <div class="w-full h-full flex flex-col justify-between border border-white/20 rounded-xl p-4 bg-black/30 backdrop-blur-sm z-10">
-                                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                                            <span class="text-xs font-heading font-semibold text-white">Live App Prototype</span>
-                                            <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-neonAccent"></span><span class="w-2 h-2 rounded-full bg-gray-500"></span></div>
-                                        </div>
-                                        <div class="h-8 w-full bg-neonAccent/10 border border-neonAccent/30 rounded mt-2 flex items-center justify-center text-[10px] text-neonAccent font-bold">Interactive System</div>
-                                    </div>
-                                </template>
-
-                                <template x-if="proj.isSocial">
-                                    <div class="grid grid-cols-2 gap-3 w-full max-w-xs z-10">
-                                        <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
-                                            <i class="fa-brands fa-instagram text-neonAccent text-lg mb-1"></i>
-                                            <span class="text-[9px] text-gray-300">Layout Post</span>
-                                        </div>
-                                        <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
-                                            <i class="fa-brands fa-linkedin text-neonAccent text-lg mb-1"></i>
-                                            <span class="text-[9px] text-gray-300">Banner Pack</span>
-                                        </div>
-                                    </div>
-                                </template>
-
-                                <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gray-300 z-10 border border-white/10" x-text="proj.time"></div>
-                            </div>
-
-                            <!-- Text Content -->
-                            <div class="p-6">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-semibold text-neonAccent uppercase tracking-wide" x-text="proj.category"></span>
-                                    <span class="text-xs text-gray-500">Delivered</span>
-                                </div>
-                                <h4 class="font-heading text-xl font-bold text-white mb-2 group-hover:text-neonAccent transition-colors" x-text="proj.title"></h4>
-                                <p class="text-gray-400 text-xs" x-text="proj.text"></p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </section>
-
-        <!-- VALUE-FIRST / OUR PHILOSOPHY SECTION -->
-        <section id="philosophy" class="py-24 bg-darkCard border-t border-darkBorder relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Visual Box: "Paisa is secondary, trust is primary" -->
-                    <div class="bg-darkBg border border-darkBorder rounded-3xl p-8 relative overflow-hidden box-glow">
-                        <i class="fa-solid fa-quote-left absolute -top-4 -left-2 text-[150px] text-neonAccent/5 pointer-events-none"></i>
-                        <div class="relative z-10">
-                            <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Unbreakable Oath</span>
-                            <h3 class="font-heading text-2xl sm:text-3xl font-bold mt-2 mb-6">"Paisa baad me, pehle aapka absolute trust."</h3>
-                            
-                            <p class="text-gray-300 text-sm leading-relaxed mb-6">
-                                BrandCraft Studio ka core motto ye nahi hai ki humne paise le liye aur project deliver kar diya. Hum mante hain ki aap apni hard-earned savings hum par trust karke lagate hain. Isliye humara target hota hai ki hum <strong class="text-neonAccent font-semibold">aapko aapke investment se 5 guna zyada values</strong> deliver karein.
-                            </p>
-
-                            <div class="flex flex-col gap-4">
-                                <div class="flex gap-4 items-start">
-                                    <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
-                                        <i class="fa-solid fa-heart"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-sm">Satisfaction or Infinite Revisions</h4>
-                                        <p class="text-xs text-gray-400">Jab tak aapko apne brand design me wahi perfection nahi milta jo aap chahte hain, hum rukaenge nahi.</p>
-                                    </div>
-                                </div>
-                                <div class="flex gap-4 items-start">
-                                    <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
-                                        <i class="fa-solid fa-circle-nodes"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-white text-sm">Word-Of-Mouth Strategy</h4>
-                                        <p class="text-xs text-gray-400">Hum chahte hain ki aapka project itna flawless ho ki aap hume khud apne social circle me recommend karein. Referral hi asli kamaai hai.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Explanation -->
-                    <div class="flex flex-col gap-6">
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">A Legacy Philosophy</span>
-                        <h2 class="font-heading text-3xl sm:text-4xl font-bold">Why We Give More Value Than We Charge</h2>
-                        <p class="text-gray-400 text-sm leading-relaxed text-justify">
-                            Industry me bohot saari agencies hain jo limited design previews deti hain aur uske baad revision charge karti hain. Hum is system ko break karna chahte hain. All layered files, high resolution output vectors, custom brand guides are standard handover rules for us.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
-                                <h4 class="font-bold text-white text-sm flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Zero Hidden Costs
-                                </h4>
-                                <p class="text-xs text-gray-400 mt-2">Hum jo plan lock karenge uske baad aapko ek rupee bhi extra pay nahi karna hai.</p>
-                            </div>
-                            <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
-                                <h4 class="font-bold text-white text-sm flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Premium Source Assets
-                                </h4>
-                                <p class="text-xs text-gray-400 mt-2">Aapko layered high-res Figma, Illustrator formats with infinite rights handover milenge.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ESTIMATOR / ROI CALCULATOR -->
-        <section id="estimator" class="py-20 bg-darkBg relative overflow-hidden border-t border-darkBorder">
-            <div class="max-w-4xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-12">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Value & Cost Calculator</span>
-                    <h2 class="font-heading text-3xl font-bold mt-2">Estimate Your True Design Value</h2>
-                    <p class="text-gray-400 text-sm mt-3">Humare premium pricing sliders use karein aur dekhiye ki aapke total budget ke mutabik hum kitna massive output value generate karenge.</p>
-                </div>
-
-                <div class="bg-darkCard border border-darkBorder p-8 rounded-2xl shadow-2xl">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                        <div>
-                            <h3 class="text-lg font-heading font-bold mb-4">Adjust Your Budget</h3>
-                            <p class="text-xs text-gray-400 mb-6">Slide your estimated design budget to reveal the exact delivery value pack we custom engineer for you.</p>
-                            
-                            <!-- Real Custom Sliders -->
-                            <div class="mb-6">
-                                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-2">
-                                    <span>Design Budget</span>
-                                    <span class="text-neonAccent font-bold" x-text="'₹ ' + clientBudget.toLocaleString() + '/-'"></span>
-                                </div>
-                                <input type="range" min="7999" max="50000" step="1000" x-model="clientBudget" class="w-full h-2 bg-darkBg border border-darkBorder rounded-lg appearance-none cursor-pointer accent-neonAccent">
-                                <div class="flex justify-between text-[10px] text-gray-500 mt-1">
-                                    <span>Min: ₹ 7,999/-</span>
-                                    <span>Max: ₹ 50,000/-</span>
-                                </div>
-                            </div>
-
-                            <div class="bg-darkBg p-4 border border-darkBorder rounded-xl">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs text-gray-400">Standard Agency Cost</span>
-                                    <span class="text-xs text-red-400 font-semibold line-through" x-text="'₹ ' + Math.round(clientBudget * 2.5).toLocaleString() + '/-'"></span>
-                                </div>
-                                <div class="flex justify-between items-center mt-2 pt-2 border-t border-darkBorder">
-                                    <span class="text-xs text-white font-bold">Your Saved Budget Value</span>
-                                    <span class="text-xs text-green-400 font-bold" x-text="'₹ ' + Math.round(clientBudget * 1.5).toLocaleString() + ' Saved'"></span>
-                                </div>
+                    <!-- Interactive Slider Form -->
+                    <form x-show="!contactSuccess" @submit.prevent="submitClientBrief" class="flex flex-col gap-6">
+                        <!-- Step Indicator -->
+                        <div class="flex justify-between items-center border-b border-darkBorder pb-4">
+                            <span class="text-xs text-gray-400 font-semibold" x-text="'STEP ' + formStep + ' OF 2'"></span>
+                            <div class="flex gap-1.5">
+                                <span class="w-6 h-1.5 rounded-full" :class="formStep >= 1 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
+                                <span class="w-6 h-1.5 rounded-full" :class="formStep >= 2 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
                             </div>
                         </div>
 
-                        <div class="bg-darkBg border border-darkBorder p-6 rounded-xl flex flex-col justify-between h-full min-h-[220px]">
+                        <!-- Step 1 Layout: Basic Info -->
+                        <div x-show="formStep === 1" class="flex flex-col gap-5">
+                            <h3 class="text-lg font-heading font-bold text-white">Let's start with basic contact details</h3>
                             <div>
-                                <span class="text-[10px] bg-neonAccent/15 text-neonAccent font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Extra Perks Handed Over</span>
-                                <h4 class="text-lg font-bold text-white mt-3">What You Truly Get:</h4>
-                                
-                                <ul class="text-xs text-gray-400 space-y-3 mt-4">
-                                    <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Custom competitor positioning study (<span class="text-white font-medium">Worth ₹10,000/- Free</span>)</li>
-                                    <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Clean structural source delivery formats</li>
-                                    <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Unlimited revision warranty validation</li>
-                                </ul>
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">What is your name?</label>
+                                <input type="text" x-model="formName" required placeholder="E.g., Devendra Sharma" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
                             </div>
-
-                            <div class="mt-6 pt-4 border-t border-darkBorder flex items-center justify-between">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <p class="text-[10px] text-gray-400">Total Delivery Pack Worth:</p>
-                                    <span class="text-lg font-heading font-extrabold text-neonAccent" x-text="'₹ ' + Math.round(clientBudget * 2.8).toLocaleString() + '*'"></span>
+                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Your Email</label>
+                                    <input type="email" x-model="formEmail" required placeholder="name@company.com" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
                                 </div>
-                                <a href="#contact" class="bg-neonAccent text-black text-xs font-bold px-4 py-2.5 rounded-full hover:bg-white transition-colors">
-                                    Book This Deal <i class="fa-solid fa-arrow-right ml-1"></i>
-                                </a>
+                                <div>
+                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Phone / WhatsApp</label>
+                                    <input type="tel" x-model="formPhone" required placeholder="+91 98765-XXXXX" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button type="button" @click="formStep = 2" class="bg-neonAccent text-black font-bold px-8 py-3.5 rounded-full hover:bg-white transition-all flex items-center gap-2">
+                                    Next Step <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Step 2 Layout: Project Scope and Budgets -->
+                        <div x-show="formStep === 2" style="display: none;" class="flex flex-col gap-5">
+                            <h3 class="text-lg font-heading font-bold text-white">Tell us about the project vision</h3>
+                            <div>
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Select Services Required</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="Logo Design" x-model="formServices" class="accent-neonAccent"> Logo Design
+                                    </label>
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="Brand Book" x-model="formServices" class="accent-neonAccent"> Brand Book
+                                    </label>
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="UI/UX Design" x-model="formServices" class="accent-neonAccent"> UI/UX Design
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Describe your vision</label>
+                                <textarea rows="3" x-model="formDesc" placeholder="Explain your design ideas, competitors or guidelines..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors resize-none"></textarea>
+                            </div>
+                            <div class="mt-4 flex justify-between items-center">
+                                <button type="button" @click="formStep = 1" class="text-xs text-gray-400 hover:text-white underline font-semibold">
+                                    Go Back
+                                </button>
+                                <button type="submit" class="bg-neonAccent hover:bg-white text-black font-extrabold px-10 py-3.5 rounded-full transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+                                    Submit Brief <i class="fa-solid fa-circle-check ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- PRICING & PLANS -->
-        <section id="pricing" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Transparent Investments</span>
-                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Choose Your Scale Package</h2>
-                    <p class="text-gray-400 text-sm mt-3 max-w-lg mx-auto">No confusing estimates. Prices are synchronized instantly from the Admin Command Center!</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Plan 1: Kickstarter -->
-                    <div id="kickstarter" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 1: Kickstarter</span>
-                            </div>
-                            <h3 class="font-heading text-4xl font-bold text-white mb-2">
-                                ₹<span x-text="pricing.kickstarter.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
-                            </h3>
-                            <p class="text-xs text-gray-400 leading-relaxed mb-6">Perfect for early stage startups wishing to set their baseline logo standards with clean styling parameters.</p>
-                            <hr class="border-darkBorder my-4">
-                            <ul class="text-xs text-gray-300 space-y-3.5 my-6">
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Professional Logo</strong> (3 Concepts)</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Standard Business Stationery Templates</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Custom Social Media Graphics</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 4 Design Revisions included</li>
-                            </ul>
+    <!-- FOOTER -->
+    <footer class="border-t border-darkBorder bg-darkBg py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-start mb-12">
+                <div class="md:col-span-2 flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">
+                            BC
                         </div>
-                        <div class="mt-auto">
-                            <button @click="showModal = true; modalPlanName = 'Kickstarter Plan (₹' + pricing.kickstarter + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
-                                Choose Kickstarter Pack
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Plan 2: Growth Edge (MOST POPULAR) -->
-                    <div id="growth-edge" class="group bg-darkCard border-2 border-neonAccent rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.1)] relative transform hover:-translate-y-1">
-                        <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-neonAccent text-black text-[10px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
-                            Most Popular (Best Value)
+                        <span class="font-heading font-bold text-lg tracking-wide text-white">
+                            Brand<span class="text-neonAccent">Craft</span>
                         </span>
-                        <div>
-                            <div class="flex items-center justify-between mb-4 mt-2">
-                                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Plan 2: Growth Edge</span>
-                            </div>
-                            <h3 class="font-heading text-4xl font-bold text-white mb-2">
-                                ₹<span x-text="pricing.growthEdge.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
-                            </h3>
-                            <p class="text-xs text-gray-300 leading-relaxed mb-6">Best designed value pack targeted directly towards growing startups wanting complete consistent makeover.</p>
-                            <hr class="border-darkBorder my-4">
-                            <ul class="text-xs text-gray-200 space-y-3.5 my-6">
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Master Logo Package</strong> (5 Concepts)</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Complete Brand Identity Guidelines</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 10 Custom Social Media Templates</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Unlimited Revisions (Satisfaction Guarantee)</li>
-                            </ul>
-                        </div>
-                        <div class="mt-auto">
-                            <button @click="showModal = true; modalPlanName = 'Growth Edge Plan (₹' + pricing.growthEdge + ')';" class="w-full bg-neonAccent hover:bg-white text-black py-3 rounded-xl text-xs font-extrabold transition-all shadow-md">
-                                Lock Growth Edge Deal
-                            </button>
-                        </div>
                     </div>
-
-                    <!-- Plan 3: Elite Brand -->
-                    <div id="elite-brand" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 3: Elite Brand</span>
-                            </div>
-                            <h3 class="font-heading text-4xl font-bold text-white mb-2">
-                                ₹<span x-text="pricing.eliteBrand.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
-                            </h3>
-                            <p class="text-xs text-gray-400 leading-relaxed mb-6">Designed primarily for established corporate domains wishing premium styling assets and UI platforms.</p>
-                            <hr class="border-darkBorder my-4">
-                            <ul class="text-xs text-gray-300 space-y-3.5 my-6">
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Premium Logo + Trademark Guidelines</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Full UI/UX Concept</strong> (5 High-fidelity screens)</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 20 Social media posts layout + Templates</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 1-Month priority active support timeline</li>
-                            </ul>
-                        </div>
-                        <div class="mt-auto">
-                            <button @click="showModal = true; modalPlanName = 'Elite Brand Plan (₹' + pricing.eliteBrand + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
-                                Acquire Elite Experience
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Plan 4: Custom Pricing -->
-                    <div id="custom-pricing" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 4: Bespoke</span>
-                            </div>
-                            <h3 class="font-heading text-3xl font-bold text-white mb-2">
-                                Custom<span class="text-sm font-normal text-gray-400"> Pricing</span>
-                            </h3>
-                            <p class="text-xs text-gray-400 leading-relaxed mb-6">Aise businesses jinhe custom requirement specifications, retainers ya complex corporate branding designs ki need ho.</p>
-                            <hr class="border-darkBorder my-4">
-                            <ul class="text-xs text-gray-300 space-y-3.5 my-6">
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored Scope of Work Blueprint</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Long term design retainer integrations</li>
-                                <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Dedicated creative design lead direct access</li>
-                            </ul>
-                        </div>
-                        <div class="mt-auto">
-                            <a href="#contact" class="block w-full text-center bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
-                                Inquire Custom Proposal
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT & STEP-BY-STEP CONSULTATION FORM -->
-        <section id="contact" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                <!-- Information Text Column -->
-                <div class="lg:col-span-5 flex flex-col gap-6">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Let's Discuss Creative Projects</span>
-                    <h2 class="font-heading text-4xl font-bold">Have an Idea? Let's Turn It Into a Real Brand.</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Koi tension ki baat nahi hai, agar aapka proposal completely detailed nahi hai, tab bhi hum free schedule call par screen-share kar ke simple ideas discuss kar sakte hain. Free of cost advice call.
+                    <p class="text-gray-400 text-xs max-w-sm mt-2 leading-relaxed">
+                        Hum designs nahi, trust aur organic growth relationships build karte hain. 100% Client-First Satisfaction Guarantee ke sath premium agency.
                     </p>
-                    <div class="flex flex-col gap-4 mt-4">
-                        <div class="flex items-center gap-4 p-4 border border-darkBorder bg-darkCard/40 rounded-xl">
-                            <div class="w-10 h-10 rounded-lg bg-neonAccent/10 text-neonAccent flex items-center justify-center font-bold">
-                                01
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">30-Min Free Branding Discovery</h4>
-                                <p class="text-xs text-gray-500">Hum screen coordinate pe ideas evaluate karte hain.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Sleek Form Layout Column -->
-                <div class="lg:col-span-7">
-                    <div class="bg-darkCard border border-darkBorder p-8 rounded-3xl shadow-2xl relative">
-                        <!-- Success screen state -->
-                        <div x-show="contactSuccess" class="text-center py-12" style="display: none;">
-                            <div class="w-16 h-16 rounded-full bg-neonAccent/15 text-neonAccent flex items-center justify-center text-3xl mx-auto mb-6">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-3">Brief Submitted Successfully!</h3>
-                            <p class="text-gray-300 text-sm max-w-sm mx-auto mb-6">
-                                Awesome! Humare senior design advisor ke paas aapki details pohoch gayi hain. Hum 2 ghante ke andar aapse response call/WhatsApp par touch-base karenge.
-                            </p>
-                            <button @click="contactSuccess = false" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
-                                Submit Another Brief
-                            </button>
-                        </div>
-
-                        <!-- Interactive Slider Form -->
-                        <form x-show="!contactSuccess" @submit.prevent="submitClientBrief" class="flex flex-col gap-6">
-                            <!-- Step Indicator -->
-                            <div class="flex justify-between items-center border-b border-darkBorder pb-4">
-                                <span class="text-xs text-gray-400 font-semibold" x-text="'STEP ' + formStep + ' OF 2'"></span>
-                                <div class="flex gap-1.5">
-                                    <span class="w-6 h-1.5 rounded-full" :class="formStep >= 1 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
-                                    <span class="w-6 h-1.5 rounded-full" :class="formStep >= 2 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
-                                </div>
-                            </div>
-
-                            <!-- Step 1 Layout: Basic Info -->
-                            <div x-show="formStep === 1" class="flex flex-col gap-5">
-                                <h3 class="text-lg font-heading font-bold text-white">Let's start with basic contact details</h3>
-                                <div>
-                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">What is your name?</label>
-                                    <input type="text" x-model="formName" required placeholder="E.g., Devendra Sharma" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Your Email</label>
-                                        <input type="email" x-model="formEmail" required placeholder="name@company.com" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
-                                    </div>
-                                    <div>
-                                        <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Phone / WhatsApp</label>
-                                        <input type="tel" x-model="formPhone" required placeholder="+91 98765-XXXXX" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
-                                    </div>
-                                </div>
-                                <div class="mt-4 flex justify-end">
-                                    <button type="button" @click="formStep = 2" class="bg-neonAccent text-black font-bold px-8 py-3.5 rounded-full hover:bg-white transition-all flex items-center gap-2">
-                                        Next Step <i class="fa-solid fa-arrow-right text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 Layout: Project Scope and Budgets -->
-                            <div x-show="formStep === 2" style="display: none;" class="flex flex-col gap-5">
-                                <h3 class="text-lg font-heading font-bold text-white">Tell us about the project vision</h3>
-                                <div>
-                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Select Services Required</label>
-                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                                        <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
-                                            <input type="checkbox" value="Logo Design" x-model="formServices" class="accent-neonAccent"> Logo Design
-                                        </label>
-                                        <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
-                                            <input type="checkbox" value="Brand Book" x-model="formServices" class="accent-neonAccent"> Brand Book
-                                        </label>
-                                        <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
-                                            <input type="checkbox" value="UI/UX Design" x-model="formServices" class="accent-neonAccent"> UI/UX Design
-                                        </label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Describe your vision</label>
-                                    <textarea rows="3" x-model="formDesc" placeholder="Explain your design ideas, competitors or guidelines..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors resize-none"></textarea>
-                                </div>
-                                <div class="mt-4 flex justify-between items-center">
-                                    <button type="button" @click="formStep = 1" class="text-xs text-gray-400 hover:text-white underline font-semibold">
-                                        Go Back
-                                    </button>
-                                    <button type="submit" class="bg-neonAccent hover:bg-white text-black font-extrabold px-10 py-3.5 rounded-full transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)]">
-                                        Submit Brief <i class="fa-solid fa-circle-check ml-1"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Agency Structure</h5>
+                    <ul class="text-xs text-gray-400 space-y-3.5">
+                        <li><a href="#services" class="hover:text-neonAccent transition-colors">Creative Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-neonAccent transition-colors">Our Case Studies</a></li>
+                        <li><a href="#philosophy" class="hover:text-neonAccent transition-colors">Word-of-Mouth Oath</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Direct Connect</h5>
+                    <p class="text-xs text-gray-400 font-bold hover:text-neonAccent"><a href="admin.html"><i class="fa-solid fa-lock"></i> Secure Admin Access</a></p>
+                    <p class="text-xs text-gray-400 mt-2">hello@brandcraftstudio.com</p>
+                    <p class="text-xs text-gray-400 mt-2">+91 98765 43210</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </footer>
 
-        <!-- FOOTER -->
-        <footer class="border-t border-darkBorder bg-darkBg py-16">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-start mb-12">
-                    <div class="md:col-span-2 flex flex-col gap-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">
-                                BC
-                            </div>
-                            <span class="font-heading font-bold text-lg tracking-wide text-white">
-                                Brand<span class="text-neonAccent">Craft</span>
-                            </span>
-                        </div>
-                        <p class="text-gray-400 text-xs max-w-sm mt-2 leading-relaxed">
-                            Hum designs nahi, trust aur organic growth relationships build karte hain. 100% Client-First Satisfaction Guarantee ke sath premium agency.
-                        </p>
-                    </div>
-                    <div>
-                        <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Agency Structure</h5>
-                        <ul class="text-xs text-gray-400 space-y-3.5">
-                            <li><a href="#services" class="hover:text-neonAccent transition-colors">Creative Services</a></li>
-                            <li><a href="#portfolio" class="hover:text-neonAccent transition-colors">Our Case Studies</a></li>
-                            <li><a href="#philosophy" class="hover:text-neonAccent transition-colors">Word-of-Mouth Oath</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Direct Connect</h5>
-                        <p class="text-xs text-gray-400 font-bold hover:text-neonAccent"><a href="admin.html"><i class="fa-solid fa-lock"></i> Secure Admin Access</a></p>
-                        <p class="text-xs text-gray-400 mt-2">hello@brandcraftstudio.com</p>
-                        <p class="text-xs text-gray-400 mt-2">+91 98765 43210</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-
-    <!-- ==========================================
-         INTERACTIVE FLOATING NAVIGATION VIEW TOGGLE
-         ========================================== -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black/90 backdrop-blur-md border border-darkBorder px-4 py-3 rounded-full shadow-2xl">
-        <span class="text-xs font-semibold text-gray-400">Owner Access:</span>
-        <a href="admin.html" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-neonAccent text-black shadow-[0_0_15px_rgba(204,255,0,0.3)] hover:bg-white">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>Admin Control Panel</span>
-        </a>
-    </div>
-
-
-    <!-- ==========================================
-         MODALS & DIALOG CONVERTERS
-         ========================================== -->
-    <!-- LEAD MODAL FOR CONVERTING DEALS INSTANTLY -->
     <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
         <div @click.away="showModal = false" class="bg-darkCard border border-darkBorder p-6 rounded-2xl max-w-md w-full relative">
             <button @click="showModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -970,7 +934,6 @@
         </div>
     </div>
 
-    <!-- Firestore Core Logic Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -1037,7 +1000,6 @@
                 formStep: 1,
                 contactSuccess: false,
                 
-                // Synced Core Database (Persisted in Firestore)
                 pricing: {
                     kickstarter: 7999,
                     growthEdge: 18999,
@@ -1045,7 +1007,6 @@
                 },
                 projects: [],
 
-                // Form Input States
                 formName: '',
                 formEmail: '',
                 formPhone: '',
@@ -1061,6 +1022,8 @@
                             if (docSnap.exists()) {
                                 this.pricing = docSnap.data();
                             }
+                        }, (err) => {
+                            console.error("Pricing snapshot failed: ", err);
                         });
 
                         // Sync Projects
@@ -1070,6 +1033,8 @@
                                 tempProjects.push({ id: doc.id, ...doc.data() });
                             });
                             this.projects = tempProjects;
+                        }, (err) => {
+                            console.error("Projects snapshot failed: ", err);
                         });
 
                     } catch (error) {
