@@ -6,7 +6,7 @@
     <title>BrandCraft Studio | Premium Graphic Design & Brand Identity Agency</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,9 +62,11 @@
 </head>
 <body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="clientApp()">
 
+    <!-- Glowing Background Gradients -->
     <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
     <div class="absolute top-[1200px] right-10 w-[600px] h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
+    <!-- Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-40 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
@@ -117,6 +119,7 @@
         </div>
     </header>
 
+    <!-- HERO SECTION -->
     <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <!-- Left Info Column -->
@@ -211,6 +214,7 @@
         </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services" class="py-24 bg-darkBg relative border-t border-darkBorder">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -315,6 +319,7 @@
         </div>
     </section>
 
+    <!-- STYLE QUIZ -->
     <section id="style-quiz" class="py-20 bg-darkCard border-y border-darkBorder relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
@@ -439,6 +444,7 @@
         </div>
     </section>
 
+    <!-- PORTFOLIO -->
     <section id="portfolio" class="py-24 bg-darkBg relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center md:text-left md:flex items-end justify-between mb-16">
@@ -452,7 +458,7 @@
                 <div class="flex flex-wrap gap-2 mt-6 md:mt-0 justify-center">
                     <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">All Projects</button>
                     <button @click="activeTab = 'branding'" :class="activeTab === 'branding' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Brand Identity</button>
-                    <button @click="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">UI/UX Design</button>
+                    <button @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">UI/UX Design</button>
                     <button @click="activeTab = 'social'" :class="activeTab === 'social' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Social Media</button>
                 </div>
             </div>
@@ -466,7 +472,7 @@
                         
                         <!-- Custom Art Header -->
                         <div class="h-64 relative flex items-center justify-center p-8 overflow-hidden"
-                             :class="'bg-gradient-to-tr ' + proj.gradient">
+                             :class="'bg-gradient-to-tr ' + (proj.gradient || 'from-violet-600 to-indigo-900')">
                             <div class="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
                             
                             <template x-if="proj.initial || (!proj.isApp && !proj.isSocial)">
@@ -498,7 +504,7 @@
                                 </div>
                             </template>
 
-                            <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gray-300 z-10 border border-white/10" x-text="proj.time"></div>
+                            <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gray-300 z-10 border border-white/10" x-text="proj.time || 'Delivery Mode'"></div>
                         </div>
 
                         <!-- Text Content -->
@@ -516,6 +522,7 @@
         </div>
     </section>
 
+    <!-- PHILOSOPHY -->
     <section id="philosophy" class="py-24 bg-darkCard border-t border-darkBorder relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -577,6 +584,7 @@
         </div>
     </section>
 
+    <!-- ESTIMATOR -->
     <section id="estimator" class="py-20 bg-darkBg relative overflow-hidden border-t border-darkBorder">
         <div class="max-w-4xl mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
@@ -642,6 +650,7 @@
         </div>
     </section>
 
+    <!-- PRICING -->
     <section id="pricing" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -670,7 +679,7 @@
                         </ul>
                     </div>
                     <div class="mt-auto">
-                        <button @click="showModal = true; modalPlanName = 'Kickstarter Plan (₹' + pricing.kickstarter + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                        <button @click="openPlanModal('Kickstarter')" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
                             Choose Kickstarter Pack
                         </button>
                     </div>
@@ -698,7 +707,7 @@
                         </ul>
                     </div>
                     <div class="mt-auto">
-                        <button @click="showModal = true; modalPlanName = 'Growth Edge Plan (₹' + pricing.growthEdge + ')';" class="w-full bg-neonAccent hover:bg-white text-black py-3 rounded-xl text-xs font-extrabold transition-all shadow-md">
+                        <button @click="openPlanModal('Growth Edge')" class="w-full bg-neonAccent hover:bg-white text-black py-3 rounded-xl text-xs font-extrabold transition-all shadow-md">
                             Lock Growth Edge Deal
                         </button>
                     </div>
@@ -723,7 +732,7 @@
                         </ul>
                     </div>
                     <div class="mt-auto">
-                        <button @click="showModal = true; modalPlanName = 'Elite Brand Plan (₹' + pricing.eliteBrand + ')';" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                        <button @click="openPlanModal('Elite Brand')" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
                             Acquire Elite Experience
                         </button>
                     </div>
@@ -747,18 +756,18 @@
                         </ul>
                     </div>
                     <div class="mt-auto">
-                        <a href="#contact" class="block w-full text-center bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                        <button @click="openPlanModal('Custom Pricing')" class="block w-full text-center bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
                             Inquire Custom Proposal
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT FORM -->
     <section id="contact" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            <!-- Information Text Column -->
             <div class="lg:col-span-5 flex flex-col gap-6">
                 <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Let's Discuss Creative Projects</span>
                 <h2 class="font-heading text-4xl font-bold">Have an Idea? Let's Turn It Into a Real Brand.</h2>
@@ -767,9 +776,7 @@
                 </p>
                 <div class="flex flex-col gap-4 mt-4">
                     <div class="flex items-center gap-4 p-4 border border-darkBorder bg-darkCard/40 rounded-xl">
-                        <div class="w-10 h-10 rounded-lg bg-neonAccent/10 text-neonAccent flex items-center justify-center font-bold">
-                            01
-                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-neonAccent/10 text-neonAccent flex items-center justify-center font-bold">01</div>
                         <div>
                             <h4 class="font-bold text-white text-sm">30-Min Free Branding Discovery</h4>
                             <p class="text-xs text-gray-500">Hum screen coordinate pe ideas evaluate karte hain.</p>
@@ -778,10 +785,9 @@
                 </div>
             </div>
 
-            <!-- Sleek Form Layout Column -->
             <div class="lg:col-span-7">
                 <div class="bg-darkCard border border-darkBorder p-8 rounded-3xl shadow-2xl relative">
-                    <!-- Success screen state -->
+                    <!-- Success screen -->
                     <div x-show="contactSuccess" class="text-center py-12" style="display: none;">
                         <div class="w-16 h-16 rounded-full bg-neonAccent/15 text-neonAccent flex items-center justify-center text-3xl mx-auto mb-6">
                             <i class="fa-solid fa-circle-check"></i>
@@ -790,14 +796,13 @@
                         <p class="text-gray-300 text-sm max-w-sm mx-auto mb-6">
                             Awesome! Humare senior design advisor ke paas aapki details pohoch gayi hain. Hum 2 ghante ke andar aapse response call/WhatsApp par touch-base karenge.
                         </p>
-                        <button @click="contactSuccess = false" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
+                        <button @click="contactSuccess = false; formStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
                             Submit Another Brief
                         </button>
                     </div>
 
-                    <!-- Interactive Slider Form -->
+                    <!-- Main Form -->
                     <form x-show="!contactSuccess" @submit.prevent="submitClientBrief" class="flex flex-col gap-6">
-                        <!-- Step Indicator -->
                         <div class="flex justify-between items-center border-b border-darkBorder pb-4">
                             <span class="text-xs text-gray-400 font-semibold" x-text="'STEP ' + formStep + ' OF 2'"></span>
                             <div class="flex gap-1.5">
@@ -806,7 +811,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 1 Layout: Basic Info -->
+                        <!-- Step 1 -->
                         <div x-show="formStep === 1" class="flex flex-col gap-5">
                             <h3 class="text-lg font-heading font-bold text-white">Let's start with basic contact details</h3>
                             <div>
@@ -830,7 +835,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 2 Layout: Project Scope and Budgets -->
+                        <!-- Step 2 -->
                         <div x-show="formStep === 2" style="display: none;" class="flex flex-col gap-5">
                             <h3 class="text-lg font-heading font-bold text-white">Tell us about the project vision</h3>
                             <div>
@@ -852,9 +857,7 @@
                                 <textarea rows="3" x-model="formDesc" placeholder="Explain your design ideas, competitors or guidelines..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors resize-none"></textarea>
                             </div>
                             <div class="mt-4 flex justify-between items-center">
-                                <button type="button" @click="formStep = 1" class="text-xs text-gray-400 hover:text-white underline font-semibold">
-                                    Go Back
-                                </button>
+                                <button type="button" @click="formStep = 1" class="text-xs text-gray-400 hover:text-white underline font-semibold">Go Back</button>
                                 <button type="submit" class="bg-neonAccent hover:bg-white text-black font-extrabold px-10 py-3.5 rounded-full transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)]">
                                     Submit Brief <i class="fa-solid fa-circle-check ml-1"></i>
                                 </button>
@@ -872,19 +875,15 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-start mb-12">
                 <div class="md:col-span-2 flex flex-col gap-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">
-                            BC
-                        </div>
-                        <span class="font-heading font-bold text-lg tracking-wide text-white">
-                            Brand<span class="text-neonAccent">Craft</span>
-                        </span>
+                        <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">BC</div>
+                        <span class="font-heading font-bold text-lg tracking-wide text-white">Brand<span class="text-neonAccent">Craft</span></span>
                     </div>
                     <p class="text-gray-400 text-xs max-w-sm mt-2 leading-relaxed">
                         Hum designs nahi, trust aur organic growth relationships build karte hain. 100% Client-First Satisfaction Guarantee ke sath premium agency.
                     </p>
                 </div>
                 <div>
-                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Agency Structure</h5>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest">Agency Structure</h5>
                     <ul class="text-xs text-gray-400 space-y-3.5">
                         <li><a href="#services" class="hover:text-neonAccent transition-colors">Creative Services</a></li>
                         <li><a href="#portfolio" class="hover:text-neonAccent transition-colors">Our Case Studies</a></li>
@@ -892,7 +891,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Direct Connect</h5>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest">Direct Connect</h5>
                     <p class="text-xs text-gray-400 font-bold hover:text-neonAccent"><a href="admin.html"><i class="fa-solid fa-lock"></i> Secure Admin Access</a></p>
                     <p class="text-xs text-gray-400 mt-2">hello@brandcraftstudio.com</p>
                     <p class="text-xs text-gray-400 mt-2">+91 98765 43210</p>
@@ -901,6 +900,7 @@
         </div>
     </footer>
 
+    <!-- INTERACTIVE PLAN MODAL -->
     <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
         <div @click.away="showModal = false" class="bg-darkCard border border-darkBorder p-6 rounded-2xl max-w-md w-full relative">
             <button @click="showModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -913,7 +913,7 @@
                 <p class="text-xs text-gray-400 mt-2">Apni details enter karein. Hum 2 ghante ke andar aapse project kickstart discussion call ke liye connect karenge.</p>
             </div>
 
-            <form @submit.prevent="showModal = false; submitClientBrief();" class="flex flex-col gap-4">
+            <form @submit.prevent="submitModalBrief" class="flex flex-col gap-4">
                 <div>
                     <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1">Your Name</label>
                     <input type="text" x-model="formName" required placeholder="E.g., Devendra Sharma" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
@@ -934,38 +934,37 @@
         </div>
     </div>
 
+    <!-- Firebase Utilities -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'brandcraft-studio-app';
+        const appId = 'brandcraft-studio-app';
         
-        let firebaseConfig;
-        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
-            firebaseConfig = JSON.parse(__firebase_config);
-        } else {
-            firebaseConfig = {
-                apiKey: "",
-                authDomain: "brandcraft-studio.firebaseapp.com",
-                projectId: "brandcraft-studio",
-                storageBucket: "brandcraft-studio.appspot.com",
-                messagingSenderId: "1234567890",
-                appId: "1:1234567890:web:12345"
-            };
-        }
+        // PASTE YOUR REAL FIREBASE CREDENTIALS HERE FOR CROSS-DEVICE SYNC
+        const firebaseConfig = {
+            apiKey: "",
+            authDomain: "brandcraft-studio.firebaseapp.com",
+            projectId: "brandcraft-studio",
+            storageBucket: "brandcraft-studio.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:12345"
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
         window.dbUtils = {
+            isConfigured() {
+                return firebaseConfig.apiKey !== "";
+            },
             async initAuth() {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    return await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
+                if (this.isConfigured()) {
                     return await signInAnonymously(auth);
                 }
+                return null;
             },
             getLeadsCollection() {
                 return collection(db, 'artifacts', appId, 'public', 'data', 'leads');
@@ -978,12 +977,11 @@
             },
             onSnapshot,
             addDoc,
-            setDoc,
-            getDoc,
             doc
         };
     </script>
 
+    <!-- Client side local storage engine -->
     <script>
         function clientApp() {
             return {
@@ -1007,6 +1005,7 @@
                 },
                 projects: [],
 
+                // Form bindings
                 formName: '',
                 formEmail: '',
                 formPhone: '',
@@ -1014,60 +1013,114 @@
                 formServices: [],
 
                 async init() {
-                    try {
-                        await window.dbUtils.initAuth();
+                    this.loadLocalData();
 
-                        // Sync Pricing
-                        window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
-                            if (docSnap.exists()) {
-                                this.pricing = docSnap.data();
+                    // Check if Firebase Live configuration exists
+                    setTimeout(async () => {
+                        if (window.dbUtils && window.dbUtils.isConfigured()) {
+                            try {
+                                await window.dbUtils.initAuth();
+                                
+                                // Sync pricing
+                                window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                                    if (docSnap.exists()) {
+                                        this.pricing = docSnap.data();
+                                    }
+                                });
+
+                                // Sync projects
+                                window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
+                                    let tempProjects = [];
+                                    snapshot.forEach((doc) => {
+                                        tempProjects.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    if (tempProjects.length > 0) {
+                                        this.projects = tempProjects;
+                                        localStorage.setItem('bc_local_projects', JSON.stringify(tempProjects));
+                                    }
+                                });
+                            } catch (e) {
+                                console.warn("Firebase Live configuration connection failed. Retaining active sandbox data.", e);
                             }
-                        }, (err) => {
-                            console.error("Pricing snapshot failed: ", err);
-                        });
+                        }
+                    }, 500);
+                },
 
-                        // Sync Projects
-                        window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
-                            let tempProjects = [];
-                            snapshot.forEach((doc) => {
-                                tempProjects.push({ id: doc.id, ...doc.data() });
-                            });
-                            this.projects = tempProjects;
-                        }, (err) => {
-                            console.error("Projects snapshot failed: ", err);
-                        });
+                loadLocalData() {
+                    // Seed initial showcase if storage is empty
+                    const savedProj = localStorage.getItem('bc_local_projects');
+                    if (savedProj) {
+                        this.projects = JSON.parse(savedProj);
+                    } else {
+                        const initial = [
+                            { id: '1', title: 'Zenith Fintech Labs', category: 'branding', time: '8 Days Delivery', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900', initial: 'Z' },
+                            { id: '2', title: 'Aero Logistics AI', category: 'uiux', time: '14 Days Delivery', text: 'Crafted clean responsive platform architecture optimizing delivery speeds.', gradient: 'from-cyan-600 to-emerald-900', isApp: true },
+                            { id: '3', title: 'Pulse Nutrition', category: 'social', time: '5 Days Delivery', text: 'Consistent scroll-stopping templates designed specifically for nutrition startups.', gradient: 'from-pink-600 to-rose-950', isSocial: true }
+                        ];
+                        this.projects = initial;
+                        localStorage.setItem('bc_local_projects', JSON.stringify(initial));
+                    }
 
-                    } catch (error) {
-                        console.error("Firebase init error: ", error);
+                    const savedPricing = localStorage.getItem('bc_local_pricing');
+                    if (savedPricing) {
+                        this.pricing = JSON.parse(savedPricing);
                     }
                 },
 
+                openPlanModal(planName) {
+                    this.modalPlanName = planName;
+                    this.formDesc = `Interested in registering for the ${planName} scope package.`;
+                    this.showModal = true;
+                },
+
+                async submitModalBrief() {
+                    this.showModal = false;
+                    await this.submitClientBrief();
+                },
+
                 async submitClientBrief() {
+                    const selectedPlan = this.modalPlanName ? this.modalPlanName : (this.clientBudget < 10000 ? 'Kickstarter' : (this.clientBudget < 25000 ? 'Growth Edge' : 'Elite Brand'));
                     const newLead = {
+                        id: 'lead_' + Date.now(),
                         name: this.formName || 'Anonymous Client',
                         email: this.formEmail || 'no-email@client.com',
                         phone: this.formPhone || 'N/A',
-                        services: [...this.formServices],
-                        desc: this.formDesc || 'No description provided.',
+                        services: this.formServices.length > 0 ? [...this.formServices] : ['General Consulting Blueprint'],
+                        desc: this.formDesc || 'Custom strategy design query.',
                         budget: parseInt(this.clientBudget),
-                        plan: this.clientBudget < 10000 ? 'Kickstarter' : (this.clientBudget < 25000 ? 'Growth Edge' : 'Elite Brand'),
+                        plan: selectedPlan,
                         status: 'new',
                         date: new Date().toLocaleDateString()
                     };
 
-                    try {
-                        await window.dbUtils.addDoc(window.dbUtils.getLeadsCollection(), newLead);
-                        this.contactSuccess = true;
-                    } catch (error) {
-                        console.error("Lead submission failed: ", error);
+                    // Persist locally so it works immediately without Firebase setup
+                    const existingLocalLeads = JSON.parse(localStorage.getItem('bc_local_leads') || '[]');
+                    existingLocalLeads.push(newLead);
+                    localStorage.setItem('bc_local_leads', JSON.stringify(existingLocalLeads));
+
+                    // Push to Live Firebase cloud database if config exists
+                    if (window.dbUtils && window.dbUtils.isConfigured()) {
+                        try {
+                            await window.dbUtils.addDoc(window.dbUtils.getLeadsCollection(), newLead);
+                        } catch (e) {
+                            console.error("Firebase live push failed.", e);
+                        }
                     }
-                    
-                    // Reset inputs
-                    this.formName = ''; this.formEmail = ''; this.formPhone = ''; this.formDesc = ''; this.formServices = [];
+
+                    this.contactSuccess = true;
+                    this.clearFormInputs();
+                },
+
+                clearFormInputs() {
+                    this.formName = '';
+                    this.formEmail = '';
+                    this.formPhone = '';
+                    this.formDesc = '';
+                    this.formServices = [];
+                    this.modalPlanName = '';
                 }
             }
         }
     </script>
-
 </body>
 </html>
