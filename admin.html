@@ -59,6 +59,7 @@
 </head>
 <body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="adminApp()">
 
+    <!-- Login Protection Screen -->
     <div x-show="!isLoggedIn" class="fixed inset-0 z-50 flex items-center justify-center bg-[#0B0B0B] p-4">
         <div class="absolute inset-0 bg-gradient-to-tr from-indigo-950/20 to-transparent pointer-events-none"></div>
         
@@ -91,10 +92,11 @@
                 </button>
             </form>
             
-            <p class="text-center text-[10px] text-gray-500 mt-6">Default credential: admin / brandcraftadmin123</p>
+            <p class="text-center text-[10px] text-gray-500 mt-6 font-semibold">Default: admin / brandcraftadmin123</p>
         </div>
     </div>
 
+    <!-- Main Dashboard Screen -->
     <div x-show="isLoggedIn" style="display: none;" class="min-h-screen flex flex-col">
         <!-- Top Admin Header -->
         <header class="bg-adminCard border-b border-adminBorder px-8 h-20 flex items-center justify-between sticky top-0 z-40">
@@ -104,7 +106,10 @@
                 </div>
                 <div>
                     <h1 class="font-heading font-bold text-lg text-white">BrandCraft Admin <span class="text-neonAccent text-xs">Command Center</span></h1>
-                    <p class="text-[10px] text-gray-400">Real-Time Firebase Synchronizer Live</p>
+                    <div class="flex items-center gap-2 mt-0.5">
+                        <span class="w-2 h-2 rounded-full" :class="isFirebaseLive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'"></span>
+                        <p class="text-[10px] text-gray-400 font-bold" x-text="isFirebaseLive ? 'Live Firebase Cloud Connected' : 'Local Persistent Sandbox Mode'"></p>
+                    </div>
                 </div>
             </div>
             
@@ -144,29 +149,40 @@
                 
                 <!-- Tab 1: Dashboard Overview -->
                 <div x-show="adminTab === 'dashboard'" class="space-y-8">
+                    <!-- Setup Alert if Firebase is not linked -->
+                    <div x-show="!isFirebaseLive" class="p-4 bg-amber-950/40 border border-amber-500/30 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-cloud-arrow-up text-amber-400 text-lg mt-0.5 shrink-0"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Configure Cloud DB Sync</h4>
+                                <p class="text-[10px] text-gray-400 mt-0.5">Website abhi Local Sandbox mode me backup save kar rahi hai. Cross-device synchronization ke liye dono files me Firebase config update karein.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex items-center justify-between border-b border-adminBorder pb-4">
                         <h2 class="font-heading text-xl font-bold text-white">Live Pipeline Insights</h2>
-                        <span class="text-xs text-gray-400">Database connected securely</span>
+                        <span class="text-xs text-gray-400" x-text="isFirebaseLive ? 'Secure Cloud Active' : 'Sandbox Persistence Active'"></span>
                     </div>
 
                     <!-- Metrics cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
-                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Total Live Leads</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Total Active Leads</span>
                             <h3 class="text-3xl font-heading font-bold text-white mt-2" x-text="leads.length"></h3>
                             <p class="text-[10px] text-green-400 mt-2 flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check"></i> Connected from public forms
+                                <i class="fa-solid fa-circle-check"></i> Automatically retrieved
                             </p>
                         </div>
                         <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
                             <span class="text-xs text-gray-400 uppercase tracking-wider block">Active Pipeline Value</span>
                             <h3 class="text-3xl font-heading font-bold text-neonAccent mt-2" x-text="'₹ ' + getTotalPipeline().toLocaleString()"></h3>
-                            <p class="text-[10px] text-gray-500 mt-2">Aggregated real-time user selections</p>
+                            <p class="text-[10px] text-gray-500 mt-2">Aggregated active user selections</p>
                         </div>
                         <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
-                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Live Portfolio Projects</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Showcased Projects</span>
                             <h3 class="text-3xl font-heading font-bold text-white mt-2" x-text="projects.length"></h3>
-                            <p class="text-[10px] text-gray-400 mt-2">Active showcases shown dynamically</p>
+                            <p class="text-[10px] text-gray-400 mt-2">Active portfolios showing dynamically</p>
                         </div>
                     </div>
                 </div>
@@ -200,13 +216,14 @@
                                         <td class="py-4 px-4 max-w-xs space-y-1">
                                             <div class="flex flex-wrap gap-1">
                                                 <template x-for="svc in (lead.services || [])">
-                                                    <span class="bg-indigo-950/80 text-indigo-300 text-[9px] px-2 py-0.5 rounded" x-text="svc"></span>
+                                                    <span class="bg-indigo-950/80 text-indigo-300 text-[9px] px-2 py-0.5 rounded animate-pulse" x-text="svc"></span>
                                                 </template>
                                             </div>
                                             <p class="text-gray-400 italic text-[10px]" x-text="'&ldquo;' + lead.desc + '&rdquo;'"></p>
                                         </td>
                                         <td class="py-4 px-4 space-y-1">
                                             <p class="font-bold text-neonAccent" x-text="'₹ ' + (parseInt(lead.budget) || 15000).toLocaleString()"></p>
+                                            <p class="text-[9px] text-gray-500 uppercase font-bold" x-text="'Plan: ' + (lead.plan || 'N/A')"></p>
                                         </td>
                                         <td class="py-4 px-4">
                                             <span class="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
@@ -350,7 +367,7 @@
                     </div>
 
                     <div class="flex justify-end pt-4">
-                        <button @click="updatePricingInFirebase" class="bg-neonAccent text-black text-xs font-bold px-6 py-3 rounded-lg transition-colors flex items-center gap-2 shadow-lg">
+                        <button @click="updatePricing" class="bg-neonAccent text-black text-xs font-bold px-6 py-3 rounded-lg transition-colors flex items-center gap-2 shadow-lg">
                             <i class="fa-solid fa-cloud-arrow-up"></i> Sync & Update Pricing
                         </button>
                     </div>
@@ -360,38 +377,37 @@
         </div>
     </div>
 
+    <!-- Firebase Utilities -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'brandcraft-studio-app';
+        const appId = 'brandcraft-studio-app';
         
-        let firebaseConfig;
-        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
-            firebaseConfig = JSON.parse(__firebase_config);
-        } else {
-            firebaseConfig = {
-                apiKey: "",
-                authDomain: "brandcraft-studio.firebaseapp.com",
-                projectId: "brandcraft-studio",
-                storageBucket: "brandcraft-studio.appspot.com",
-                messagingSenderId: "1234567890",
-                appId: "1:1234567890:web:12345"
-            };
-        }
+        // PASTE YOUR REAL FIREBASE CONFIG HERE TO ALLOW CROSS-DEVICE CLOUD SYNC
+        const firebaseConfig = {
+            apiKey: "",
+            authDomain: "brandcraft-studio.firebaseapp.com",
+            projectId: "brandcraft-studio",
+            storageBucket: "brandcraft-studio.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:12345"
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
         window.dbUtils = {
+            isConfigured() {
+                return firebaseConfig.apiKey !== "";
+            },
             async initAuth() {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    return await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
+                if (this.isConfigured()) {
                     return await signInAnonymously(auth);
                 }
+                return null;
             },
             getLeadsCollection() {
                 return collection(db, 'artifacts', appId, 'public', 'data', 'leads');
@@ -403,7 +419,6 @@
                 return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'main');
             },
             onSnapshot,
-            addDoc,
             updateDoc,
             deleteDoc,
             doc,
@@ -420,6 +435,7 @@
                 adminPass: '',
                 loginError: false,
                 adminTab: 'dashboard',
+                isFirebaseLive: false,
                 
                 leads: [],
                 projects: [],
@@ -438,7 +454,7 @@
                 init() {
                     if (sessionStorage.getItem('brandcraft_logged') === 'true') {
                         this.isLoggedIn = true;
-                        this.startFirebaseSync();
+                        this.startEngine();
                     }
                 },
 
@@ -447,7 +463,7 @@
                         this.isLoggedIn = true;
                         this.loginError = false;
                         sessionStorage.setItem('brandcraft_logged', 'true');
-                        this.startFirebaseSync();
+                        this.startEngine();
                     } else {
                         this.loginError = true;
                     }
@@ -458,54 +474,56 @@
                     sessionStorage.removeItem('brandcraft_logged');
                 },
 
-                async startFirebaseSync() {
-                    try {
-                        await window.dbUtils.initAuth();
+                async startEngine() {
+                    this.loadLocalData();
 
-                        // Sync Leads
-                        window.dbUtils.onSnapshot(window.dbUtils.getLeadsCollection(), (snapshot) => {
-                            let tempLeads = [];
-                            snapshot.forEach((doc) => {
-                                tempLeads.push({ id: doc.id, ...doc.data() });
-                            });
-                            this.leads = tempLeads;
-                        }, (err) => {
-                            console.error("Leads snapshot failed: ", err);
-                        });
+                    // Detect and connect real-time Firebase if configured
+                    setTimeout(async () => {
+                        if (window.dbUtils && window.dbUtils.isConfigured()) {
+                            try {
+                                await window.dbUtils.initAuth();
+                                this.isFirebaseLive = true;
 
-                        // Sync Projects
-                        window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
-                            let tempProjects = [];
-                            snapshot.forEach((doc) => {
-                                tempProjects.push({ id: doc.id, ...doc.data() });
-                            });
-                            if (tempProjects.length === 0) {
-                                this.seedInitialProjects();
-                            } else {
-                                this.projects = tempProjects;
-                            }
-                        }, (err) => {
-                            console.error("Projects snapshot failed: ", err);
-                        });
-
-                        // Sync Pricing
-                        window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
-                            if (docSnap.exists()) {
-                                this.pricing = docSnap.data();
-                            } else {
-                                window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
-                                    kickstarter: 7999,
-                                    growthEdge: 18999,
-                                    eliteBrand: 29999
+                                // Sync Leads from Cloud
+                                window.dbUtils.onSnapshot(window.dbUtils.getLeadsCollection(), (snapshot) => {
+                                    let tempLeads = [];
+                                    snapshot.forEach((doc) => {
+                                        tempLeads.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    this.leads = tempLeads;
+                                    localStorage.setItem('bc_local_leads', JSON.stringify(tempLeads));
                                 });
-                            }
-                        }, (err) => {
-                            console.error("Pricing snapshot failed: ", err);
-                        });
 
-                    } catch (error) {
-                        console.error("Firebase auth/sync error: ", error);
-                    }
+                                // Sync Projects from Cloud
+                                window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
+                                    let tempProjects = [];
+                                    snapshot.forEach((doc) => {
+                                        tempProjects.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    this.projects = tempProjects;
+                                    localStorage.setItem('bc_local_projects', JSON.stringify(tempProjects));
+                                });
+
+                                // Sync Pricing from Cloud
+                                window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                                    if (docSnap.exists()) {
+                                        this.pricing = docSnap.data();
+                                        localStorage.setItem('bc_local_pricing', JSON.stringify(docSnap.data()));
+                                    }
+                                });
+
+                            } catch (e) {
+                                console.warn("Firebase Live setup connection error. Using local persistent storage.", e);
+                            }
+                        }
+                    }, 500);
+                },
+
+                loadLocalData() {
+                    // Pull local persistence leads
+                    this.leads = JSON.parse(localStorage.getItem('bc_local_leads') || '[]');
+                    this.pricing = JSON.parse(localStorage.getItem('bc_local_pricing') || '{"kickstarter": 7999, "growthEdge": 18999, "eliteBrand": 29999}');
+                    this.projects = JSON.parse(localStorage.getItem('bc_local_projects') || '[]');
                 },
 
                 getTotalPipeline() {
@@ -513,49 +531,87 @@
                 },
 
                 async updateLeadStatus(id, newStatus) {
-                    const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
-                    await window.dbUtils.updateDoc(leadDocRef, { status: newStatus });
+                    // Update locally
+                    this.leads = this.leads.map(l => l.id === id ? { ...l, status: newStatus } : l);
+                    localStorage.setItem('bc_local_leads', JSON.stringify(this.leads));
+
+                    // Update Cloud
+                    if (this.isFirebaseLive) {
+                        try {
+                            const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
+                            await window.dbUtils.updateDoc(leadDocRef, { status: newStatus });
+                        } catch (e) {
+                            console.error("Cloud status update failed.", e);
+                        }
+                    }
                 },
 
                 async deleteLead(id) {
-                    const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
-                    await window.dbUtils.deleteDoc(leadDocRef);
+                    this.leads = this.leads.filter(l => l.id !== id);
+                    localStorage.setItem('bc_local_leads', JSON.stringify(this.leads));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
+                            await window.dbUtils.deleteDoc(leadDocRef);
+                        } catch (e) {
+                            console.error("Cloud delete failed.", e);
+                        }
+                    }
                 },
 
                 async addProject() {
                     const payload = {
+                        id: 'proj_' + Date.now(),
                         title: this.newProjTitle,
                         category: this.newProjCategory,
                         time: this.newProjTime,
                         text: this.newProjText,
                         gradient: this.newProjGradient
                     };
-                    await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), payload);
+
+                    this.projects.push(payload);
+                    localStorage.setItem('bc_local_projects', JSON.stringify(this.projects));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), payload);
+                        } catch (e) {
+                            console.error("Cloud project insert failed.", e);
+                        }
+                    }
+
                     this.newProjTitle = '';
                     this.newProjText = '';
                 },
 
                 async deleteProject(id) {
-                    const projDocRef = window.dbUtils.doc(window.dbUtils.getProjectsCollection(), id);
-                    await window.dbUtils.deleteDoc(projDocRef);
+                    this.projects = this.projects.filter(p => p.id !== id);
+                    localStorage.setItem('bc_local_projects', JSON.stringify(this.projects));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const projDocRef = window.dbUtils.doc(window.dbUtils.getProjectsCollection(), id);
+                            await window.dbUtils.deleteDoc(projDocRef);
+                        } catch (e) {
+                            console.error("Cloud project delete failed.", e);
+                        }
+                    }
                 },
 
-                async updatePricingInFirebase() {
-                    await window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
-                        kickstarter: this.pricing.kickstarter,
-                        growthEdge: this.pricing.growthEdge,
-                        eliteBrand: this.pricing.eliteBrand
-                    });
-                },
+                async updatePricing() {
+                    localStorage.setItem('bc_local_pricing', JSON.stringify(this.pricing));
 
-                async seedInitialProjects() {
-                    const initial = [
-                        { title: 'Zenith Fintech Labs', category: 'branding', time: '8 Days Delivery', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900', initial: 'Z' },
-                        { title: 'Aero Logistics AI', category: 'uiux', time: '14 Days Delivery', text: 'Crafted clean responsive platform architecture optimizing delivery speeds.', gradient: 'from-cyan-600 to-emerald-900', isApp: true },
-                        { title: 'Pulse Nutrition', category: 'social', time: '5 Days Delivery', text: 'Consistent scroll-stopping templates designed specifically for nutrition startups.', gradient: 'from-pink-600 to-rose-950', isSocial: true }
-                    ];
-                    for (let p of initial) {
-                        await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), p);
+                    if (this.isFirebaseLive) {
+                        try {
+                            await window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
+                                kickstarter: this.pricing.kickstarter,
+                                growthEdge: this.pricing.growthEdge,
+                                eliteBrand: this.pricing.eliteBrand
+                            });
+                        } catch (e) {
+                            console.error("Cloud pricing sync failed.", e);
+                        }
                     }
                 }
             }
