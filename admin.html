@@ -136,11 +136,14 @@
                     </span>
                     <span class="bg-adminBg text-white text-[10px] px-2.5 py-1 rounded-full font-bold" x-text="leads.length"></span>
                 </button>
-                <button @click="adminTab = 'portfolio'" :class="adminTab === 'portfolio' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
-                    <i class="fa-solid fa-images text-lg"></i> Portfolio Manager
+                <button @click="adminTab = 'services'" :class="adminTab === 'services' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
+                    <i class="fa-solid fa-cubes text-lg"></i> Services Manager
                 </button>
                 <button @click="adminTab = 'pricing'" :class="adminTab === 'pricing' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
-                    <i class="fa-solid fa-tags text-lg"></i> Pricing Controller
+                    <i class="fa-solid fa-tags text-lg"></i> Plans & Pricing
+                </button>
+                <button @click="adminTab = 'portfolio'" :class="adminTab === 'portfolio' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
+                    <i class="fa-solid fa-images text-lg"></i> Portfolio Manager
                 </button>
             </aside>
 
@@ -259,7 +262,186 @@
                     </div>
                 </div>
 
-                <!-- Tab 3: Portfolio Manager -->
+                <!-- Tab 3: Services Manager -->
+                <div x-show="adminTab === 'services'" style="display: none;" class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Bespoke Services Manager</h2>
+                        <button @click="openNewServiceForm" class="bg-neonAccent text-black text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Add New Service
+                        </button>
+                    </div>
+
+                    <!-- Add/Edit Service form -->
+                    <form x-show="showServiceForm" @submit.prevent="saveService" class="bg-adminBg/60 border border-adminBorder p-6 rounded-xl space-y-4 shadow-inner" style="display: none;">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-neonAccent" x-text="serviceFormEditMode ? 'Edit Existing Service Details' : 'Create Brand New Service Segment'"></h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Service Title</label>
+                                <input type="text" x-model="serviceForm.title" required placeholder="E.g., Brand Identity" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">FontAwesome Icon Class</label>
+                                <input type="text" x-model="serviceForm.icon" required placeholder="E.g., fa-solid fa-id-card" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">CTA Action Link Text</label>
+                                <input type="text" x-model="serviceForm.actionLabel" required placeholder="E.g., Establish Brand Identity" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Service Key Features (Comma Separated)</label>
+                                <input type="text" x-model="serviceForm.featuresInput" required placeholder="In-depth color system, Custom typography, Letterheads" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] uppercase text-gray-400 block mb-1">Brief Description</label>
+                            <textarea rows="2" x-model="serviceForm.desc" required placeholder="Explain clearly what the client gets..." class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent resize-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-2">
+                            <button type="button" @click="showServiceForm = false" class="bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2.5 rounded-lg transition-colors">Cancel</button>
+                            <button type="submit" class="bg-neonAccent text-black text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-save"></i> Save Service Segment
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Current Services Grid Manager -->
+                    <div class="space-y-3">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-gray-400">Current Active Services</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <template x-for="svc in services" :key="svc.id">
+                                <div class="bg-adminBg/60 border border-adminBorder p-4 rounded-xl flex justify-between items-center">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-neonAccent/15 text-neonAccent flex items-center justify-center text-xs">
+                                            <i :class="svc.icon"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-white" x-text="svc.title"></h4>
+                                            <span class="text-[9px] text-gray-500" x-text="svc.features.length + ' Key Points'"></span>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-1">
+                                        <button @click="editService(svc)" class="text-neonAccent hover:text-white p-2">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button @click="deleteService(svc.id)" class="text-red-400 hover:text-red-300 p-2">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Plans & Pricing Controller -->
+                <div x-show="adminTab === 'pricing'" style="display: none;" class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Dynamic Pricing & Plans Controller</h2>
+                        <button @click="openNewPlanForm" class="bg-neonAccent text-black text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Add New Package Card
+                        </button>
+                    </div>
+
+                    <!-- Choose Most Popular Option Dynamic Dropdown/Selector -->
+                    <div class="bg-adminBg/40 border border-adminBorder p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <span class="text-[10px] text-neonAccent font-bold uppercase block mb-1">Exclusive Highlight Switch</span>
+                            <h4 class="text-sm font-bold text-white">Select "Most Popular (Best Value)" Highlight Card</h4>
+                            <p class="text-[11px] text-gray-400">The selected plan automatically glows with neon-accent borders, pop headers & customized buttons on the front-end page.</p>
+                        </div>
+                        <div class="w-full sm:w-auto">
+                            <select x-model="popularPlanId" @change="savePopularPlanSelection" class="bg-adminBg border border-adminBorder text-white text-xs p-2.5 rounded-lg w-full focus:outline-none focus:border-neonAccent font-bold">
+                                <template x-for="p in plans" :key="p.id">
+                                    <option :value="p.id" x-text="p.name" :selected="p.id === popularPlanId"></option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Add/Edit Plan form -->
+                    <form x-show="showPlanForm" @submit.prevent="savePlan" class="bg-adminBg/60 border border-adminBorder p-6 rounded-xl space-y-4 shadow-inner" style="display: none;">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-neonAccent" x-text="planFormEditMode ? 'Edit Existing Package Specifications' : 'Build A New Scale Plan Card'"></h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Plan Display Name</label>
+                                <input type="text" x-model="planForm.name" required placeholder="E.g., Plan 1: Kickstarter" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent font-bold">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Display Pricing Value</label>
+                                <div class="relative">
+                                    <input type="text" x-model="planForm.price" required placeholder="E.g., 7999 or Custom" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 pl-8 text-xs text-white focus:outline-none focus:border-neonAccent font-bold">
+                                    <span class="absolute left-3 top-3 text-gray-500 text-xs">₹</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Plan Button Call To Action</label>
+                                <input type="text" x-model="planForm.actionLabel" required placeholder="E.g., Choose Kickstarter Pack" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                            <div class="flex items-center gap-4 pt-4">
+                                <label class="flex items-center gap-2 cursor-pointer text-xs text-gray-300">
+                                    <input type="checkbox" x-model="planForm.isCustom" class="accent-neonAccent h-4 w-4">
+                                    Is Custom Price? (Displays string instead of numerical formatting)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] uppercase text-gray-400 block mb-1">Plan Point-by-point Features (Comma Separated)</label>
+                            <input type="text" x-model="planForm.featuresInput" required placeholder="E.g., 3 Original Concepts, High-res PDF, Stationery templates" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] uppercase text-gray-400 block mb-1">Short Description / Sub-header</label>
+                            <textarea rows="2" x-model="planForm.desc" required placeholder="A brief context of who this plan target is..." class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent resize-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-2">
+                            <button type="button" @click="showPlanForm = false" class="bg-gray-800 text-gray-300 text-xs font-bold px-4 py-2.5 rounded-lg transition-colors">Cancel</button>
+                            <button type="submit" class="bg-neonAccent text-black text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-save"></i> Save Plan Configuration
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Current active plans list manager -->
+                    <div class="space-y-3">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-gray-400">Current Setup Plan Cards</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <template x-for="p in plans" :key="p.id">
+                                <div class="bg-adminBg/60 border p-5 rounded-xl flex justify-between items-start transition-all" :class="p.id === popularPlanId ? 'border-neonAccent box-glow' : 'border-adminBorder'">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="text-sm font-extrabold text-white" x-text="p.name"></h4>
+                                            <span x-show="p.id === popularPlanId" class="bg-neonAccent text-black text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase">Most Popular</span>
+                                        </div>
+                                        <p class="text-[10px] text-gray-400" x-text="p.desc"></p>
+                                        <p class="text-xs font-bold text-neonAccent" x-text="p.isCustom ? p.price : '₹ ' + parseInt(p.price).toLocaleString() + '/-'"></p>
+                                    </div>
+                                    <div class="flex gap-1 shrink-0">
+                                        <button @click="editPlan(p)" class="text-neonAccent hover:text-white p-2">
+                                            <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                        <button @click="deletePlan(p.id)" class="text-red-400 hover:text-red-300 p-2">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Portfolio Manager -->
                 <div x-show="adminTab === 'portfolio'" style="display: none;" class="space-y-6">
                     <div class="flex items-center justify-between border-b border-adminBorder pb-4">
                         <h2 class="font-heading text-xl font-bold text-white">Dynamic Portfolio Manager</h2>
@@ -332,47 +514,6 @@
                     </div>
                 </div>
 
-                <!-- Tab 4: Pricing Controller -->
-                <div x-show="adminTab === 'pricing'" style="display: none;" class="space-y-6">
-                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
-                        <h2 class="font-heading text-xl font-bold text-white">Interactive Pricing Configuration</h2>
-                        <p class="text-xs text-gray-400">Edit plan pricing parameters below. Changes reflect on front-end cards instantly.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <!-- Card Price 1 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block font-heading">Plan 1: Kickstarter</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.kickstarter" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
-                            </div>
-                        </div>
-                        <!-- Card Price 2 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-neonAccent font-bold uppercase tracking-wider block font-heading">Plan 2: Growth Edge</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.growthEdge" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
-                            </div>
-                        </div>
-                        <!-- Card Price 3 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block font-heading">Plan 3: Elite Brand</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.eliteBrand" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-end pt-4">
-                        <button @click="updatePricing" class="bg-neonAccent text-black text-xs font-bold px-6 py-3 rounded-lg transition-colors flex items-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> Sync & Update Pricing
-                        </button>
-                    </div>
-                </div>
-
             </main>
         </div>
     </div>
@@ -385,7 +526,6 @@
 
         const appId = 'brandcraft-studio-app';
         
-        // PASTE YOUR REAL FIREBASE CONFIG HERE TO ALLOW CROSS-DEVICE CLOUD SYNC
         const firebaseConfig = {
             apiKey: "",
             authDomain: "brandcraft-studio.firebaseapp.com",
@@ -415,8 +555,14 @@
             getProjectsCollection() {
                 return collection(db, 'artifacts', appId, 'public', 'data', 'projects');
             },
-            getPricingDoc() {
-                return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'main');
+            getServicesCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'services');
+            },
+            getPlansCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'plans');
+            },
+            getPopularPlanDoc() {
+                return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'popular');
             },
             onSnapshot,
             updateDoc,
@@ -439,17 +585,41 @@
                 
                 leads: [],
                 projects: [],
-                pricing: {
-                    kickstarter: 7999,
-                    growthEdge: 18999,
-                    eliteBrand: 29999
-                },
+                services: [],
+                plans: [],
+                popularPlanId: 'plan_2',
 
+                // Portfolio binds
                 newProjTitle: '',
                 newProjCategory: 'branding',
                 newProjTime: '8 Days Delivery',
                 newProjText: '',
                 newProjGradient: 'from-violet-600 to-indigo-900',
+
+                // Services forms binds
+                showServiceForm: false,
+                serviceFormEditMode: false,
+                serviceForm: {
+                    id: '',
+                    title: '',
+                    icon: '',
+                    desc: '',
+                    actionLabel: '',
+                    featuresInput: ''
+                },
+
+                // Plans forms binds
+                showPlanForm: false,
+                planFormEditMode: false,
+                planForm: {
+                    id: '',
+                    name: '',
+                    price: '',
+                    desc: '',
+                    actionLabel: '',
+                    isCustom: false,
+                    featuresInput: ''
+                },
 
                 init() {
                     if (sessionStorage.getItem('brandcraft_logged') === 'true') {
@@ -484,7 +654,7 @@
                                 await window.dbUtils.initAuth();
                                 this.isFirebaseLive = true;
 
-                                // Sync Leads from Cloud
+                                // Sync Leads
                                 window.dbUtils.onSnapshot(window.dbUtils.getLeadsCollection(), (snapshot) => {
                                     let tempLeads = [];
                                     snapshot.forEach((doc) => {
@@ -492,9 +662,9 @@
                                     });
                                     this.leads = tempLeads;
                                     localStorage.setItem('bc_local_leads', JSON.stringify(tempLeads));
-                                });
+                                }, (err) => console.log(err));
 
-                                // Sync Projects from Cloud
+                                // Sync Projects
                                 window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
                                     let tempProjects = [];
                                     snapshot.forEach((doc) => {
@@ -502,15 +672,35 @@
                                     });
                                     this.projects = tempProjects;
                                     localStorage.setItem('bc_local_projects', JSON.stringify(tempProjects));
-                                });
+                                }, (err) => console.log(err));
 
-                                // Sync Pricing from Cloud
-                                window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                                // Sync Services
+                                window.dbUtils.onSnapshot(window.dbUtils.getServicesCollection(), (snapshot) => {
+                                    let tempServices = [];
+                                    snapshot.forEach((doc) => {
+                                        tempServices.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    this.services = tempServices;
+                                    localStorage.setItem('bc_local_services', JSON.stringify(tempServices));
+                                }, (err) => console.log(err));
+
+                                // Sync Plans
+                                window.dbUtils.onSnapshot(window.dbUtils.getPlansCollection(), (snapshot) => {
+                                    let tempPlans = [];
+                                    snapshot.forEach((doc) => {
+                                        tempPlans.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    this.plans = tempPlans.sort((a,b) => a.orderIndex - b.orderIndex);
+                                    localStorage.setItem('bc_local_plans', JSON.stringify(tempPlans));
+                                }, (err) => console.log(err));
+
+                                // Sync popular configuration
+                                window.dbUtils.onSnapshot(window.dbUtils.getPopularPlanDoc(), (docSnap) => {
                                     if (docSnap.exists()) {
-                                        this.pricing = docSnap.data();
-                                        localStorage.setItem('bc_local_pricing', JSON.stringify(docSnap.data()));
+                                        this.popularPlanId = docSnap.data().popularPlanId;
+                                        localStorage.setItem('bc_local_popular_plan_id', this.popularPlanId);
                                     }
-                                });
+                                }, (err) => console.log(err));
 
                             } catch (e) {
                                 console.warn("Firebase Live setup connection error. Using local persistent storage.", e);
@@ -520,10 +710,15 @@
                 },
 
                 loadLocalData() {
-                    // Pull local persistence leads
                     this.leads = JSON.parse(localStorage.getItem('bc_local_leads') || '[]');
-                    this.pricing = JSON.parse(localStorage.getItem('bc_local_pricing') || '{"kickstarter": 7999, "growthEdge": 18999, "eliteBrand": 29999}');
                     this.projects = JSON.parse(localStorage.getItem('bc_local_projects') || '[]');
+                    this.popularPlanId = localStorage.getItem('bc_local_popular_plan_id') || 'plan_2';
+
+                    // Pull services
+                    this.services = JSON.parse(localStorage.getItem('bc_local_services') || '[]');
+                    
+                    // Pull plans
+                    this.plans = JSON.parse(localStorage.getItem('bc_local_plans') || '[]');
                 },
 
                 getTotalPipeline() {
@@ -531,17 +726,15 @@
                 },
 
                 async updateLeadStatus(id, newStatus) {
-                    // Update locally
                     this.leads = this.leads.map(l => l.id === id ? { ...l, status: newStatus } : l);
                     localStorage.setItem('bc_local_leads', JSON.stringify(this.leads));
 
-                    // Update Cloud
                     if (this.isFirebaseLive) {
                         try {
                             const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
                             await window.dbUtils.updateDoc(leadDocRef, { status: newStatus });
                         } catch (e) {
-                            console.error("Cloud status update failed.", e);
+                            console.error(e);
                         }
                     }
                 },
@@ -555,11 +748,157 @@
                             const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
                             await window.dbUtils.deleteDoc(leadDocRef);
                         } catch (e) {
-                            console.error("Cloud delete failed.", e);
+                            console.error(e);
                         }
                     }
                 },
 
+                // SERVICES CORE LOGIC
+                openNewServiceForm() {
+                    this.serviceFormEditMode = false;
+                    this.serviceForm = { id: 'srv_' + Date.now(), title: '', icon: 'fa-solid fa-shapes', desc: '', actionLabel: 'Inquire Concept', featuresInput: '' };
+                    this.showServiceForm = true;
+                },
+
+                editService(svc) {
+                    this.serviceFormEditMode = true;
+                    this.serviceForm = {
+                        id: svc.id,
+                        title: svc.title,
+                        icon: svc.icon,
+                        desc: svc.desc,
+                        actionLabel: svc.actionLabel || 'Request Concept',
+                        featuresInput: svc.features ? svc.features.join(', ') : ''
+                    };
+                    this.showServiceForm = true;
+                },
+
+                async saveService() {
+                    const parsedFeatures = this.serviceForm.featuresInput.split(',').map(f => f.trim()).filter(f => f !== "");
+                    const payload = {
+                        id: this.serviceForm.id,
+                        title: this.serviceForm.title,
+                        icon: this.serviceForm.icon,
+                        desc: this.serviceForm.desc,
+                        actionLabel: this.serviceForm.actionLabel,
+                        features: parsedFeatures
+                    };
+
+                    if (this.serviceFormEditMode) {
+                        this.services = this.services.map(s => s.id === payload.id ? payload : s);
+                    } else {
+                        this.services.push(payload);
+                    }
+                    localStorage.setItem('bc_local_services', JSON.stringify(this.services));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const svcDocRef = window.dbUtils.doc(window.dbUtils.getServicesCollection(), payload.id);
+                            await window.dbUtils.setDoc(svcDocRef, payload);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                    this.showServiceForm = false;
+                },
+
+                async deleteService(id) {
+                    this.services = this.services.filter(s => s.id !== id);
+                    localStorage.setItem('bc_local_services', JSON.stringify(this.services));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const svcDocRef = window.dbUtils.doc(window.dbUtils.getServicesCollection(), id);
+                            await window.dbUtils.deleteDoc(svcDocRef);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                },
+
+                // PLANS CORE LOGIC
+                openNewPlanForm() {
+                    this.planFormEditMode = false;
+                    this.planForm = { id: 'plan_' + Date.now(), name: '', price: '', desc: '', actionLabel: 'Book Deal', isCustom: false, featuresInput: '' };
+                    this.showPlanForm = true;
+                },
+
+                editPlan(p) {
+                    this.planFormEditMode = true;
+                    this.planForm = {
+                        id: p.id,
+                        name: p.name,
+                        price: p.price,
+                        desc: p.desc,
+                        actionLabel: p.actionLabel || 'Book Deal',
+                        isCustom: p.isCustom || false,
+                        featuresInput: p.features ? p.features.join(', ') : ''
+                    };
+                    this.showPlanForm = true;
+                },
+
+                async savePlan() {
+                    const parsedFeatures = this.planForm.featuresInput.split(',').map(f => f.trim()).filter(f => f !== "");
+                    const payload = {
+                        id: this.planForm.id,
+                        name: this.planForm.name,
+                        price: this.planForm.isCustom ? this.planForm.price : parseInt(this.planForm.price) || 0,
+                        isCustom: this.planForm.isCustom,
+                        desc: this.planForm.desc,
+                        actionLabel: this.planForm.actionLabel,
+                        features: parsedFeatures,
+                        orderIndex: this.planFormEditMode ? (this.plans.find(x => x.id === this.planForm.id)?.orderIndex || 9) : (this.plans.length + 1)
+                    };
+
+                    if (this.planFormEditMode) {
+                        this.plans = this.plans.map(pl => pl.id === payload.id ? payload : pl);
+                    } else {
+                        this.plans.push(payload);
+                    }
+                    this.plans = this.plans.sort((a,b) => a.orderIndex - b.orderIndex);
+                    localStorage.setItem('bc_local_plans', JSON.stringify(this.plans));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const planDocRef = window.dbUtils.doc(window.dbUtils.getPlansCollection(), payload.id);
+                            await window.dbUtils.setDoc(planDocRef, payload);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                    this.showPlanForm = false;
+                },
+
+                async deletePlan(id) {
+                    this.plans = this.plans.filter(p => p.id !== id);
+                    localStorage.setItem('bc_local_plans', JSON.stringify(this.plans));
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            const planDocRef = window.dbUtils.doc(window.dbUtils.getPlansCollection(), id);
+                            await window.dbUtils.deleteDoc(planDocRef);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                },
+
+                // HIGHLIGHTS DYNAMICS
+                async savePopularPlanSelection() {
+                    localStorage.setItem('bc_local_popular_plan_id', this.popularPlanId);
+
+                    if (this.isFirebaseLive) {
+                        try {
+                            await window.dbUtils.setDoc(window.dbUtils.getPopularPlanDoc(), {
+                                popularPlanId: this.popularPlanId
+                            });
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                },
+
+                // PORTFOLIO MANAGEMENT
                 async addProject() {
                     const payload = {
                         id: 'proj_' + Date.now(),
@@ -575,9 +914,9 @@
 
                     if (this.isFirebaseLive) {
                         try {
-                            await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), payload);
+                            await window.dbUtils.setDoc(window.dbUtils.doc(window.dbUtils.getProjectsCollection(), payload.id), payload);
                         } catch (e) {
-                            console.error("Cloud project insert failed.", e);
+                            console.error(e);
                         }
                     }
 
@@ -594,23 +933,7 @@
                             const projDocRef = window.dbUtils.doc(window.dbUtils.getProjectsCollection(), id);
                             await window.dbUtils.deleteDoc(projDocRef);
                         } catch (e) {
-                            console.error("Cloud project delete failed.", e);
-                        }
-                    }
-                },
-
-                async updatePricing() {
-                    localStorage.setItem('bc_local_pricing', JSON.stringify(this.pricing));
-
-                    if (this.isFirebaseLive) {
-                        try {
-                            await window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
-                                kickstarter: this.pricing.kickstarter,
-                                growthEdge: this.pricing.growthEdge,
-                                eliteBrand: this.pricing.eliteBrand
-                            });
-                        } catch (e) {
-                            console.error("Cloud pricing sync failed.", e);
+                            console.error(e);
                         }
                     }
                 }
