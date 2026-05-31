@@ -65,121 +65,10 @@
     </style>
 </head>
 <body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" 
-      x-data="{ 
-          isAdminMode: false,
-          adminTab: 'dashboard',
-          mobileMenu: false, 
-          activeTab: 'all', 
-          activeQuizStep: 0, 
-          quizAnswers: {}, 
-          showQuizResult: false, 
-          quizLoading: false, 
-          recommendedPlan: '', 
-          showModal: false, 
-          modalPlanName: '', 
-          clientBudget: 15000, 
-          formStep: 1, 
-          contactSuccess: false,
-          
-          /* Notification State */
-          notificationShow: false,
-          notificationMessage: '',
-          notificationType: 'success',
-          showNotification(msg, type = 'success') {
-              this.notificationMessage = msg;
-              this.notificationType = type;
-              this.notificationShow = true;
-              setTimeout(() => { this.notificationShow = false; }, 3000);
-          },
+      x-data="clientApp()">
 
-          /* Synced Core Database (In-Memory State) */
-          pricing: {
-              kickstarter: 7999,
-              growthEdge: 18999,
-              eliteBrand: 29999
-          },
-          leads: [
-              { id: 1, name: 'Devendra Sharma', email: 'devendra@techstartup.in', phone: '+91 98765-43210', services: ['Logo Design', 'Brand Book'], desc: 'Need modern cyber aesthetic logo for our AI automation platform.', budget: 15000, plan: 'Growth Edge', status: 'new', date: 'May 31, 2026' },
-              { id: 2, name: 'Ananya Roy', email: 'ananya@bakingbay.com', phone: '+91 87654-32109', services: ['Social Pack'], desc: 'Looking for sweet pink pastel social media layouts to boost bakery engagement.', budget: 8500, plan: 'Kickstarter', status: 'contacted', date: 'May 30, 2026' }
-          ],
-          projects: [
-              { title: 'Zenith Fintech Labs', category: 'branding', time: '8 Days', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900', initial: 'Z' },
-              { title: 'Aero Logistics AI', category: 'uiux', time: '14 Days', text: 'Crafted clean responsive platform architecture optimizing delivery speeds.', gradient: 'from-cyan-600 to-emerald-900', isApp: true },
-              { title: 'Pulse Nutrition', category: 'social', time: '5 Days', text: 'Consistent scroll-stopping templates designed specifically for nutrition startups.', gradient: 'from-pink-600 to-rose-950', isSocial: true },
-              { title: 'Nova Construction Corp', category: 'branding', time: '12 Days', text: 'High structural templates, stationery blueprints, and packaging guidelines.', gradient: 'from-purple-800 to-indigo-950', initial: 'N' }
-          ],
-
-          /* Form Submission Logic */
-          formName: '',
-          formEmail: '',
-          formPhone: '',
-          formDesc: '',
-          formServices: [],
-          submitClientBrief() {
-              const newLead = {
-                  id: this.leads.length + 1,
-                  name: this.formName || 'Anonymous Client',
-                  email: this.formEmail || 'no-email@client.com',
-                  phone: this.formPhone || 'N/A',
-                  services: [...this.formServices],
-                  desc: this.formDesc || 'No description provided.',
-                  budget: this.clientBudget,
-                  plan: this.clientBudget < 10000 ? 'Kickstarter' : (this.clientBudget < 25000 ? 'Growth Edge' : 'Elite Brand'),
-                  status: 'new',
-                  date: 'Today'
-              };
-              this.leads.unshift(newLead);
-              this.contactSuccess = true;
-              this.showNotification('Your creative brief has been recorded successfully! Checked in Admin Panel.');
-              
-              /* Reset Form */
-              this.formName = ''; this.formEmail = ''; this.formPhone = ''; this.formDesc = ''; this.formServices = [];
-          },
-
-          /* Admin Form States */
-          newProjTitle: '',
-          newProjCategory: 'branding',
-          newProjTime: '7 Days',
-          newProjText: '',
-          newProjGradient: 'from-purple-600 to-blue-800',
-          addProject() {
-              if(!this.newProjTitle || !this.newProjText) {
-                  this.showNotification('Please fill all project details!', 'error');
-                  return;
-              }
-              this.projects.push({
-                  title: this.newProjTitle,
-                  category: this.newProjCategory,
-                  time: this.newProjTime,
-                  text: this.newProjText,
-                  gradient: this.newProjGradient,
-                  initial: this.newProjTitle.charAt(0)
-              });
-              this.showNotification('Project added to live Portfolio!');
-              this.newProjTitle = ''; this.newProjText = '';
-          }
-      }">
-
-    <div x-show="notificationShow" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:translate-x-4"
-         x-transition:enter-end="opacity-100 translate-y-0 sm:translate-x-0"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         class="fixed top-24 right-6 z-50 p-4 rounded-xl shadow-2xl flex items-center gap-3 border"
-         :class="notificationType === 'success' ? 'bg-black border-neonAccent text-white' : 'bg-red-950 border-red-500 text-red-200'"
-         style="display: none;">
-        <i class="fa-solid" :class="notificationType === 'success' ? 'fa-circle-check text-neonAccent' : 'fa-circle-exclamation text-red-400'"></i>
-        <span class="text-sm font-semibold" x-text="notificationMessage"></span>
-    </div>
-
-    <!-- ==========================================
-         CLIENT-FACING WEBSITE VIEW
-         ========================================== -->
-    <div x-show="!isAdminMode">
-        <!-- Glowing Background Gradients -->
-        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <!-- Glowing Background Gradients -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
         <div class="absolute top-[1200px] right-10 w-[600px] h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
         <!-- Navigation Bar -->
@@ -208,7 +97,7 @@
 
                 <!-- CTA Desktop Button -->
                 <div class="hidden md:flex items-center gap-4">
-                    <a href="#estimator" class="text-gray-400 hover:text-white transition-colors text-sm">Value Calculator</a>
+                    <a href="admin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Admin Control</a>
                     <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(204,255,0,0.2)] hover:shadow-[0_0_25px_rgba(204,255,0,0.4)]">
                         Free Consultation <i class="fa-solid fa-arrow-right ml-1"></i>
                     </a>
@@ -221,13 +110,14 @@
             </div>
 
             <!-- Mobile Drawer -->
-            <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-10" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10" class="md:hidden absolute top-20 left-0 w-full bg-darkBg border-b border-darkBorder py-8 px-6 shadow-2xl flex flex-col gap-6" style="display: none;">
-                <a @click="mobileMenu = false" href="#services" class="text-lg text-gray-300 hover:text-neonAccent">Services</a>
-                <a @click="mobileMenu = false" href="#portfolio" class="text-lg text-gray-300 hover:text-neonAccent">Portfolio</a>
-                <a @click="mobileMenu = false" href="#philosophy" class="text-lg text-gray-300 hover:text-neonAccent">Our Philosophy</a>
-                <a @click="mobileMenu = false" href="#pricing" class="text-lg text-gray-300 hover:text-neonAccent">Pricing & Plans</a>
-                <a @click="mobileMenu = false" href="#style-quiz" class="text-lg text-neonAccent font-semibold">Take Brand Style Quiz</a>
-                <hr class="border-darkBorder">
+        <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-10" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10" class="md:hidden absolute top-20 left-0 w-full bg-darkBg border-b border-darkBorder py-8 px-6 shadow-2xl flex flex-col gap-6" style="display: none;">
+            <a @click="mobileMenu = false" href="#services" class="text-lg text-gray-300 hover:text-neonAccent">Services</a>
+            <a @click="mobileMenu = false" href="#portfolio" class="text-lg text-gray-300 hover:text-neonAccent">Portfolio</a>
+            <a @click="mobileMenu = false" href="#philosophy" class="text-lg text-gray-300 hover:text-neonAccent">Our Philosophy</a>
+            <a @click="mobileMenu = false" href="#pricing" class="text-lg text-gray-300 hover:text-neonAccent">Pricing & Plans</a>
+            <a @click="mobileMenu = false" href="admin.html" class="text-lg text-gray-300 hover:text-neonAccent">Admin Panel</a>
+            <a @click="mobileMenu = false" href="#style-quiz" class="text-lg text-neonAccent font-semibold">Take Brand Style Quiz</a>
+            <hr class="border-darkBorder">
                 <a @click="mobileMenu = false" href="#contact" class="bg-neonAccent text-black text-center py-3 rounded-full font-semibold">
                     Get Free Consultation
                 </a>
@@ -580,7 +470,7 @@
 
                 <!-- Dynamic Projects Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <template x-for="proj in projects" :key="proj.title">
+                    <template x-for="proj in projects" :key="proj.id">
                         <div x-show="activeTab === 'all' || activeTab === proj.category" 
                              x-transition:enter="transition ease-out duration-300"
                              class="group bg-darkCard border border-darkBorder rounded-2xl overflow-hidden transition-all duration-300 hover:border-neonAccent/40">
@@ -590,9 +480,9 @@
                                  :class="'bg-gradient-to-tr ' + proj.gradient">
                                 <div class="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
                                 
-                                <template x-if="proj.initial">
+                                <template x-if="proj.initial || (!proj.isApp && !proj.isSocial)">
                                     <div class="w-24 h-24 rounded-full border-4 border-white/20 flex items-center justify-center z-10 animate-pulse">
-                                        <span class="font-heading text-4xl font-extrabold text-white" x-text="proj.initial"></span>
+                                        <span class="font-heading text-4xl font-extrabold text-white" x-text="proj.initial || proj.title.charAt(0)"></span>
                                     </div>
                                 </template>
 
@@ -1021,7 +911,8 @@
                     </div>
                     <div>
                         <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest text-glow">Direct Connect</h5>
-                        <p class="text-xs text-gray-400">hello@brandcraftstudio.com</p>
+                        <p class="text-xs text-gray-400 font-bold hover:text-neonAccent"><a href="admin.html"><i class="fa-solid fa-lock"></i> Secure Admin Access</a></p>
+                        <p class="text-xs text-gray-400 mt-2">hello@brandcraftstudio.com</p>
                         <p class="text-xs text-gray-400 mt-2">+91 98765 43210</p>
                     </div>
                 </div>
@@ -1031,320 +922,14 @@
 
 
     <!-- ==========================================
-         COMMAND CENTER: PREMIUM ADMIN PORTAL VIEW
-         ========================================== -->
-    <div x-show="isAdminMode" class="min-h-screen bg-adminBg text-gray-200" style="display: none;">
-        <!-- Top Admin Header -->
-        <header class="bg-adminCard border-b border-adminBorder px-8 h-20 flex items-center justify-between sticky top-0 z-40">
-            <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-lg bg-indigo-500 flex items-center justify-center font-heading font-bold text-white text-xl">
-                    BC
-                </div>
-                <div>
-                    <h1 class="font-heading font-bold text-lg text-white">BrandCraft Admin <span class="text-indigo-400 text-xs">Command Center</span></h1>
-                    <p class="text-[10px] text-gray-400">Manage Leads, Portfolio, Strategy, and Live Values</p>
-                </div>
-            </div>
-            
-            <!-- Quick stats header pill -->
-            <div class="flex items-center gap-6">
-                <div class="hidden lg:flex items-center gap-2 bg-indigo-950/40 border border-indigo-500/30 px-4 py-2 rounded-xl text-xs">
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-indigo-200">System Synced & Live</span>
-                </div>
-                <button @click="isAdminMode = false" class="bg-neonAccent hover:bg-white text-black px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-eye"></i> View Live Site
-                </button>
-            </div>
-        </header>
-
-        <!-- Admin Layout Grid -->
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Sidebar navigation -->
-            <aside class="lg:col-span-3 flex flex-col gap-2">
-                <button @click="adminTab = 'dashboard'" :class="adminTab === 'dashboard' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
-                    <i class="fa-solid fa-chart-line text-lg"></i> Overview & Metrics
-                </button>
-                <button @click="adminTab = 'leads'" :class="adminTab === 'leads' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center justify-between text-sm font-semibold transition-all text-left">
-                    <span class="flex items-center gap-3">
-                        <i class="fa-solid fa-envelope-open-text text-lg"></i> Leads & Briefs
-                    </span>
-                    <span class="bg-indigo-950 text-indigo-300 text-[10px] px-2 py-0.5 rounded-full font-bold" x-text="leads.length"></span>
-                </button>
-                <button @click="adminTab = 'portfolio'" :class="adminTab === 'portfolio' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
-                    <i class="fa-solid fa-images text-lg"></i> Portfolio Manager
-                </button>
-                <button @click="adminTab = 'pricing'" :class="adminTab === 'pricing' ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
-                    <i class="fa-solid fa-tags text-lg"></i> Pricing Controller
-                </button>
-            </aside>
-
-            <!-- Main Content panel -->
-            <main class="lg:col-span-9 bg-adminCard border border-adminBorder rounded-2xl p-8 shadow-xl min-h-[500px]">
-                
-                <!-- Tab 1: Dashboard Overview -->
-                <div x-show="adminTab === 'dashboard'" x-transition class="space-y-8">
-                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
-                        <h2 class="font-heading text-xl font-bold text-white">Command Analytics</h2>
-                        <span class="text-xs text-gray-400" x-text="'Current active data models: ' + leads.length + ' leads, ' + projects.length + ' projects'"></span>
-                    </div>
-
-                    <!-- Metrics cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
-                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Total Leads Captured</span>
-                            <h3 class="text-3xl font-heading font-bold text-white mt-2" x-text="leads.length"></h3>
-                            <p class="text-[10px] text-green-400 mt-2 flex items-center gap-1">
-                                <i class="fa-solid fa-circle-nodes"></i> Directly connected from front-end form
-                            </p>
-                        </div>
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
-                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Projected Pipeline</span>
-                            <h3 class="text-3xl font-heading font-bold text-indigo-400 mt-2" x-text="'₹ ' + leads.reduce((sum, item) => sum + parseInt(item.budget), 0).toLocaleString()"></h3>
-                            <p class="text-[10px] text-gray-500 mt-2">Aggregated from dynamic slider briefs</p>
-                        </div>
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
-                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Portfolio Case Studies</span>
-                            <h3 class="text-3xl font-heading font-bold text-neonAccent mt-2" x-text="projects.length"></h3>
-                            <p class="text-[10px] text-gray-400 mt-2">Active showcases shown dynamically</p>
-                        </div>
-                    </div>
-
-                    <!-- Visual Quick Flow Chart Simulation -->
-                    <div class="bg-adminBg/60 border border-adminBorder p-6 rounded-xl">
-                        <h4 class="text-sm font-bold text-white mb-4">Pipeline Status Flow</h4>
-                        <div class="grid grid-cols-4 gap-4 text-center">
-                            <div class="p-3 bg-indigo-950/40 border border-indigo-500/20 rounded-lg">
-                                <span class="text-lg font-bold text-indigo-300" x-text="leads.filter(l => l.status === 'new').length"></span>
-                                <p class="text-[10px] text-gray-400 uppercase mt-1">New Briefs</p>
-                            </div>
-                            <div class="p-3 bg-yellow-950/40 border border-yellow-500/20 rounded-lg">
-                                <span class="text-lg font-bold text-yellow-300" x-text="leads.filter(l => l.status === 'contacted').length"></span>
-                                <p class="text-[10px] text-gray-400 uppercase mt-1">Contacted</p>
-                            </div>
-                            <div class="p-3 bg-green-950/40 border border-green-500/20 rounded-lg">
-                                <span class="text-lg font-bold text-green-300">0</span>
-                                <p class="text-[10px] text-gray-400 uppercase mt-1">In Designing</p>
-                            </div>
-                            <div class="p-3 bg-blue-950/40 border border-blue-500/20 rounded-lg">
-                                <span class="text-lg font-bold text-blue-300">2</span>
-                                <p class="text-[10px] text-gray-400 uppercase mt-1">Completed</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- System Info Vibe section -->
-                    <div class="p-4 bg-indigo-950/20 border border-indigo-900/40 rounded-xl flex gap-3 items-start">
-                        <i class="fa-solid fa-circle-info text-indigo-400 mt-0.5"></i>
-                        <p class="text-xs text-indigo-200 leading-relaxed">
-                            <strong>Note to Agency Owner:</strong> This system runs on single-session local state variables. Any lead submitted on the front-end will show up instantly in the "Leads" tab below. You can accept, reject, or update statuses in real-time.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Tab 2: Leads Management -->
-                <div x-show="adminTab === 'leads'" x-transition class="space-y-6">
-                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
-                        <h2 class="font-heading text-xl font-bold text-white">Submitted Creative Briefs & Leads</h2>
-                        <span class="text-xs text-indigo-400 font-semibold uppercase tracking-wider" x-text="leads.length + ' Live Leads'"></span>
-                    </div>
-
-                    <div class="overflow-x-auto custom-scrollbar">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="border-b border-adminBorder text-[11px] text-gray-400 uppercase tracking-wider">
-                                    <th class="py-3 px-4">Client Detail</th>
-                                    <th class="py-3 px-4">Scope Required</th>
-                                    <th class="py-3 px-4">Budget / Plan</th>
-                                    <th class="py-3 px-4">Status</th>
-                                    <th class="py-3 px-4 text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <template x-for="lead in leads" :key="lead.id">
-                                    <tr class="border-b border-adminBorder/50 hover:bg-adminBg/40 transition-colors text-xs">
-                                        <!-- Contact details -->
-                                        <td class="py-4 px-4 space-y-1">
-                                            <p class="font-bold text-white" x-text="lead.name"></p>
-                                            <p class="text-gray-400" x-text="lead.email"></p>
-                                            <p class="text-[10px] text-indigo-400" x-text="lead.phone"></p>
-                                        </td>
-                                        <!-- Project vision details -->
-                                        <td class="py-4 px-4 max-w-xs space-y-1">
-                                            <div class="flex flex-wrap gap-1">
-                                                <template x-for="svc in lead.services">
-                                                    <span class="bg-indigo-950/80 text-indigo-300 text-[9px] px-2 py-0.5 rounded" x-text="svc"></span>
-                                                </template>
-                                            </div>
-                                            <p class="text-gray-400 italic text-[10px]" x-text="'&ldquo;' + lead.desc + '&rdquo;'"></p>
-                                        </td>
-                                        <!-- Values & Budgets -->
-                                        <td class="py-4 px-4 space-y-1">
-                                            <p class="font-bold text-neonAccent" x-text="'₹ ' + lead.budget.toLocaleString()"></p>
-                                            <span class="text-[10px] bg-adminBg border border-adminBorder px-2 py-0.5 rounded text-gray-400 block w-max" x-text="lead.plan"></span>
-                                        </td>
-                                        <!-- Leads status badge -->
-                                        <td class="py-4 px-4">
-                                            <span class="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
-                                                  :class="{
-                                                      'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30': lead.status === 'new',
-                                                      'bg-amber-950/80 text-amber-300 border border-amber-500/30': lead.status === 'contacted',
-                                                      'bg-gray-800 text-gray-400': lead.status === 'closed'
-                                                  }"
-                                                  x-text="lead.status">
-                                            </span>
-                                        </td>
-                                        <!-- Admin action buttons -->
-                                        <td class="py-4 px-4 text-right space-x-1 whitespace-nowrap">
-                                            <button x-show="lead.status === 'new'" @click="lead.status = 'contacted'; showNotification('Lead marked as Contacted!')" class="bg-amber-500 hover:bg-amber-600 text-black text-[10px] font-bold px-2 py-1 rounded transition-colors">
-                                                Mark Contacted
-                                            </button>
-                                            <button x-show="lead.status === 'contacted'" @click="lead.status = 'closed'; showNotification('Lead status closed.')" class="bg-gray-700 hover:bg-gray-600 text-white text-[10px] px-2 py-1 rounded transition-colors">
-                                                Close Deal
-                                            </button>
-                                            <button @click="leads = leads.filter(l => l.id !== lead.id); showNotification('Lead removed from database.', 'error')" class="text-red-400 hover:text-red-300 text-xs p-1" title="Delete lead">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Tab 3: Portfolio Manager -->
-                <div x-show="adminTab === 'portfolio'" x-transition class="space-y-6">
-                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
-                        <h2 class="font-heading text-xl font-bold text-white">Dynamic Portfolio Manager</h2>
-                        <p class="text-xs text-gray-400">Add new project showcases below to reflect immediately on the main customer page.</p>
-                    </div>
-
-                    <!-- Add project form -->
-                    <form @submit.prevent="addProject" class="bg-adminBg/60 border border-adminBorder p-6 rounded-xl space-y-4">
-                        <h3 class="text-xs uppercase tracking-wider font-bold text-indigo-400">Add New Case Study</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Project Title</label>
-                                <input type="text" x-model="newProjTitle" required placeholder="E.g., Aero Space Labs" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                            </div>
-                            <div>
-                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Scope Category</label>
-                                <select x-model="newProjCategory" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                                    <option value="branding">Brand Identity</option>
-                                    <option value="uiux">UI/UX Design</option>
-                                    <option value="social">Social Media Kit</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Delivery Time (Label)</label>
-                                <input type="text" x-model="newProjTime" placeholder="E.g., 8 Days Delivery" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                            </div>
-                            <div>
-                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Visual Theme Gradient</label>
-                                <select x-model="newProjGradient" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500">
-                                    <option value="from-violet-600 to-indigo-900">Sunset Violet (Deep Indigo)</option>
-                                    <option value="from-cyan-600 to-emerald-900">Aero Emerald (Green Teal)</option>
-                                    <option value="from-pink-600 to-rose-950">Pulse Pink (Dark Velvet)</option>
-                                    <option value="from-amber-600 to-red-900">Oasis Red (Hot Ember)</option>
-                                    <option value="from-indigo-600 to-blue-800">Classic Blue</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="text-[10px] uppercase text-gray-400 block mb-1">Brief Description</label>
-                            <textarea rows="2" x-model="newProjText" required placeholder="E.g., High end typographic identity assets for local clothing brand." class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 resize-none"></textarea>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Publish Live Project
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Projects List manager -->
-                    <div class="space-y-3">
-                        <h3 class="text-xs uppercase tracking-wider font-bold text-gray-400">Current Portfolio Items</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <template x-for="p in projects" :key="p.title">
-                                <div class="bg-adminBg/60 border border-adminBorder p-4 rounded-xl flex justify-between items-center">
-                                    <div>
-                                        <span class="text-[9px] uppercase tracking-wider text-indigo-400 block font-semibold" x-text="p.category"></span>
-                                        <h4 class="text-sm font-bold text-white mt-1" x-text="p.title"></h4>
-                                    </div>
-                                    <button @click="projects = projects.filter(item => item.title !== p.title); showNotification('Project deleted from live site.', 'error')" class="text-red-400 hover:text-red-300 p-2">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab 4: Pricing Controller -->
-                <div x-show="adminTab === 'pricing'" x-transition class="space-y-6">
-                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
-                        <h2 class="font-heading text-xl font-bold text-white">Interactive Pricing Configuration</h2>
-                        <p class="text-xs text-gray-400">Edit plan pricing parameters below. Changes reflect on front-end cards instantly.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <!-- Card Price 1 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Plan 1: Kickstarter</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.kickstarter" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                            </div>
-                            <span class="text-[9px] text-gray-500">Live base update</span>
-                        </div>
-                        <!-- Card Price 2 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider block">Plan 2: Growth Edge</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.growthEdge" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                            </div>
-                            <span class="text-[9px] text-gray-500">Highly popular scale tag</span>
-                        </div>
-                        <!-- Card Price 3 -->
-                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
-                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Plan 3: Elite Brand</span>
-                            <div class="relative">
-                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
-                                <input type="number" x-model.number="pricing.eliteBrand" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                            </div>
-                            <span class="text-[9px] text-gray-500">Advanced guidelines pack</span>
-                        </div>
-                    </div>
-
-                    <div class="p-4 bg-emerald-950/20 border border-emerald-900/40 rounded-xl flex gap-3 items-center">
-                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span class="text-xs text-emerald-200">Dynamic parameters verified. Switch back to client view to observe changes live.</span>
-                    </div>
-                </div>
-
-            </main>
-        </div>
-    </div>
-
-
-    <!-- ==========================================
          INTERACTIVE FLOATING NAVIGATION VIEW TOGGLE
          ========================================== -->
     <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-black/90 backdrop-blur-md border border-darkBorder px-4 py-3 rounded-full shadow-2xl">
-        <span class="text-xs font-semibold text-gray-400">Switch View:</span>
-        <button @click="isAdminMode = !isAdminMode" 
-                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-2"
-                :class="isAdminMode ? 'bg-indigo-600 text-white' : 'bg-neonAccent text-black shadow-[0_0_15px_rgba(204,255,0,0.3)]'">
-            <i class="fa-solid" :class="isAdminMode ? 'fa-user-gear' : 'fa-laptop-code'"></i>
-            <span x-text="isAdminMode ? 'Admin Portal' : 'Client Website'"></span>
-        </button>
+        <span class="text-xs font-semibold text-gray-400">Owner Access:</span>
+        <a href="admin.html" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-neonAccent text-black shadow-[0_0_15px_rgba(204,255,0,0.3)] hover:bg-white">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Admin Control Panel</span>
+        </a>
     </div>
 
 
@@ -1384,6 +969,140 @@
             </form>
         </div>
     </div>
+
+    <!-- Firestore Core Logic Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'brandcraft-studio-app';
+        
+        let firebaseConfig;
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            firebaseConfig = {
+                apiKey: "",
+                authDomain: "brandcraft-studio.firebaseapp.com",
+                projectId: "brandcraft-studio",
+                storageBucket: "brandcraft-studio.appspot.com",
+                messagingSenderId: "1234567890",
+                appId: "1:1234567890:web:12345"
+            };
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        window.dbUtils = {
+            async initAuth() {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    return await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    return await signInAnonymously(auth);
+                }
+            },
+            getLeadsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'leads');
+            },
+            getProjectsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+            },
+            getPricingDoc() {
+                return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'main');
+            },
+            onSnapshot,
+            addDoc,
+            setDoc,
+            getDoc,
+            doc
+        };
+    </script>
+
+    <script>
+        function clientApp() {
+            return {
+                mobileMenu: false,
+                activeTab: 'all',
+                activeQuizStep: 0,
+                quizAnswers: {},
+                showQuizResult: false,
+                quizLoading: false,
+                recommendedPlan: '',
+                showModal: false,
+                modalPlanName: '',
+                clientBudget: 15000,
+                formStep: 1,
+                contactSuccess: false,
+                
+                // Synced Core Database (Persisted in Firestore)
+                pricing: {
+                    kickstarter: 7999,
+                    growthEdge: 18999,
+                    eliteBrand: 29999
+                },
+                projects: [],
+
+                // Form Input States
+                formName: '',
+                formEmail: '',
+                formPhone: '',
+                formDesc: '',
+                formServices: [],
+
+                async init() {
+                    try {
+                        await window.dbUtils.initAuth();
+
+                        // Sync Pricing
+                        window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                            if (docSnap.exists()) {
+                                this.pricing = docSnap.data();
+                            }
+                        });
+
+                        // Sync Projects
+                        window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
+                            let tempProjects = [];
+                            snapshot.forEach((doc) => {
+                                tempProjects.push({ id: doc.id, ...doc.data() });
+                            });
+                            this.projects = tempProjects;
+                        });
+
+                    } catch (error) {
+                        console.error("Firebase init error: ", error);
+                    }
+                },
+
+                async submitClientBrief() {
+                    const newLead = {
+                        name: this.formName || 'Anonymous Client',
+                        email: this.formEmail || 'no-email@client.com',
+                        phone: this.formPhone || 'N/A',
+                        services: [...this.formServices],
+                        desc: this.formDesc || 'No description provided.',
+                        budget: parseInt(this.clientBudget),
+                        plan: this.clientBudget < 10000 ? 'Kickstarter' : (this.clientBudget < 25000 ? 'Growth Edge' : 'Elite Brand'),
+                        status: 'new',
+                        date: new Date().toLocaleDateString()
+                    };
+
+                    try {
+                        await window.dbUtils.addDoc(window.dbUtils.getLeadsCollection(), newLead);
+                        this.contactSuccess = true;
+                    } catch (error) {
+                        console.error("Lead submission failed: ", error);
+                    }
+                    
+                    // Reset inputs
+                    this.formName = ''; this.formEmail = ''; this.formPhone = ''; this.formDesc = ''; this.formServices = [];
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
