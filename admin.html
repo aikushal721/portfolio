@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandCraft Studio | Secure Command Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        adminBg: '#0F111A',
+                        adminCard: '#161925',
+                        adminBorder: '#23293F',
+                        neonAccent: '#CCFF00'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0F111A;
+        }
+        .box-glow {
+            box-shadow: 0 0 25px rgba(204, 255, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0F111A;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #23293F;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #CCFF00;
+        }
+    </style>
+</head>
+<body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="adminApp()">
+
+    <div x-show="!isLoggedIn" class="fixed inset-0 z-50 flex items-center justify-center bg-[#0B0B0B] p-4">
+        <div class="absolute inset-0 bg-gradient-to-tr from-indigo-950/20 to-transparent pointer-events-none"></div>
+        
+        <div class="bg-adminCard border border-adminBorder p-8 rounded-3xl max-w-md w-full relative box-glow z-10">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-3xl mx-auto shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+                    BC
+                </div>
+                <h2 class="font-heading font-bold text-2xl text-white mt-4">Command Center</h2>
+                <p class="text-xs text-gray-400 mt-2">Enter authorized credentials to control public agency variables.</p>
+            </div>
+
+            <!-- Login Error Toast -->
+            <div x-show="loginError" class="p-3 bg-red-950/40 border border-red-500/30 text-red-200 text-xs rounded-xl mb-4 flex items-center gap-2" style="display: none;">
+                <i class="fa-solid fa-circle-exclamation text-red-400"></i>
+                <span>Aapka user ID ya password incorrect hai! Try again.</span>
+            </div>
+
+            <form @submit.prevent="handleLogin" class="flex flex-col gap-4">
+                <div>
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1.5">Authorized Admin ID</label>
+                    <input type="text" x-model="adminUser" required placeholder="E.g., admin" class="w-full bg-adminBg border border-adminBorder rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-neonAccent transition-colors">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1.5">Secure Password</label>
+                    <input type="password" x-model="adminPass" required placeholder="••••••••••••" class="w-full bg-adminBg border border-adminBorder rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-neonAccent transition-colors">
+                </div>
+                <button type="submit" class="w-full bg-neonAccent hover:bg-white text-black font-extrabold py-3.5 rounded-xl text-xs transition-colors shadow-lg mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-shield-halved"></i> Authenticate Credentials
+                </button>
+            </form>
+            
+            <p class="text-center text-[10px] text-gray-500 mt-6">Default credential: admin / brandcraftadmin123</p>
+        </div>
+    </div>
+
+    <div x-show="isLoggedIn" style="display: none;" class="min-h-screen flex flex-col">
+        <!-- Top Admin Header -->
+        <header class="bg-adminCard border-b border-adminBorder px-8 h-20 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-xl">
+                    BC
+                </div>
+                <div>
+                    <h1 class="font-heading font-bold text-lg text-white">BrandCraft Admin <span class="text-neonAccent text-xs">Command Center</span></h1>
+                    <p class="text-[10px] text-gray-400">Real-Time Firebase Synchronizer Live</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> View Site
+                </a>
+                <button @click="logout" class="bg-red-500/10 hover:bg-red-500 hover:text-white border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Admin Layout Grid -->
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 w-full flex-grow">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:col-span-3 flex flex-col gap-2">
+                <button @click="adminTab = 'dashboard'" :class="adminTab === 'dashboard' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
+                    <i class="fa-solid fa-chart-line text-lg"></i> Overview & Metrics
+                </button>
+                <button @click="adminTab = 'leads'" :class="adminTab === 'leads' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center justify-between text-sm font-semibold transition-all text-left">
+                    <span class="flex items-center gap-3">
+                        <i class="fa-solid fa-envelope-open-text text-lg"></i> Leads & Briefs
+                    </span>
+                    <span class="bg-adminBg text-white text-[10px] px-2.5 py-1 rounded-full font-bold" x-text="leads.length"></span>
+                </button>
+                <button @click="adminTab = 'portfolio'" :class="adminTab === 'portfolio' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
+                    <i class="fa-solid fa-images text-lg"></i> Portfolio Manager
+                </button>
+                <button @click="adminTab = 'pricing'" :class="adminTab === 'pricing' ? 'bg-neonAccent text-black border-neonAccent' : 'bg-adminCard hover:bg-adminCard/70 text-gray-400 border-adminBorder'" class="p-4 border rounded-xl flex items-center gap-3 text-sm font-semibold transition-all text-left">
+                    <i class="fa-solid fa-tags text-lg"></i> Pricing Controller
+                </button>
+            </aside>
+
+            <!-- Main Content panel -->
+            <main class="lg:col-span-9 bg-adminCard border border-adminBorder rounded-2xl p-8 shadow-xl min-h-[500px]">
+                
+                <!-- Tab 1: Dashboard Overview -->
+                <div x-show="adminTab === 'dashboard'" class="space-y-8">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Live Pipeline Insights</h2>
+                        <span class="text-xs text-gray-400">Database connected securely</span>
+                    </div>
+
+                    <!-- Metrics cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Total Live Leads</span>
+                            <h3 class="text-3xl font-heading font-bold text-white mt-2" x-text="leads.length"></h3>
+                            <p class="text-[10px] text-green-400 mt-2 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check"></i> Connected from public forms
+                            </p>
+                        </div>
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Active Pipeline Value</span>
+                            <h3 class="text-3xl font-heading font-bold text-neonAccent mt-2" x-text="'₹ ' + getTotalPipeline().toLocaleString()"></h3>
+                            <p class="text-[10px] text-gray-500 mt-2">Aggregated real-time user selections</p>
+                        </div>
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl">
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Live Portfolio Projects</span>
+                            <h3 class="text-3xl font-heading font-bold text-white mt-2" x-text="projects.length"></h3>
+                            <p class="text-[10px] text-gray-400 mt-2">Active showcases shown dynamically</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Leads Management -->
+                <div x-show="adminTab === 'leads'" style="display: none;" class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Submitted Creative Briefs & Leads</h2>
+                        <span class="text-xs text-neonAccent font-semibold uppercase tracking-wider" x-text="leads.length + ' Live Leads'"></span>
+                    </div>
+
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-adminBorder text-[11px] text-gray-400 uppercase tracking-wider">
+                                    <th class="py-3 px-4">Client Detail</th>
+                                    <th class="py-3 px-4">Scope Required</th>
+                                    <th class="py-3 px-4">Budget / Plan</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 px-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="lead in leads" :key="lead.id">
+                                    <tr class="border-b border-adminBorder/50 hover:bg-adminBg/40 transition-colors text-xs">
+                                        <td class="py-4 px-4 space-y-1">
+                                            <p class="font-bold text-white" x-text="lead.name"></p>
+                                            <p class="text-gray-400" x-text="lead.email"></p>
+                                            <p class="text-[10px] text-neonAccent" x-text="lead.phone"></p>
+                                        </td>
+                                        <td class="py-4 px-4 max-w-xs space-y-1">
+                                            <div class="flex flex-wrap gap-1">
+                                                <template x-for="svc in (lead.services || [])">
+                                                    <span class="bg-indigo-950/80 text-indigo-300 text-[9px] px-2 py-0.5 rounded" x-text="svc"></span>
+                                                </template>
+                                            </div>
+                                            <p class="text-gray-400 italic text-[10px]" x-text="'&ldquo;' + lead.desc + '&rdquo;'"></p>
+                                        </td>
+                                        <td class="py-4 px-4 space-y-1">
+                                            <p class="font-bold text-neonAccent" x-text="'₹ ' + (parseInt(lead.budget) || 15000).toLocaleString()"></p>
+                                        </td>
+                                        <td class="py-4 px-4">
+                                            <span class="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                                                  :class="{
+                                                      'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30': lead.status === 'new',
+                                                      'bg-amber-950/80 text-amber-300 border border-amber-500/30': lead.status === 'contacted',
+                                                      'bg-indigo-950/80 text-indigo-300 border border-indigo-500/30': lead.status === 'designing',
+                                                      'bg-gray-800 text-gray-400': lead.status === 'completed'
+                                                  }"
+                                                  x-text="lead.status">
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-4 text-right space-y-1 whitespace-nowrap">
+                                            <div class="flex justify-end gap-1.5">
+                                                <button x-show="lead.status === 'new'" @click="updateLeadStatus(lead.id, 'contacted')" class="bg-amber-500 hover:bg-amber-600 text-black text-[10px] font-bold px-2 py-1 rounded transition-colors">
+                                                    Contacted
+                                                </button>
+                                                <button x-show="lead.status === 'contacted'" @click="updateLeadStatus(lead.id, 'designing')" class="bg-indigo-500 hover:bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded transition-colors">
+                                                    Design
+                                                </button>
+                                                <button x-show="lead.status === 'designing'" @click="updateLeadStatus(lead.id, 'completed')" class="bg-green-500 hover:bg-green-600 text-black text-[10px] font-bold px-2 py-1 rounded transition-colors">
+                                                    Complete
+                                                </button>
+                                                <button @click="deleteLead(lead.id)" class="text-red-400 hover:text-red-300 text-xs p-1" title="Delete lead">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Portfolio Manager -->
+                <div x-show="adminTab === 'portfolio'" style="display: none;" class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Dynamic Portfolio Manager</h2>
+                        <p class="text-xs text-gray-400">Add new project showcases below to reflect immediately on the main customer page.</p>
+                    </div>
+
+                    <!-- Add project form -->
+                    <form @submit.prevent="addProject" class="bg-adminBg/60 border border-adminBorder p-6 rounded-xl space-y-4">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-neonAccent">Add New Case Study</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Project Title</label>
+                                <input type="text" x-model="newProjTitle" required placeholder="E.g., Aero Space Labs" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Scope Category</label>
+                                <select x-model="newProjCategory" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                                    <option value="branding">Brand Identity</option>
+                                    <option value="uiux">UI/UX Design</option>
+                                    <option value="social">Social Media Kit</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Delivery Label</label>
+                                <input type="text" x-model="newProjTime" placeholder="E.g., 8 Days Delivery" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                            </div>
+                            <div>
+                                <label class="text-[10px] uppercase text-gray-400 block mb-1">Visual Theme Gradient</label>
+                                <select x-model="newProjGradient" class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                                    <option value="from-violet-600 to-indigo-900">Sunset Violet (Deep Indigo)</option>
+                                    <option value="from-cyan-600 to-emerald-900">Aero Emerald (Green Teal)</option>
+                                    <option value="from-pink-600 to-rose-950">Pulse Pink (Dark Velvet)</option>
+                                    <option value="from-amber-600 to-red-900">Oasis Red (Hot Ember)</option>
+                                    <option value="from-indigo-600 to-blue-800">Classic Blue</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[10px] uppercase text-gray-400 block mb-1">Brief Description</label>
+                            <textarea rows="2" x-model="newProjText" required placeholder="E.g., High end typographic identity assets for local clothing brand." class="w-full bg-adminBg border border-adminBorder rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-neonAccent resize-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" class="bg-neonAccent text-black text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Publish Live Project
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Projects List manager -->
+                    <div class="space-y-3">
+                        <h3 class="text-xs uppercase tracking-wider font-bold text-gray-400">Current Live Portfolios</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <template x-for="p in projects" :key="p.id">
+                                <div class="bg-adminBg/60 border border-adminBorder p-4 rounded-xl flex justify-between items-center">
+                                    <div>
+                                        <span class="text-[9px] uppercase tracking-wider text-neonAccent block font-semibold" x-text="p.category"></span>
+                                        <h4 class="text-sm font-bold text-white mt-1" x-text="p.title"></h4>
+                                    </div>
+                                    <button @click="deleteProject(p.id)" class="text-red-400 hover:text-red-300 p-2">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Pricing Controller -->
+                <div x-show="adminTab === 'pricing'" style="display: none;" class="space-y-6">
+                    <div class="flex items-center justify-between border-b border-adminBorder pb-4">
+                        <h2 class="font-heading text-xl font-bold text-white">Interactive Pricing Configuration</h2>
+                        <p class="text-xs text-gray-400">Edit plan pricing parameters below. Changes reflect on front-end cards instantly.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <!-- Card Price 1 -->
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block font-heading">Plan 1: Kickstarter</span>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
+                                <input type="number" x-model.number="pricing.kickstarter" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
+                            </div>
+                        </div>
+                        <!-- Card Price 2 -->
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
+                            <span class="text-[10px] text-neonAccent font-bold uppercase tracking-wider block font-heading">Plan 2: Growth Edge</span>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
+                                <input type="number" x-model.number="pricing.growthEdge" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
+                            </div>
+                        </div>
+                        <!-- Card Price 3 -->
+                        <div class="bg-adminBg border border-adminBorder p-5 rounded-xl space-y-3">
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block font-heading">Plan 3: Elite Brand</span>
+                            <div class="relative">
+                                <span class="absolute left-3 top-2.5 text-gray-400 text-xs">₹</span>
+                                <input type="number" x-model.number="pricing.eliteBrand" class="w-full bg-adminCard border border-adminBorder rounded-lg py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-neonAccent font-bold">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button @click="updatePricingInFirebase" class="bg-neonAccent text-black text-xs font-bold px-6 py-3 rounded-lg transition-colors flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Sync & Update Pricing
+                        </button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'brandcraft-studio-app';
+        
+        let firebaseConfig;
+        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            firebaseConfig = {
+                apiKey: "",
+                authDomain: "brandcraft-studio.firebaseapp.com",
+                projectId: "brandcraft-studio",
+                storageBucket: "brandcraft-studio.appspot.com",
+                messagingSenderId: "1234567890",
+                appId: "1:1234567890:web:12345"
+            };
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        window.dbUtils = {
+            async initAuth() {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    return await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    return await signInAnonymously(auth);
+                }
+            },
+            getLeadsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'leads');
+            },
+            getProjectsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+            },
+            getPricingDoc() {
+                return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'main');
+            },
+            onSnapshot,
+            addDoc,
+            updateDoc,
+            deleteDoc,
+            doc,
+            setDoc,
+            getDoc
+        };
+    </script>
+
+    <script>
+        function adminApp() {
+            return {
+                isLoggedIn: false,
+                adminUser: '',
+                adminPass: '',
+                loginError: false,
+                adminTab: 'dashboard',
+                
+                leads: [],
+                projects: [],
+                pricing: {
+                    kickstarter: 7999,
+                    growthEdge: 18999,
+                    eliteBrand: 29999
+                },
+
+                newProjTitle: '',
+                newProjCategory: 'branding',
+                newProjTime: '8 Days Delivery',
+                newProjText: '',
+                newProjGradient: 'from-violet-600 to-indigo-900',
+
+                init() {
+                    if (sessionStorage.getItem('brandcraft_logged') === 'true') {
+                        this.isLoggedIn = true;
+                        this.startFirebaseSync();
+                    }
+                },
+
+                handleLogin() {
+                    if (this.adminUser === 'admin' && this.adminPass === 'brandcraftadmin123') {
+                        this.isLoggedIn = true;
+                        this.loginError = false;
+                        sessionStorage.setItem('brandcraft_logged', 'true');
+                        this.startFirebaseSync();
+                    } else {
+                        this.loginError = true;
+                    }
+                },
+
+                logout() {
+                    this.isLoggedIn = false;
+                    sessionStorage.removeItem('brandcraft_logged');
+                },
+
+                async startFirebaseSync() {
+                    try {
+                        await window.dbUtils.initAuth();
+
+                        // Sync Leads
+                        window.dbUtils.onSnapshot(window.dbUtils.getLeadsCollection(), (snapshot) => {
+                            let tempLeads = [];
+                            snapshot.forEach((doc) => {
+                                tempLeads.push({ id: doc.id, ...doc.data() });
+                            });
+                            this.leads = tempLeads;
+                        }, (err) => {
+                            console.error("Leads snapshot failed: ", err);
+                        });
+
+                        // Sync Projects
+                        window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
+                            let tempProjects = [];
+                            snapshot.forEach((doc) => {
+                                tempProjects.push({ id: doc.id, ...doc.data() });
+                            });
+                            if (tempProjects.length === 0) {
+                                this.seedInitialProjects();
+                            } else {
+                                this.projects = tempProjects;
+                            }
+                        }, (err) => {
+                            console.error("Projects snapshot failed: ", err);
+                        });
+
+                        // Sync Pricing
+                        window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                            if (docSnap.exists()) {
+                                this.pricing = docSnap.data();
+                            } else {
+                                window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
+                                    kickstarter: 7999,
+                                    growthEdge: 18999,
+                                    eliteBrand: 29999
+                                });
+                            }
+                        }, (err) => {
+                            console.error("Pricing snapshot failed: ", err);
+                        });
+
+                    } catch (error) {
+                        console.error("Firebase auth/sync error: ", error);
+                    }
+                },
+
+                getTotalPipeline() {
+                    return this.leads.reduce((sum, l) => sum + (parseInt(l.budget) || 15000), 0);
+                },
+
+                async updateLeadStatus(id, newStatus) {
+                    const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
+                    await window.dbUtils.updateDoc(leadDocRef, { status: newStatus });
+                },
+
+                async deleteLead(id) {
+                    const leadDocRef = window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id);
+                    await window.dbUtils.deleteDoc(leadDocRef);
+                },
+
+                async addProject() {
+                    const payload = {
+                        title: this.newProjTitle,
+                        category: this.newProjCategory,
+                        time: this.newProjTime,
+                        text: this.newProjText,
+                        gradient: this.newProjGradient
+                    };
+                    await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), payload);
+                    this.newProjTitle = '';
+                    this.newProjText = '';
+                },
+
+                async deleteProject(id) {
+                    const projDocRef = window.dbUtils.doc(window.dbUtils.getProjectsCollection(), id);
+                    await window.dbUtils.deleteDoc(projDocRef);
+                },
+
+                async updatePricingInFirebase() {
+                    await window.dbUtils.setDoc(window.dbUtils.getPricingDoc(), {
+                        kickstarter: this.pricing.kickstarter,
+                        growthEdge: this.pricing.growthEdge,
+                        eliteBrand: this.pricing.eliteBrand
+                    });
+                },
+
+                async seedInitialProjects() {
+                    const initial = [
+                        { title: 'Zenith Fintech Labs', category: 'branding', time: '8 Days Delivery', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900', initial: 'Z' },
+                        { title: 'Aero Logistics AI', category: 'uiux', time: '14 Days Delivery', text: 'Crafted clean responsive platform architecture optimizing delivery speeds.', gradient: 'from-cyan-600 to-emerald-900', isApp: true },
+                        { title: 'Pulse Nutrition', category: 'social', time: '5 Days Delivery', text: 'Consistent scroll-stopping templates designed specifically for nutrition startups.', gradient: 'from-pink-600 to-rose-950', isSocial: true }
+                    ];
+                    for (let p of initial) {
+                        await window.dbUtils.addDoc(window.dbUtils.getProjectsCollection(), p);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
