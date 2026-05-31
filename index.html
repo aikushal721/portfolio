@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons for Beautiful UI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Alpine.js -->
+    <!-- Alpine.js for Smooth Interactive Magic -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
@@ -28,10 +28,7 @@
                         darkCard: '#141414',
                         darkBorder: '#222222',
                         neonAccent: '#CCFF00', 
-                        neonGlow: '#CCFF0033',
-                        adminBg: '#0F111A',
-                        adminCard: '#161925',
-                        adminBorder: '#23293F',
+                        neonGlow: '#CCFF0033'
                     }
                 }
             }
@@ -50,7 +47,6 @@
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #0B0B0B;
@@ -64,641 +60,889 @@
         }
     </style>
 </head>
-<body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="masterApp()">
+<body class="text-gray-100 antialiased overflow-x-hidden custom-scrollbar" x-data="clientApp()">
 
-    <!-- CLIENT FRONT-END VIEW -->
-    <div x-show="!isAdminView">
-        <!-- Glowing Background Gradients -->
-        <div class="absolute top-0 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
-        <div class="absolute top-[1200px] right-10 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
+    <!-- Glowing Background Gradients -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#CCFF00]/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="absolute top-[1200px] right-10 w-[600px] h-[600px] bg-gradient-to-bl from-[#CCFF00]/5 to-transparent rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
-        <!-- Navigation Bar -->
-        <header class="fixed top-0 left-0 w-full z-50 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder transition-all duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-xl transition-transform duration-300 group-hover:rotate-12">BC</div>
-                    <span class="font-heading font-bold text-lg sm:text-xl tracking-wide group-hover:text-neonAccent transition-colors">
-                        Brand<span class="text-neonAccent">Craft</span>
-                    </span>
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-xl transition-transform duration-300 group-hover:rotate-12">
+                    BC
+                </div>
+                <span class="font-heading font-bold text-xl tracking-wide group-hover:text-neonAccent transition-colors">
+                    Brand<span class="text-neonAccent">Craft</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium">
+                <a href="#services" class="text-gray-300 hover:text-neonAccent transition-colors">Services</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-neonAccent transition-colors">Portfolio</a>
+                <a href="#philosophy" class="text-gray-300 hover:text-neonAccent transition-colors">Our Philosophy</a>
+                <a href="#pricing" class="text-gray-300 hover:text-neonAccent transition-colors">Pricing & Plans</a>
+                <a href="#style-quiz" class="text-neonAccent hover:underline transition-colors flex items-center gap-2">
+                    <span class="animate-pulse w-2 h-2 rounded-full bg-neonAccent"></span> Style Quiz
                 </a>
+            </nav>
 
-                <!-- Desktop Nav Links -->
-                <nav class="hidden md:flex items-center gap-8 font-medium">
-                    <a href="#services" class="text-gray-300 hover:text-neonAccent transition-colors text-sm">Services</a>
-                    <a href="#portfolio" class="text-gray-300 hover:text-neonAccent transition-colors text-sm">Portfolio</a>
-                    <a href="#philosophy" class="text-gray-300 hover:text-neonAccent transition-colors text-sm">Our Philosophy</a>
-                    <a href="#pricing" class="text-gray-300 hover:text-neonAccent transition-colors text-sm">Pricing & Plans</a>
-                    <a href="#style-quiz" class="text-neonAccent hover:underline transition-colors text-sm flex items-center gap-2">
-                        <span class="animate-pulse w-2 h-2 rounded-full bg-neonAccent"></span> Style Quiz
+            <!-- CTA Desktop Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="admin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Admin Control</a>
+                <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-[0_0_15px_rgba(204,255,0,0.2)] hover:shadow-[0_0_25px_rgba(204,255,0,0.4)]">
+                    Free Consultation <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Navigation Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-2xl focus:outline-none text-white hover:text-neonAccent">
+                <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars-staggered'"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div x-show="mobileMenu" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-10" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10" class="md:hidden absolute top-20 left-0 w-full bg-darkBg border-b border-darkBorder py-8 px-6 shadow-2xl flex flex-col gap-6" style="display: none;">
+            <a @click="mobileMenu = false" href="#services" class="text-lg text-gray-300 hover:text-neonAccent">Services</a>
+            <a @click="mobileMenu = false" href="#portfolio" class="text-lg text-gray-300 hover:text-neonAccent">Portfolio</a>
+            <a @click="mobileMenu = false" href="#philosophy" class="text-lg text-gray-300 hover:text-neonAccent">Our Philosophy</a>
+            <a @click="mobileMenu = false" href="#pricing" class="text-lg text-gray-300 hover:text-neonAccent">Pricing & Plans</a>
+            <a @click="mobileMenu = false" href="admin.html" class="text-lg text-gray-300 hover:text-neonAccent">Admin Panel</a>
+            <a @click="mobileMenu = false" href="#style-quiz" class="text-lg text-neonAccent font-semibold">Take Brand Style Quiz</a>
+            <hr class="border-darkBorder">
+            <a @click="mobileMenu = false" href="#contact" class="bg-neonAccent text-black text-center py-3 rounded-full font-semibold">
+                Get Free Consultation
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Info Column -->
+            <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-darkCard border border-darkBorder w-max mx-auto lg:mx-0 shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full bg-neonAccent animate-ping"></span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Not Just Designs, We Build Lasting Brands</span>
+                </div>
+                <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                    Design That Builds <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-neonAccent text-glow">Brands People Trust.</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-xl mx-auto lg:mx-0">
+                    Aapka brand sirf graphics nahi, aapke business ka chehra hai. Hum aapko paise se <span class="text-white font-semibold underline decoration-neonAccent">kahin zyada quality</span> aur 100% genuine growth-focused design assets deliver karte hain.
+                </p>
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0 mt-2">
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-rotate-left text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">unlimited reviews</span>
+                    </div>
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">100% Satisfaction</span>
+                    </div>
+                    <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-handshake text-neonAccent text-lg mb-1"></i>
+                        <span class="text-xs text-gray-400 text-center font-medium">No-Compromise Trust</span>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 justify-center lg:justify-start">
+                    <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(204,255,0,0.15)] hover:shadow-[0_0_30px_rgba(204,255,0,0.4)] transform hover:-translate-y-1">
+                        Book Free Strategy Call
                     </a>
-                </nav>
-
-                <!-- CTA Desktop Button -->
-                <div class="hidden md:flex items-center gap-4">
-                    <a href="#estimator" class="text-gray-400 hover:text-white transition-colors text-xs">Value Calculator</a>
-                    <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-5 py-2 rounded-full font-bold text-xs transition-all duration-300 shadow-[0_0_15px_rgba(204,255,0,0.1)] hover:shadow-[0_0_20px_rgba(204,255,0,0.3)]">
-                        Free Consultation <i class="fa-solid fa-arrow-right ml-1"></i>
+                    <a href="#portfolio" class="border border-darkBorder hover:border-neonAccent bg-darkCard/50 hover:bg-darkCard text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto text-center transform hover:-translate-y-1">
+                        Explore Showcase <i class="fa-solid fa-arrow-down ml-2"></i>
                     </a>
                 </div>
-
-                <!-- Mobile Navigation Toggle -->
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden text-2xl focus:outline-none text-white hover:text-neonAccent">
-                    <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars-staggered'"></i>
-                </button>
             </div>
 
-            <!-- Mobile Drawer -->
-            <div x-show="mobileMenu" x-collapse class="md:hidden absolute top-20 left-0 w-full bg-darkBg border-b border-darkBorder py-8 px-6 shadow-2xl flex flex-col gap-6" style="display: none;">
-                <a @click="mobileMenu = false" href="#services" class="text-base text-gray-300 hover:text-neonAccent">Services</a>
-                <a @click="mobileMenu = false" href="#portfolio" class="text-base text-gray-300 hover:text-neonAccent">Portfolio</a>
-                <a @click="mobileMenu = false" href="#philosophy" class="text-base text-gray-300 hover:text-neonAccent">Our Philosophy</a>
-                <a @click="mobileMenu = false" href="#pricing" class="text-base text-gray-300 hover:text-neonAccent">Pricing & Plans</a>
-                <a @click="mobileMenu = false" href="#style-quiz" class="text-base text-neonAccent font-semibold">Take Brand Style Quiz</a>
-                <hr class="border-darkBorder">
-                <a @click="mobileMenu = false" href="#contact" class="bg-neonAccent text-black text-center py-3 rounded-full font-bold text-sm">
-                    Get Free Consultation
-                </a>
-            </div>
-        </header>
-
-        <!-- HERO SECTION -->
-        <section class="relative pt-28 pb-16 md:pt-40 md:pb-32 overflow-hidden px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-darkCard border border-darkBorder w-max mx-auto lg:mx-0 shadow-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-neonAccent animate-pulse"></span>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Design jo aapke business ko brand banaye</span>
+            <!-- Right Visual Dashboard Mock -->
+            <div class="lg:col-span-5 relative mt-8 lg:mt-0">
+                <div class="bg-darkCard border border-darkBorder p-6 rounded-2xl relative shadow-2xl overflow-hidden box-glow">
+                    <div class="flex items-center gap-1.5 mb-6">
+                        <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+                        <span class="text-xs text-gray-500 ml-2">brandcraft_dashboard.design</span>
                     </div>
-                    <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                        Design That Builds <br class="hidden sm:inline">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-neonAccent text-glow">Brands People Trust.</span>
-                    </h1>
-                    <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0">
-                        Aapka brand sirf graphics nahi, aapke business ka chehra hai. Hum aapko paise se <span class="text-white font-semibold underline decoration-neonAccent">kahin zyada quality</span> aur 100% genuine growth-focused design assets deliver karte hain.
+                    <div class="flex items-center justify-between border-b border-darkBorder pb-4 mb-6">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest">Client Satisfaction Rate</p>
+                            <h3 class="font-heading text-2xl font-bold text-neonAccent animate-pulse">99.8%</h3>
+                        </div>
+                        <div class="bg-neonAccent/10 text-neonAccent px-3 py-1 rounded-full text-xs font-semibold">
+                            <i class="fa-solid fa-star mr-1"></i> Highly Recommended
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                                    <i class="fa-solid fa-shapes"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Interactive Logo Guidelines</h4>
+                                    <p class="text-xs text-gray-500">Vector files & Palette ready</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                        </div>
+                        <div class="p-4 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">High-Converting UI Mockups</h4>
+                                    <p class="text-xs text-gray-500">Fully responsive dynamic screens</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-semibold">Delivered</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-darkBorder text-center">
+                        <p class="text-xs text-gray-400">
+                            <i class="fa-solid fa-quote-left text-neonAccent mr-1"></i>
+                            Hum sirf pixel nahi, trust design karte hain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-darkBg relative border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Domain Expertise</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">What We Create For You</h2>
+                    <p class="text-gray-400 text-sm mt-3 max-w-lg">Aapka visual communication handle karne ke liye hum 6 core segments me bespoke design services provide karte hain.</p>
+                </div>
+                <div>
+                    <a href="#style-quiz" class="inline-flex items-center gap-2 group text-neonAccent hover:text-white transition-colors">
+                        <span class="text-sm font-semibold">Confused on where to start? Let's take the quiz</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1: Logo Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Logo Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Ek unique aur high-impact icon jo aapki brand message ko first look me client tak pohochaye.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Original Design Concepts</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-resolution formats (SVG, PDF, PNG)</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Request Logo Concept <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 2: Brand Identity -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Brand Identity</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Consistent brand book, customized corporate color palettes, perfect mood boards, and guidelines.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> In-depth color system & guidelines</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Customized typography specs</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Establish Brand Identity <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 3: Social Media Designs -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Social Media Designs</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Scroll-stopping banners, dynamic templates, and promotional graphics that guarantee engagement.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Custom post layout configurations</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Ready-to-edit Figma/Canva templates</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Upgrade Your Feed <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 4: Printing & Marketing -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Printing & Marketing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Flawless, print-ready corporate brochures, marketing flyers, sleek letterheads, and packaging.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> CMYK Print-ready layouts included</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> High-quality digital representation</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Order Print Deliverables <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 5: UI/UX Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Modern website wireframes, engaging landing pages, and intuitive visual user flows.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Organized Figma master components</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Fully responsive dynamic screen guides</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Wireframe My Product <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+
+                <!-- Service 6: Custom Design -->
+                <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors">Custom Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Aise requirements jo standard slots me nahi aate. Custom vector arts, merchandising designs, etc.</p>
+                    <ul class="text-xs text-gray-400 space-y-2.5 mb-6">
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored processing logic</li>
+                        <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Uncompromised artistic supervision</li>
+                    </ul>
+                    <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">Share Custom Brief <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYLE QUIZ -->
+    <section id="style-quiz" class="py-20 bg-darkCard border-y border-darkBorder relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Interactive Engagement</span>
+                <h2 class="font-heading text-3xl font-bold mt-2">Find Your Brand's Visual Vibe</h2>
+                <p class="text-gray-400 text-sm mt-3">Confused about your visual aesthetics? Take our 3-question quiz to receive a customized professional match suggestion.</p>
+            </div>
+
+            <div class="bg-darkBg border border-darkBorder p-8 rounded-2xl shadow-2xl">
+                <!-- Step 0: Welcome -->
+                <div x-show="activeQuizStep === 0" class="text-center py-6">
+                    <div class="w-16 h-16 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Just takes 30 seconds to decode.</h3>
+                    <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Find out if your company needs a sleek corporate layout, a bold futuristic neon style, or a hand-crafted artistic theme.</p>
+                    <button @click="activeQuizStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors shadow-lg">
+                        Start Aesthetic Quiz
+                    </button>
+                </div>
+
+                <!-- Step 1: Industry Selection -->
+                <div x-show="activeQuizStep === 1" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 1 OF 3</span>
+                        <span class="text-xs text-gray-500">33% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">What best describes your business niche?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.industry = 'tech'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Tech, Software, AI & Fintech</span>
+                            <span class="text-xs text-gray-400">Needs cutting-edge, clean, futuristic branding.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'lifestyle'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Lifestyle, Fashion & Food</span>
+                            <span class="text-xs text-gray-400">Needs sophisticated, emotional, artistic vibes.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'traditional'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Real Estate, Finance & Corporate</span>
+                            <span class="text-xs text-gray-400">Needs stable, highly trustworthy, secure look.</span>
+                        </button>
+                        <button @click="quizAnswers.industry = 'creator'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Content Creator & Agency</span>
+                            <span class="text-xs text-gray-400">Needs bold, trendy, highly interactive designs.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Primary Brand Emotion -->
+                <div x-show="activeQuizStep === 2" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 2 OF 3</span>
+                        <span class="text-xs text-gray-500">66% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">What primary emotion should your audience feel first?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.emotion = 'modern'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">"Wow, these guys are futuristic!"</span>
+                            <span class="text-xs text-gray-400">Bold layouts, deep dark aesthetics, high tech.</span>
+                        </button>
+                        <button @click="quizAnswers.emotion = 'trust'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">"These are highly professional."</span>
+                            <span class="text-xs text-gray-400">Minimalistic, geometric, classic layouts.</span>
+                        </button>
+                    </div>
+                    <button @click="activeQuizStep = 1" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
+                </div>
+
+                <!-- Step 3: Audience Focus -->
+                <div x-show="activeQuizStep === 3" style="display: none;">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs text-neonAccent font-bold">QUESTION 3 OF 3</span>
+                        <span class="text-xs text-gray-500">99% Complete</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-6">Who is your target crowd?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button @click="quizAnswers.audience = 'genz'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; if(quizAnswers.industry === 'tech') recommendedPlan = 'Growth Edge'; else recommendedPlan = 'Kickstarter'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">Gen-Z & Trendy Millennials</span>
+                            <span class="text-xs text-gray-400">Requires trendy, high contrast visual patterns.</span>
+                        </button>
+                        <button @click="quizAnswers.audience = 'b2b'; quizLoading = true; activeQuizStep = 4; setTimeout(() => { quizLoading = false; showQuizResult = true; recommendedPlan = 'Elite Brand'; }, 1000)" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder hover:border-neonAccent text-left rounded-xl transition-all">
+                            <span class="font-bold text-white block">B2B Enterprises & Decision Makers</span>
+                            <span class="text-xs text-gray-400">Requires structural clarity and robust grids.</span>
+                        </button>
+                    </div>
+                    <button @click="activeQuizStep = 2" class="text-xs text-gray-400 hover:text-white mt-6 underline block">Go Back</button>
+                </div>
+
+                <!-- Loading State -->
+                <div x-show="activeQuizStep === 4 && quizLoading" class="text-center py-12" style="display: none;">
+                    <div class="w-12 h-12 border-4 border-neonAccent border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <p class="text-gray-400">Analyzing brand archetype parameters...</p>
+                </div>
+
+                <!-- Quiz Results -->
+                <div x-show="activeQuizStep === 4 && showQuizResult" class="text-center py-4" style="display: none;">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonAccent/15 text-neonAccent font-bold text-xs uppercase mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Aesthetic Decoded
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Your Brand Vibe: <span class="text-neonAccent">Modern Neo-Minimalist</span></h3>
+                    <p class="text-gray-300 text-sm max-w-lg mx-auto mb-8">
+                        Aapka industry segment aur audience target standard designs ke mukable aapse <strong class="text-neonAccent">sleek layouts aur strong geometric consistency</strong> demand karta hai.
                     </p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0 mt-2 w-full">
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-rotate-left text-neonAccent text-base mb-1"></i>
-                            <span class="text-[11px] text-gray-400 text-center font-medium">Unlimited Reviews</span>
-                        </div>
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-neonAccent text-base mb-1"></i>
-                            <span class="text-[11px] text-gray-400 text-center font-medium">100% Satisfaction</span>
-                        </div>
-                        <div class="bg-darkCard/50 p-3 rounded-xl border border-darkBorder flex flex-col items-center justify-center">
-                            <i class="fa-solid fa-handshake text-neonAccent text-base mb-1"></i>
-                            <span class="text-[11px] text-gray-400 text-center font-medium">No-Compromise Trust</span>
-                        </div>
+                    <!-- Matched Offer Plan -->
+                    <div class="p-6 bg-darkCard border border-darkBorder rounded-xl max-w-md mx-auto mb-8">
+                        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Best Matched Plan For You</p>
+                        <h4 class="text-xl font-bold text-white" x-text="recommendedPlan"></h4>
+                        <p class="text-xs text-gray-500 mt-2">Perfect match with 100% Satisfaction Guarantee and customized design loops.</p>
+                        <a :href="'#'+recommendedPlan.toLowerCase().replace(' ', '-')" class="inline-block mt-4 text-xs font-bold bg-neonAccent text-black px-6 py-2 rounded-full hover:bg-white transition-colors">
+                            Explore Plan Details
+                        </a>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row items-center gap-4 mt-4 justify-center lg:justify-start">
-                        <a href="#contact" class="bg-neonAccent hover:bg-white text-black px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(204,255,0,0.15)] transform hover:-translate-y-1">
-                            Book Free Strategy Call
-                        </a>
-                        <a href="#portfolio" class="border border-darkBorder hover:border-neonAccent bg-darkCard/50 hover:bg-darkCard text-white px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 w-full sm:w-auto text-center transform hover:-translate-y-1">
-                            Explore Showcase <i class="fa-solid fa-arrow-down ml-1"></i>
-                        </a>
+                    <div class="flex justify-center gap-4">
+                        <button @click="activeQuizStep = 0; showQuizResult = false; quizAnswers = {}" class="text-xs text-gray-400 hover:text-white underline">
+                            Retake Quiz
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Right Visual Mockup -->
-                <div class="lg:col-span-5 relative">
-                    <div class="bg-darkCard border border-darkBorder p-5 sm:p-6 rounded-2xl relative shadow-2xl overflow-hidden box-glow">
-                        <div class="flex items-center gap-1.5 mb-6">
-                            <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
-                            <span class="text-[10px] text-gray-500 ml-2">brandcraft_dashboard.design</span>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-darkBorder pb-4 mb-6">
-                            <div>
-                                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Client Satisfaction Rate</p>
-                                <h3 class="font-heading text-xl sm:text-2xl font-bold text-neonAccent">99.8%</h3>
-                            </div>
-                            <div class="bg-neonAccent/10 text-neonAccent px-3 py-1 rounded-full text-[10px] font-bold">
-                                <i class="fa-solid fa-star mr-0.5"></i> Highly Recommended
-                            </div>
-                        </div>
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="py-24 bg-darkBg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center md:text-left md:flex items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Work Portfolio</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Designs That Deliver Value</h2>
+                    <p class="text-gray-400 text-sm mt-3 max-w-lg">Hum real-world visual identity projects represent kar rahe hain. (Synced directly with Admin Portal!).</p>
+                </div>
 
-                        <div class="flex flex-col gap-3">
-                            <div class="p-3 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400"><i class="fa-solid fa-shapes"></i></div>
-                                    <div>
-                                        <h4 class="font-bold text-white">Interactive Logo Guidelines</h4>
-                                        <p class="text-[10px] text-gray-500">Vector assets & guidelines</p>
+                <!-- Tab filters -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0 justify-center">
+                    <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">All Projects</button>
+                    <button @click="activeTab = 'branding'" :class="activeTab === 'branding' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Brand Identity</button>
+                    <button @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">UI/UX Design</button>
+                    <button @click="activeTab = 'social'" :class="activeTab === 'social' ? 'bg-neonAccent text-black' : 'bg-darkCard hover:bg-darkCard/80 text-gray-400 border border-darkBorder'" class="px-5 py-2 rounded-full text-xs font-bold transition-all">Social Media</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="proj in projects" :key="proj.id">
+                    <div x-show="activeTab === 'all' || activeTab === proj.category" 
+                         x-transition:enter="transition ease-out duration-300"
+                         class="group bg-darkCard border border-darkBorder rounded-2xl overflow-hidden transition-all duration-300 hover:border-neonAccent/40">
+                        
+                        <!-- Custom Art Header -->
+                        <div class="h-64 relative flex items-center justify-center p-8 overflow-hidden"
+                             :class="'bg-gradient-to-tr ' + (proj.gradient || 'from-violet-600 to-indigo-900')">
+                            <div class="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
+                            
+                            <template x-if="proj.initial || (!proj.isApp && !proj.isSocial)">
+                                <div class="w-24 h-24 rounded-full border-4 border-white/20 flex items-center justify-center z-10 animate-pulse">
+                                    <span class="font-heading text-4xl font-extrabold text-white" x-text="proj.initial || proj.title.charAt(0)"></span>
+                                </div>
+                            </template>
+
+                            <template x-if="proj.isApp">
+                                <div class="w-full h-full flex flex-col justify-between border border-white/20 rounded-xl p-4 bg-black/30 backdrop-blur-sm z-10">
+                                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                        <span class="text-xs font-heading font-semibold text-white">Live App Prototype</span>
+                                        <div class="flex gap-1"><span class="w-2 h-2 rounded-full bg-neonAccent"></span><span class="w-2 h-2 rounded-full bg-gray-500"></span></div>
+                                    </div>
+                                    <div class="h-8 w-full bg-neonAccent/10 border border-neonAccent/30 rounded mt-2 flex items-center justify-center text-[10px] text-neonAccent font-bold">Interactive System</div>
+                                </div>
+                            </template>
+
+                            <template x-if="proj.isSocial">
+                                <div class="grid grid-cols-2 gap-3 w-full max-w-xs z-10">
+                                    <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
+                                        <i class="fa-brands fa-instagram text-neonAccent text-lg mb-1"></i>
+                                        <span class="text-[9px] text-gray-300">Layout Post</span>
+                                    </div>
+                                    <div class="aspect-square bg-black/30 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center flex-col text-center">
+                                        <i class="fa-brands fa-linkedin text-neonAccent text-lg mb-1"></i>
+                                        <span class="text-[9px] text-gray-300">Banner Pack</span>
                                     </div>
                                 </div>
-                                <span class="text-[9px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-bold">Delivered</span>
+                            </template>
+
+                            <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gray-300 z-10 border border-white/10" x-text="proj.time || 'Delivery Mode'"></div>
+                        </div>
+
+                        <!-- Text Content -->
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-neonAccent uppercase tracking-wide" x-text="proj.category"></span>
+                                <span class="text-xs text-gray-500">Delivered</span>
                             </div>
-                            <div class="p-3 bg-darkBg/60 border border-darkBorder rounded-xl flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400"><i class="fa-solid fa-mobile-screen"></i></div>
-                                    <div>
-                                        <h4 class="font-bold text-white">High-Converting UI/UX Mockups</h4>
-                                        <p class="text-[10px] text-gray-500">Fully responsive dynamic screens</p>
-                                    </div>
-                                </div>
-                                <span class="text-[9px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full font-bold">Delivered</span>
-                            </div>
+                            <h4 class="font-heading text-xl font-bold text-white mb-2 group-hover:text-neonAccent transition-colors" x-text="proj.title"></h4>
+                            <p class="text-gray-400 text-xs" x-text="proj.text"></p>
                         </div>
                     </div>
-                </div>
+                </template>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SERVICES SECTION -->
-        <section id="services" class="py-20 bg-darkBg relative border-t border-darkBorder px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                    <div>
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Domain Expertise</span>
-                        <h2 class="font-heading text-2xl sm:text-4xl font-bold mt-2">What We Create For You</h2>
-                    </div>
-                    <div>
-                        <a href="#style-quiz" class="inline-flex items-center gap-2 group text-neonAccent hover:text-white transition-colors text-sm">
-                            <span>Confused on where to start? Let's take the quiz</span>
-                            <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <template x-for="svc in services" :key="svc.id">
-                        <div class="group bg-darkCard/50 hover:bg-darkCard border border-darkBorder hover:border-neonAccent/40 p-6 sm:p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-neonAccent/10 text-neonAccent flex items-center justify-center text-lg mb-6 group-hover:scale-110 transition-transform">
-                                <i :class="svc.icon"></i>
-                            </div>
-                            <h3 class="font-heading text-xl font-bold mb-3 text-white group-hover:text-neonAccent transition-colors" x-text="svc.title"></h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-6" x-text="svc.desc"></p>
-                            <ul class="text-xs text-gray-400 space-y-2 mb-6">
-                                <template x-for="feat in svc.features">
-                                    <li class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-neonAccent"></i>
-                                        <span x-text="feat"></span>
-                                    </li>
-                                </template>
-                            </ul>
-                            <a href="#contact" class="text-xs font-bold text-neonAccent hover:underline inline-flex items-center gap-1">
-                                <span x-text="svc.actionLabel || 'Request Concept'"></span> <i class="fa-solid fa-chevron-right text-[9px]"></i>
-                            </a>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </section>
-
-        <!-- BRAND STYLE QUIZ -->
-        <section id="style-quiz" class="py-20 bg-darkCard border-y border-darkBorder px-4 sm:px-6">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Interactive Engagement</span>
-                    <h2 class="font-heading text-2xl sm:text-3xl font-bold mt-2">Find Your Brand's Visual Vibe</h2>
-                </div>
-
-                <div class="bg-darkBg border border-darkBorder p-5 sm:p-8 rounded-2xl shadow-2xl">
-                    <div x-show="activeQuizStep === 0" class="text-center py-6">
-                        <div class="w-16 h-16 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center text-2xl mx-auto mb-6"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                        <h3 class="text-lg sm:text-xl font-bold mb-2">Just takes 30 seconds to decode.</h3>
-                        <p class="text-gray-400 text-sm max-w-md mx-auto mb-6">Aapke business niche ke mutabik kaunsa aesthetic look standard conversion deliver karega?</p>
-                        <button @click="activeQuizStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors text-xs uppercase tracking-wider">Start Aesthetic Quiz</button>
-                    </div>
-
-                    <div x-show="activeQuizStep === 1" style="display: none;">
-                        <h3 class="text-base sm:text-lg font-bold mb-6">What best describes your business niche?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <button @click="quizAnswers.industry = 'tech'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder text-left rounded-xl transition-all">
-                                <span class="font-bold text-white text-sm block">Tech, AI & Startups</span>
-                                <span class="text-[10px] text-gray-500">Needs futuristic neon look</span>
-                            </button>
-                            <button @click="quizAnswers.industry = 'traditional'; activeQuizStep = 2" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder text-left rounded-xl transition-all">
-                                <span class="font-bold text-white text-sm block">Corporate & Real Estate</span>
-                                <span class="text-[10px] text-gray-500">Needs stable premium trust look</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div x-show="activeQuizStep === 2" style="display: none;">
-                        <h3 class="text-base sm:text-lg font-bold mb-6">What primary emotion should your audience feel?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <button @click="quizAnswers.emotion = 'modern'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder text-left rounded-xl transition-all"><span class="font-bold text-white text-sm block">"Wow, they are cutting-edge!"</span></button>
-                            <button @click="quizAnswers.emotion = 'luxury'; activeQuizStep = 3" class="p-4 bg-darkCard hover:bg-neonAccent/5 border border-darkBorder text-left rounded-xl transition-all"><span class="font-bold text-white text-sm block">"Extremely elite and high-end"</span></button>
-                        </div>
-                    </div>
-
-                    <div x-show="activeQuizStep === 3" style="display: none;">
-                        <h3 class="text-base sm:text-lg font-bold mb-6">Decoding complete. See your brand path</h3>
-                        <button @click="activeQuizStep = 4" class="w-full bg-neonAccent text-black font-bold p-3.5 rounded-xl text-xs uppercase">Reveal Recommendation Match</button>
-                    </div>
-
-                    <div x-show="activeQuizStep === 4" style="display: none;" class="text-center py-4">
-                        <h4 class="text-lg font-bold text-neonAccent mb-2">Recommended Identity Package: Modern Neo-Minimalist</h4>
-                        <p class="text-gray-300 text-sm max-w-md mx-auto mb-6">Aapke design vision and inputs ke mutabik humara high value Growth Edge program aapki expectations scale karega.</p>
-                        <button @click="activeQuizStep = 0" class="text-xs text-gray-500 hover:text-white underline">Retake Quiz</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO SECTION -->
-        <section id="portfolio" class="py-20 bg-darkBg px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                    <div>
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Work Portfolio</span>
-                        <h2 class="font-heading text-2xl sm:text-4xl font-bold mt-2">Designs That Deliver Value</h2>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'bg-neonAccent text-black' : 'bg-darkCard text-gray-400 border border-darkBorder'" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all">All</button>
-                        <button @click="activeTab = 'branding'" :class="activeTab === 'branding' ? 'bg-neonAccent text-black' : 'bg-darkCard text-gray-400 border border-darkBorder'" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all">Branding</button>
-                        <button @click="activeTab = 'uiux'" :class="activeTab === 'uiux' ? 'bg-neonAccent text-black' : 'bg-darkCard text-gray-400 border border-darkBorder'" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all">UI/UX</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <template x-for="p in projects" :key="p.id">
-                        <div x-show="activeTab === 'all' || activeTab === p.category" class="group bg-darkCard border border-darkBorder rounded-2xl overflow-hidden transition-all duration-300 hover:border-neonAccent/40">
-                            <div class="h-48 sm:h-56 bg-gradient-to-tr relative flex items-center justify-center p-6 overflow-hidden" :class="p.gradient">
-                                <span class="font-heading text-3xl font-extrabold text-white/40 tracking-wider uppercase" x-text="p.category"></span>
-                            </div>
-                            <div class="p-5">
-                                <div class="flex items-center justify-between mb-2 text-[10px]">
-                                    <span class="font-bold text-neonAccent uppercase" x-text="p.category"></span>
-                                    <span class="text-gray-500" x-text="p.time"></span>
-                                </div>
-                                <h4 class="font-heading text-lg font-bold text-white mb-2" x-text="p.title"></h4>
-                                <p class="text-gray-400 text-xs leading-relaxed" x-text="p.text"></p>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </section>
-
-        <!-- PHILOSOPHY SECTION -->
-        <section id="philosophy" class="py-20 bg-darkCard border-t border-darkBorder px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-6 bg-darkBg border border-darkBorder p-6 sm:p-8 rounded-3xl relative overflow-hidden">
+    <!-- PHILOSOPHY -->
+    <section id="philosophy" class="py-24 bg-darkCard border-t border-darkBorder relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="bg-darkBg border border-darkBorder rounded-3xl p-8 relative overflow-hidden box-glow">
+                    <i class="fa-solid fa-quote-left absolute -top-4 -left-2 text-[150px] text-neonAccent/5 pointer-events-none"></i>
+                    <div class="relative z-10">
                         <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Our Unbreakable Oath</span>
                         <h3 class="font-heading text-2xl sm:text-3xl font-bold mt-2 mb-6">"Paisa baad me, pehle aapka absolute trust."</h3>
+                        
                         <p class="text-gray-300 text-sm leading-relaxed mb-6">
                             BrandCraft Studio ka core motto ye nahi hai ki humne paise le liye aur project deliver kar diya. Hum mante hain ki aap apni hard-earned savings hum par trust karke lagate hain. Isliye humara target hota hai ki hum <strong class="text-neonAccent font-semibold">aapko aapke investment se 5 guna zyada values</strong> deliver karein.
                         </p>
+
+                        <div class="flex flex-col gap-4">
+                            <div class="flex gap-4 items-start">
+                                <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Satisfaction or Infinite Revisions</h4>
+                                    <p class="text-xs text-gray-400">Jab tak aapko apne brand design me wahi perfection nahi milta jo aap chahte hain, hum rukaenge nahi.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-8 h-8 rounded-full bg-neonAccent/10 text-neonAccent flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-circle-nodes"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Word-Of-Mouth Strategy</h4>
+                                    <p class="text-xs text-gray-400">Hum chahte hain ki aapka project itna flawless ho ki aap hume khud apne social circle me recommend karein. Referral hi asli kamaai hai.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="lg:col-span-6 flex flex-col gap-6">
-                        <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">A 20-Year Legacy Philosophy</span>
-                        <h2 class="font-heading text-2xl sm:text-4xl font-bold">Why We Give More Value Than We Charge</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 border border-darkBorder rounded-xl bg-darkBg text-xs">
-                                <h4 class="font-bold text-white flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neonAccent"></span> Zero Hidden Costs</h4>
-                                <p class="text-gray-400 mt-2">All source files included without any dynamic extra cost specifications.</p>
-                            </div>
-                            <div class="p-4 border border-darkBorder rounded-xl bg-darkBg text-xs">
-                                <h4 class="font-bold text-white flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neonAccent"></span> Real Market Study</h4>
-                                <p class="text-gray-400 mt-2">Deep competitor analysis to make your designs actually perform.</p>
-                            </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">A Legacy Philosophy</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold">Why We Give More Value Than We Charge</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed text-justify">
+                        Industry me bohot saari agencies hain jo limited design previews deti hain aur uske baad revision charge karti hain. Hum is system ko break karna chahte hain. All layered files, high resolution output vectors, custom brand guides are standard handover rules for us.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Zero Hidden Costs
+                            </h4>
+                            <p class="text-xs text-gray-400 mt-2">Hum jo plan lock karenge uske baad aapko ek rupee bhi extra pay nahi karna hai.</p>
+                        </div>
+                        <div class="p-5 border border-darkBorder rounded-xl bg-darkBg">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-neonAccent"></span> Premium Source Assets
+                            </h4>
+                            <p class="text-xs text-gray-400 mt-2">Aapko layered high-res Figma, Illustrator formats with infinite rights handover milenge.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- VALUE CALCULATOR -->
-        <section id="estimator" class="py-20 bg-darkBg border-t border-darkBorder px-4 sm:px-6">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Value & Cost Calculator</span>
-                    <h2 class="font-heading text-2xl sm:text-3xl font-bold mt-2">Estimate Your True Design Value</h2>
-                </div>
+    <!-- ESTIMATOR -->
+    <section id="estimator" class="py-20 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Value & Cost Calculator</span>
+                <h2 class="font-heading text-3xl font-bold mt-2">Estimate Your True Design Value</h2>
+                <p class="text-gray-400 text-sm mt-3">Humare premium pricing sliders use karein aur dekhiye ki aapke total budget ke mutabik hum kitna massive output value generate karenge.</p>
+            </div>
 
-                <div class="bg-darkCard border border-darkBorder p-6 sm:p-8 rounded-2xl shadow-2xl">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-base sm:text-lg font-bold mb-4">Adjust Your Budget</h3>
-                            <div class="mb-4">
-                                <div class="flex justify-between text-xs font-semibold mb-2">
-                                    <span>Estimated Budget</span>
-                                    <span class="text-neonAccent font-bold" x-text="'₹ ' + clientBudget.toLocaleString() + '/-'"></span>
-                                </div>
-                                <input type="range" min="7999" max="50000" step="1000" x-model="clientBudget" class="w-full h-1.5 bg-darkBg border border-darkBorder rounded-lg appearance-none cursor-pointer accent-neonAccent">
+            <div class="bg-darkCard border border-darkBorder p-8 rounded-2xl shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-lg font-heading font-bold mb-4">Adjust Your Budget</h3>
+                        <p class="text-xs text-gray-400 mb-6">Slide your estimated design budget to reveal the exact delivery value pack we custom engineer for you.</p>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-semibold text-gray-300 mb-2">
+                                <span>Design Budget</span>
+                                <span class="text-neonAccent font-bold" x-text="'₹ ' + clientBudget.toLocaleString() + '/-'"></span>
                             </div>
-                            <div class="bg-darkBg p-3 border border-darkBorder rounded-xl text-xs space-y-2">
-                                <div class="flex justify-between text-gray-400">
-                                    <span>Typical Agency Price:</span>
-                                    <span class="line-through text-red-400" x-text="'₹ ' + Math.round(clientBudget * 2.5).toLocaleString()"></span>
-                                </div>
-                                <div class="flex justify-between font-bold text-green-400">
-                                    <span>Direct Saving Value:</span>
-                                    <span x-text="'₹ ' + Math.round(clientBudget * 1.5).toLocaleString() + ' Saved'"></span>
-                                </div>
+                            <input type="range" min="7999" max="50000" step="1000" x-model="clientBudget" class="w-full h-2 bg-darkBg border border-darkBorder rounded-lg appearance-none cursor-pointer accent-neonAccent">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>Min: ₹ 7,999/-</span>
+                                <span>Max: ₹ 50,000/-</span>
                             </div>
                         </div>
-                        <div class="bg-darkBg border border-darkBorder p-5 rounded-xl text-xs">
-                            <span class="text-[10px] bg-neonAccent/15 text-neonAccent font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">Extra Perks Guaranteed</span>
-                            <h4 class="font-bold text-white mt-3 mb-2">What You Receive Free:</h4>
-                            <ul class="space-y-2 text-gray-400">
-                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-1"></i> Competitor Analysis study (Worth ₹10,000/-)</li>
-                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-1"></i> High-resolution source layered vector delivery</li>
+
+                        <div class="bg-darkBg p-4 border border-darkBorder rounded-xl">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Standard Agency Cost</span>
+                                <span class="text-xs text-red-400 font-semibold line-through" x-text="'₹ ' + Math.round(clientBudget * 2.5).toLocaleString() + '/-'"></span>
+                            </div>
+                            <div class="flex justify-between items-center mt-2 pt-2 border-t border-darkBorder">
+                                <span class="text-xs text-white font-bold">Your Saved Budget Value</span>
+                                <span class="text-xs text-green-400 font-bold" x-text="'₹ ' + Math.round(clientBudget * 1.5).toLocaleString() + ' Saved'"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-darkBg border border-darkBorder p-6 rounded-xl flex flex-col justify-between h-full min-h-[220px]">
+                        <div>
+                            <span class="text-[10px] bg-neonAccent/15 text-neonAccent font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Extra Perks Handed Over</span>
+                            <h4 class="text-lg font-bold text-white mt-3">What You Truly Get:</h4>
+                            
+                            <ul class="text-xs text-gray-400 space-y-3 mt-4">
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Custom competitor positioning study (<span class="text-white font-medium">Worth ₹10,000/- Free</span>)</li>
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Clean structural source delivery formats</li>
+                                <li><i class="fa-solid fa-circle-check text-neonAccent mr-2"></i> Unlimited revision warranty validation</li>
                             </ul>
                         </div>
+
+                        <div class="mt-6 pt-4 border-t border-darkBorder flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] text-gray-400">Total Delivery Pack Worth:</p>
+                                <span class="text-lg font-heading font-extrabold text-neonAccent" x-text="'₹ ' + Math.round(clientBudget * 2.8).toLocaleString() + '*'"></span>
+                            </div>
+                            <a href="#contact" class="bg-neonAccent text-black text-xs font-bold px-4 py-2.5 rounded-full hover:bg-white transition-colors">
+                                Book This Deal <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- PRICING GRIDS -->
-        <section id="pricing" class="py-20 bg-darkBg relative overflow-hidden border-t border-darkBorder px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Transparent Investments</span>
-                    <h2 class="font-heading text-2xl sm:text-4xl font-bold mt-2">Choose Your Scale Package</h2>
+    <!-- PRICING -->
+    <section id="pricing" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Transparent Investments</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold mt-2">Choose Your Scale Package</h2>
+                <p class="text-gray-400 text-sm mt-3 max-w-lg mx-auto">No confusing estimates. Prices are synchronized instantly from the Admin Command Center!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plan 1: Kickstarter -->
+                <div id="kickstarter" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 1: Kickstarter</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.kickstarter.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Perfect for early stage startups wishing to set their baseline logo standards with clean styling parameters.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Professional Logo</strong> (3 Concepts)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Standard Business Stationery Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 3 Custom Social Media Graphics</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 4 Design Revisions included</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="openPlanModal('Kickstarter')" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Choose Kickstarter Pack
+                        </button>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <template x-for="p in plans" :key="p.id">
-                        <div class="group bg-darkCard border rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1 relative"
-                             :class="p.id === popularPlanId ? 'border-2 border-neonAccent shadow-[0_0_20px_rgba(204,255,0,0.1)]' : 'border-darkBorder'">
-                            
-                            <span x-show="p.id === popularPlanId" class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-neonAccent text-black text-[9px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
-                                Most Popular (Best Value)
-                            </span>
+                <!-- Plan 2: Growth Edge -->
+                <div id="growth-edge" class="group bg-darkCard border-2 border-neonAccent rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.1)] relative transform hover:-translate-y-1">
+                    <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-neonAccent text-black text-[10px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                        Most Popular (Best Value)
+                    </span>
+                    <div>
+                        <div class="flex items-center justify-between mb-4 mt-2">
+                            <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Plan 2: Growth Edge</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.growthEdge.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-6">Best designed value pack targeted directly towards growing startups wanting complete consistent makeover.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-200 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Master Logo Package</strong> (5 Concepts)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Complete Brand Identity Guidelines</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 10 Custom Social Media Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Unlimited Revisions (Satisfaction Guarantee)</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="openPlanModal('Growth Edge')" class="w-full bg-neonAccent hover:bg-white text-black py-3 rounded-xl text-xs font-extrabold transition-all shadow-md">
+                            Lock Growth Edge Deal
+                        </button>
+                    </div>
+                </div>
 
-                            <div class="space-y-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block" x-text="p.name"></span>
-                                <h3 class="font-heading text-3xl font-bold text-white">
-                                    <span x-show="!p.isCustom">₹</span><span x-text="p.isCustom ? p.price : parseInt(p.price).toLocaleString()"></span><span x-show="!p.isCustom" class="text-xs font-normal text-gray-400">/-</span>
-                                </h3>
-                                <p class="text-xs text-gray-400 leading-relaxed" x-text="p.desc"></p>
-                                <hr class="border-darkBorder">
-                                <ul class="text-xs text-gray-300 space-y-3 py-2">
-                                    <template x-for="feat in p.features">
-                                        <li class="flex items-start gap-2">
-                                            <i class="fa-solid fa-check text-neonAccent shrink-0 mt-0.5"></i>
-                                            <span x-text="feat"></span>
-                                        </li>
-                                    </template>
-                                </ul>
+                <!-- Plan 3: Elite Brand -->
+                <div id="elite-brand" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 3: Elite Brand</span>
+                        </div>
+                        <h3 class="font-heading text-4xl font-bold text-white mb-2">
+                            ₹<span x-text="pricing.eliteBrand.toLocaleString()"></span><span class="text-sm font-normal text-gray-400">/-</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Designed primarily for established corporate domains wishing premium styling assets and UI platforms.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Premium Logo + Trademark Guidelines</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> <strong>Full UI/UX Concept</strong> (5 High-fidelity screens)</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 20 Social media posts layout + Templates</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 1-Month priority active support timeline</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="openPlanModal('Elite Brand')" class="w-full bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Acquire Elite Experience
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 4: Custom Pricing -->
+                <div id="custom-pricing" class="group bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:border-neonAccent/30 transform hover:-translate-y-1">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Plan 4: Bespoke</span>
+                        </div>
+                        <h3 class="font-heading text-3xl font-bold text-white mb-2">
+                            Custom<span class="text-sm font-normal text-gray-400"> Pricing</span>
+                        </h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Aise businesses jinhe custom requirement specifications, retainers ya complex corporate branding designs ki need ho.</p>
+                        <hr class="border-darkBorder my-4">
+                        <ul class="text-xs text-gray-300 space-y-3.5 my-6">
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> 100% Tailored Scope of Work Blueprint</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Long term design retainer integrations</li>
+                            <li><i class="fa-solid fa-check text-neonAccent mr-2"></i> Dedicated creative design lead direct access</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <button @click="openPlanModal('Custom Pricing')" class="block w-full text-center bg-darkBg border border-darkBorder hover:border-neonAccent hover:bg-neonAccent hover:text-black py-3 rounded-xl text-xs font-bold transition-all">
+                            Inquire Custom Proposal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact" class="py-24 bg-darkBg relative overflow-hidden border-t border-darkBorder">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <span class="text-xs font-bold text-neonAccent uppercase tracking-widest text-glow">Let's Discuss Creative Projects</span>
+                <h2 class="font-heading text-4xl font-bold">Have an Idea? Let's Turn It Into a Real Brand.</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Koi tension ki baat nahi hai, agar aapka proposal completely detailed nahi hai, tab bhi hum free schedule call par screen-share kar ke simple ideas discuss kar sakte hain. Free of cost advice call.
+                </p>
+                <div class="flex flex-col gap-4 mt-4">
+                    <div class="flex items-center gap-4 p-4 border border-darkBorder bg-darkCard/40 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-neonAccent/10 text-neonAccent flex items-center justify-center font-bold">01</div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">30-Min Free Branding Discovery</h4>
+                            <p class="text-xs text-gray-500">Hum screen coordinate pe ideas evaluate karte hain.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="bg-darkCard border border-darkBorder p-8 rounded-3xl shadow-2xl relative">
+                    <!-- Success screen -->
+                    <div x-show="contactSuccess" class="text-center py-12" style="display: none;">
+                        <div class="w-16 h-16 rounded-full bg-neonAccent/15 text-neonAccent flex items-center justify-center text-3xl mx-auto mb-6">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Brief Submitted Successfully!</h3>
+                        <p class="text-gray-300 text-sm max-w-sm mx-auto mb-6">
+                            Awesome! Humare senior design advisor ke paas aapki details pohoch gayi hain. Hum 2 ghante ke andar aapse response call/WhatsApp par touch-base karenge.
+                        </p>
+                        <button @click="contactSuccess = false; formStep = 1" class="bg-neonAccent text-black font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
+                            Submit Another Brief
+                        </button>
+                    </div>
+
+                    <!-- Main Form -->
+                    <form x-show="!contactSuccess" @submit.prevent="submitClientBrief" class="flex flex-col gap-6">
+                        <div class="flex justify-between items-center border-b border-darkBorder pb-4">
+                            <span class="text-xs text-gray-400 font-semibold" x-text="'STEP ' + formStep + ' OF 2'"></span>
+                            <div class="flex gap-1.5">
+                                <span class="w-6 h-1.5 rounded-full" :class="formStep >= 1 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
+                                <span class="w-6 h-1.5 rounded-full" :class="formStep >= 2 ? 'bg-neonAccent' : 'bg-darkBorder'"></span>
                             </div>
+                        </div>
 
-                            <div class="mt-6">
-                                <button @click="openOfferModal(p)" class="w-full text-xs font-bold py-3 rounded-xl transition-all"
-                                        :class="p.id === popularPlanId ? 'bg-neonAccent hover:bg-white text-black' : 'bg-darkBg border border-darkBorder hover:border-neonAccent text-white'">
-                                    <span x-text="p.actionLabel || 'Book Package'"></span>
+                        <!-- Step 1 -->
+                        <div x-show="formStep === 1" class="flex flex-col gap-5">
+                            <h3 class="text-lg font-heading font-bold text-white">Let's start with basic contact details</h3>
+                            <div>
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">What is your name?</label>
+                                <input type="text" x-model="formName" required placeholder="E.g., Devendra Sharma" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Your Email</label>
+                                    <input type="email" x-model="formEmail" required placeholder="name@company.com" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Phone / WhatsApp</label>
+                                    <input type="tel" x-model="formPhone" required placeholder="+91 98765-XXXXX" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors">
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end">
+                                <button type="button" @click="formStep = 2" class="bg-neonAccent text-black font-bold px-8 py-3.5 rounded-full hover:bg-white transition-all flex items-center gap-2">
+                                    Next Step <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </button>
                             </div>
                         </div>
-                    </template>
-                </div>
-            </div>
-        </section>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="py-20 bg-darkBg border-t border-darkBorder px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 flex flex-col gap-6">
-                    <span class="text-xs font-bold text-neonAccent uppercase tracking-widest">Let's Discuss Creative Projects</span>
-                    <h2 class="font-heading text-2xl sm:text-4xl font-bold">Have an Idea? Let's Turn It Into a Real Brand.</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">No matter agar aapka brief clear nahi hai, hum advice call par system manage karenge.</p>
-                </div>
-
-                <div class="lg:col-span-7">
-                    <div class="bg-darkCard border border-darkBorder p-6 sm:p-8 rounded-3xl shadow-2xl relative">
-                        <div x-show="contactSuccess" class="text-center py-8">
-                            <div class="w-12 h-12 rounded-full bg-neonAccent/15 text-neonAccent flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-circle-check"></i></div>
-                            <h3 class="text-lg font-bold mb-2">Brief Submitted Successfully!</h3>
-                            <p class="text-gray-300 text-xs max-w-sm mx-auto mb-6">Advisors 2 ghante me connect karenge.</p>
-                            <button @click="contactSuccess = false" class="bg-neonAccent text-black font-bold px-6 py-2.5 rounded-full text-xs">Submit Another Brief</button>
-                        </div>
-
-                        <form x-show="!contactSuccess" @submit.prevent="submitClientBrief" class="flex flex-col gap-4 text-xs">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="text-gray-400 font-semibold block mb-1.5 uppercase">Your Name</label>
-                                    <input type="text" x-model="formInput.name" required placeholder="E.g., Devendra" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonAccent">
-                                </div>
-                                <div>
-                                    <label class="text-gray-400 font-semibold block mb-1.5 uppercase">WhatsApp / Phone</label>
-                                    <input type="tel" x-model="formInput.phone" required placeholder="+91 93131-XXXXX" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonAccent">
+                        <!-- Step 2 -->
+                        <div x-show="formStep === 2" style="display: none;" class="flex flex-col gap-5">
+                            <h3 class="text-lg font-heading font-bold text-white">Tell us about the project vision</h3>
+                            <div>
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Select Services Required</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="Logo Design" x-model="formServices" class="accent-neonAccent"> Logo Design
+                                    </label>
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="Brand Book" x-model="formServices" class="accent-neonAccent"> Brand Book
+                                    </label>
+                                    <label class="p-3 border border-darkBorder rounded-xl bg-darkBg flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:border-neonAccent/50">
+                                        <input type="checkbox" value="UI/UX Design" x-model="formServices" class="accent-neonAccent"> UI/UX Design
+                                    </label>
                                 </div>
                             </div>
                             <div>
-                                <label class="text-gray-400 font-semibold block mb-1.5 uppercase">Email Address</label>
-                                <input type="email" x-model="formInput.email" required placeholder="name@company.com" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonAccent">
+                                <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-2">Describe your vision</label>
+                                <textarea rows="3" x-model="formDesc" placeholder="Explain your design ideas, competitors or guidelines..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3.5 focus:border-neonAccent focus:outline-none text-white text-sm transition-colors resize-none"></textarea>
                             </div>
-                            <div>
-                                <label class="text-gray-400 font-semibold block mb-1.5 uppercase">Project Vision</label>
-                                <textarea rows="3" x-model="formInput.desc" placeholder="Design requirements..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neonAccent resize-none"></textarea>
+                            <div class="mt-4 flex justify-between items-center">
+                                <button type="button" @click="formStep = 1" class="text-xs text-gray-400 hover:text-white underline font-semibold">Go Back</button>
+                                <button type="submit" class="bg-neonAccent hover:bg-white text-black font-extrabold px-10 py-3.5 rounded-full transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+                                    Submit Brief <i class="fa-solid fa-circle-check ml-1"></i>
+                                </button>
                             </div>
-                            <button type="submit" class="bg-neonAccent text-black font-bold p-3.5 rounded-full text-xs uppercase tracking-wider">Submit Design Brief</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="border-t border-darkBorder bg-darkBg py-16 px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">BC</div>
-                            <span class="font-heading font-bold text-lg text-white">Brand<span class="text-neonAccent">Craft</span></span>
                         </div>
-                        <p class="text-gray-400 text-xs max-w-sm">Hum designs nahi, trust aur organic growth relationships build karte hain.</p>
-                    </div>
-                    <div>
-                        <h5 class="font-heading font-bold text-xs text-white mb-4 uppercase tracking-widest text-glow">Agency Structure</h5>
-                        <ul class="text-xs text-gray-400 space-y-3">
-                            <li><a href="#services" class="hover:text-neonAccent">Creative Services</a></li>
-                            <li><a href="#portfolio" class="hover:text-neonAccent">Our Case Studies</a></li>
-                            <li><a href="#pricing" class="hover:text-neonAccent">Premium Pricing Grid</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="font-heading font-bold text-xs text-white mb-4 uppercase tracking-widest text-glow">Direct Connect</h5>
-                        <ul class="text-xs text-gray-400 space-y-3">
-                            <li class="flex items-center gap-2"><i class="fa-regular fa-envelope text-neonAccent"></i> hello@brandcraftstudio.com</li>
-                            <li class="flex items-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-green-400 text-sm"></i> 
-                                <a href="https://wa.me/919313169516" class="hover:text-neonAccent font-bold text-white">+91 93 1316 9516</a>
-                            </li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-neonAccent"></i> Surat, Gujarat, India</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="border-t border-darkBorder pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
-                    <p>&copy; 2026 BrandCraft Studio. All visual guidelines reserved strictly.</p>
-                    <p class="text-xs text-gray-400 font-bold">Made with <i class="fa-solid fa-heart text-red-500 animate-pulse"></i> | © 2026 HK721</p>
+                    </form>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-        <!-- MODAL PROPOSAL -->
-        <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
-            <div @click.away="showModal = false" class="bg-darkCard border border-darkBorder p-6 rounded-2xl max-w-md w-full relative">
-                <button @click="showModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-                <div class="text-center mb-4">
-                    <h3 class="font-heading text-base font-bold text-white" x-text="'Confirm Plan: ' + modalPlanName"></h3>
+    <!-- FOOTER -->
+    <footer class="border-t border-darkBorder bg-darkBg py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 items-start mb-12">
+                <div class="md:col-span-2 flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-neonAccent flex items-center justify-center font-heading font-bold text-black text-lg">BC</div>
+                        <span class="font-heading font-bold text-lg tracking-wide text-white">Brand<span class="text-neonAccent">Craft</span></span>
+                    </div>
+                    <p class="text-gray-400 text-xs max-w-sm mt-2 leading-relaxed">
+                        Hum designs nahi, trust aur organic growth relationships build karte hain. 100% Client-First Satisfaction Guarantee ke sath premium agency.
+                    </p>
                 </div>
-                <form @submit.prevent="submitModalLead" class="flex flex-col gap-3 text-xs">
-                    <input type="text" x-model="formInput.name" required placeholder="Your Name" class="w-full bg-darkBg border border-darkBorder rounded-xl p-3 text-white focus:outline-none">
-                    <input type="tel" x-model="formInput.phone" required placeholder="WhatsApp Number" class="w-full bg-darkBg border border-darkBorder rounded-xl p-3 text-white focus:outline-none">
-                    <button type="submit" class="w-full bg-neonAccent text-black font-extrabold py-3 rounded-xl">Confirm Proposal</button>
-                </form>
+                <div>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest">Agency Structure</h5>
+                    <ul class="text-xs text-gray-400 space-y-3.5">
+                        <li><a href="#services" class="hover:text-neonAccent transition-colors">Creative Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-neonAccent transition-colors">Our Case Studies</a></li>
+                        <li><a href="#philosophy" class="hover:text-neonAccent transition-colors">Word-of-Mouth Oath</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-heading font-bold text-sm text-white mb-4 uppercase tracking-widest">Direct Connect</h5>
+                    <p class="text-xs text-gray-400 font-bold hover:text-neonAccent"><a href="admin.html"><i class="fa-solid fa-lock"></i> Secure Admin Access</a></p>
+                    <p class="text-xs text-gray-400 mt-2">hello@brandcraftstudio.com</p>
+                    <p class="text-xs text-gray-400 mt-2">+91 98765 43210</p>
+                </div>
             </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE PLAN MODAL -->
+    <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style="display: none;" x-transition>
+        <div @click.away="showModal = false" class="bg-darkCard border border-darkBorder p-6 rounded-2xl max-w-md w-full relative">
+            <button @click="showModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="text-[10px] bg-neonAccent/15 text-neonAccent font-bold px-3 py-1 rounded-full uppercase tracking-wider">Book Proposal</span>
+                <h3 class="font-heading text-lg font-bold text-white mt-3">Ready to lock <span class="text-neonAccent" x-text="modalPlanName"></span>?</h3>
+                <p class="text-xs text-gray-400 mt-2">Apni details enter karein. Hum 2 ghante ke andar aapse project kickstart discussion call ke liye connect karenge.</p>
+            </div>
+
+            <form @submit.prevent="submitModalBrief" class="flex flex-col gap-4">
+                <div>
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1">Your Name</label>
+                    <input type="text" x-model="formName" required placeholder="E.g., Devendra Sharma" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1">WhatsApp / Phone Number</label>
+                    <input type="tel" x-model="formPhone" required placeholder="+91 98765-XXXXX" class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonAccent">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase block mb-1">Quick design notes</label>
+                    <textarea rows="3" x-model="formDesc" placeholder="Describe your business goals..." class="w-full bg-darkBg border border-darkBorder rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonAccent resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-neonAccent hover:bg-white text-black font-extrabold py-3 rounded-xl text-xs transition-colors shadow-lg">
+                    Confirm Project Discovery Call <i class="fa-solid fa-circle-check ml-1"></i>
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- SECURE INTEGRATED ADMIN GATEWAY (Hash Render Layout) -->
-    <div x-show="isAdminView" style="display: none;" class="min-h-screen bg-adminBg text-gray-100 flex flex-col">
-        <!-- Login Form Panel -->
-        <div x-show="!isLoggedIn" class="fixed inset-0 z-50 flex items-center justify-center bg-[#0B0B0B] p-4">
-            <div class="bg-adminCard border border-adminBorder p-8 rounded-3xl max-w-md w-full relative box-glow">
-                <div class="text-center mb-6">
-                    <h2 class="font-heading font-bold text-xl text-white">Command Center Portal</h2>
-                </div>
-                <form @submit.prevent="handleLogin" class="flex flex-col gap-4 text-xs">
-                    <input type="text" x-model="adminUser" required placeholder="Admin ID" class="w-full bg-adminBg border border-adminBorder rounded-xl p-3 text-white">
-                    <input type="password" x-model="adminPass" required placeholder="Password" class="w-full bg-adminBg border border-adminBorder rounded-xl p-3 text-white">
-                    <button type="submit" class="w-full bg-neonAccent text-black font-bold py-3 rounded-xl uppercase">Authenticate Access</button>
-                    <a href="#" @click="isAdminView = false" class="text-center text-xs text-gray-500 underline mt-2 block">Exit to Site</a>
-                </form>
-            </div>
-        </div>
-
-        <!-- Authenticated Dashboard UI Layout -->
-        <div x-show="isLoggedIn" class="flex-grow flex flex-col">
-            <header class="bg-adminCard border-b border-adminBorder px-6 h-20 flex items-center justify-between sticky top-0 z-40">
-                <h1 class="font-heading font-bold text-sm text-white">BrandCraft Admin <span class="text-neonAccent">System</span></h1>
-                <div class="flex gap-2">
-                    <button @click="isAdminView = false" class="bg-gray-800 text-gray-300 px-4 py-1.5 rounded-lg text-xs font-bold">Exit Admin</button>
-                    <button @click="logout" class="bg-red-500/10 text-red-400 border border-red-500/20 px-4 py-1.5 rounded-lg text-xs font-bold">Logout</button>
-                </div>
-            </header>
-
-            <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 w-full flex-grow">
-                <aside class="lg:col-span-3 flex flex-col gap-2">
-                    <button @click="adminTab = 'leads'" :class="adminTab === 'leads' ? 'bg-neonAccent text-black' : 'bg-adminCard text-gray-400 border-adminBorder'" class="p-3 border rounded-xl font-bold text-xs text-left">Leads Received (<span x-text="leads.length"></span>)</button>
-                    <button @click="adminTab = 'services'" :class="adminTab === 'services' ? 'bg-neonAccent text-black' : 'bg-adminCard text-gray-400 border-adminBorder'" class="p-3 border rounded-xl font-bold text-xs text-left">Services Config</button>
-                    <button @click="adminTab = 'pricing'" :class="adminTab === 'pricing' ? 'bg-neonAccent text-black' : 'bg-adminCard text-gray-400 border-adminBorder'" class="p-3 border rounded-xl font-bold text-xs text-left">Packages Manager</button>
-                    <button @click="adminTab = 'portfolio'" :class="adminTab === 'portfolio' ? 'bg-neonAccent text-black' : 'bg-adminCard text-gray-400 border-adminBorder'" class="p-3 border rounded-xl font-bold text-xs text-left">Portfolio Manager</button>
-                </aside>
-
-                <main class="lg:col-span-9 bg-adminCard border border-adminBorder rounded-2xl p-6 text-xs">
-                    <!-- Leads Viewer -->
-                    <div x-show="adminTab === 'leads'">
-                        <h3 class="text-base font-bold text-white border-b border-adminBorder pb-2 mb-4">Received System Leads</h3>
-                        <div class="space-y-3">
-                            <template x-for="l in leads" :key="l.id">
-                                <div class="p-4 bg-adminBg border border-adminBorder rounded-xl flex justify-between items-start">
-                                    <div class="space-y-1">
-                                        <p class="font-bold text-white text-sm" x-text="l.name"></p>
-                                        <p class="text-neonAccent font-medium" x-text="l.phone"></p>
-                                        <p class="text-gray-400" x-text="l.email"></p>
-                                        <p class="text-gray-500 italic mt-1" x-text="l.desc"></p>
-                                        <span class="text-[10px] bg-darkCard px-2 py-0.5 rounded text-gray-400 font-bold uppercase block w-max mt-1" x-text="'Scope: '+ l.plan"></span>
-                                    </div>
-                                    <button @click="deleteLead(l.id)" class="text-red-400 hover:text-red-300 font-bold border border-red-500/20 px-2 py-1 bg-red-500/5 rounded">Delete</button>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Services config tab -->
-                    <div x-show="adminTab === 'services'" style="display: none;" class="space-y-4">
-                        <div class="flex justify-between items-center border-b border-adminBorder pb-2">
-                            <h3 class="text-base font-bold text-white">Dynamic Services Cards Grid</h3>
-                            <button @click="openNewServiceForm" class="bg-neonAccent text-black font-bold px-3 py-1 rounded">Add Naya Card</button>
-                        </div>
-                        <div x-show="showServiceForm" class="p-4 bg-adminBg border border-adminBorder rounded-xl space-y-3">
-                            <input type="text" x-model="serviceForm.title" placeholder="Card Title" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                            <input type="text" x-model="serviceForm.icon" placeholder="FontAwesome Icon Class" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                            <input type="text" x-model="serviceForm.featuresInput" placeholder="Features lists (Comma separated split layout)" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                            <textarea x-model="serviceForm.desc" placeholder="Service description paragraph" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder resize-none"></textarea>
-                            <div class="flex justify-end gap-2"><button type="button" @click="showServiceForm=false" class="bg-gray-800 px-3 py-1 rounded">Cancel</button><button type="button" @click="saveService" class="bg-neonAccent text-black font-bold px-3 py-1 rounded">Save</button></div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <template x-for="s in services" :key="s.id">
-                                <div class="bg-adminBg p-3 border border-adminBorder rounded-xl flex items-center justify-between">
-                                    <span class="font-bold text-white" x-text="s.title"></span>
-                                    <div class="flex gap-2"><button @click="editService(s)" class="text-neonAccent"><i class="fa-solid fa-pencil"></i></button><button @click="deleteService(s.id)" class="text-red-400"><i class="fa-solid fa-trash"></i></button></div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Pricing tab manager -->
-                    <div x-show="adminTab === 'pricing'" style="display: none;" class="space-y-4">
-                        <div class="flex justify-between items-center border-b border-adminBorder pb-2">
-                            <h3 class="text-base font-bold text-white">Dynamic Pricing Plans Configuration</h3>
-                            <button @click="openNewPlanForm" class="bg-neonAccent text-black font-bold px-3 py-1 rounded">Add Package</button>
-                        </div>
-                        <div class="p-4 bg-adminBg border border-adminBorder rounded-xl flex items-center justify-between">
-                            <span class="font-bold text-white">Select Popular Feature Glow card:</span>
-                            <select x-model="popularPlanId" @change="savePopularPlanSelection" class="bg-adminCard border border-adminBorder p-2 rounded text-white font-bold focus:outline-none">
-                                <template x-for="p in plans" :key="p.id"><option :value="p.id" x-text="p.name"></option></template>
-                            </select>
-                        </div>
-                        <div x-show="showPlanForm" class="p-4 bg-adminBg border border-adminBorder rounded-xl space-y-3">
-                            <input type="text" x-model="planForm.name" placeholder="Plan Package Name" class="w-full bg-adminCard p-2.5 rounded border border-adminBorder text-white">
-                            <input type="text" x-model="planForm.price" placeholder="Pricing Label value" class="w-full bg-adminCard p-2.5 rounded border border-adminBorder text-white">
-                            <label class="flex items-center gap-2 text-gray-400"><input type="checkbox" x-model="planForm.isCustom" class="accent-neonAccent"> Custom String valuation? (e.g. For Custom Pricing text)</label>
-                            <input type="text" x-model="planForm.featuresInput" placeholder="Features (Comma-separated text strings)" class="w-full bg-adminCard p-2.5 rounded border border-adminBorder text-white">
-                            <textarea x-model="planForm.desc" placeholder="Short description metadata package" class="w-full bg-adminCard p-2.5 rounded border border-adminBorder text-white resize-none"></textarea>
-                            <div class="flex justify-end gap-2"><button type="button" @click="showPlanForm=false" class="bg-gray-800 px-3 py-1 rounded">Cancel</button><button type="button" @click="savePlan" class="bg-neonAccent text-black font-bold px-3 py-1 rounded">Save Package</button></div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <template x-for="p in plans" :key="p.id">
-                                <div class="bg-adminBg p-3 border border-adminBorder rounded-xl flex items-center justify-between" :class="p.id === popularPlanId ? 'border-neonAccent':''">
-                                    <span class="font-bold text-white" x-text="p.name"></span>
-                                    <div class="flex gap-2"><button @click="editPlan(p)" class="text-neonAccent"><i class="fa-solid fa-pencil"></i></button><button @click="deletePlan(p.id)" class="text-red-400"><i class="fa-solid fa-trash"></i></button></div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio tab manager -->
-                    <div x-show="adminTab === 'portfolio'" style="display: none;" class="space-y-4">
-                        <h3 class="text-base font-bold text-white border-b border-adminBorder pb-2">Dynamic Case Studies Showcase</h3>
-                        <form @submit.prevent="addProject" class="p-4 bg-adminBg border border-adminBorder rounded-xl space-y-3">
-                            <input type="text" x-model="newProjTitle" required placeholder="Project Title Placement" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                            <select x-model="newProjCategory" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                                <option value="branding">Brand Identity Portfolio</option>
-                                <option value="uiux">UI/UX Design Platform</option>
-                            </select>
-                            <select x-model="newProjGradient" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                                <option value="from-violet-600 to-indigo-900">Sunset Violet (Deep Indigo)</option>
-                                <option value="from-cyan-600 to-emerald-900">Aero Emerald (Green Teal)</option>
-                                <option value="from-pink-600 to-rose-950">Pulse Pink (Dark Velvet)</option>
-                            </select>
-                            <input type="text" x-model="newProjTime" placeholder="Duration (e.g. Delivered in 8 Days)" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder">
-                            <textarea x-model="newProjText" placeholder="Summary case study parameters" class="w-full bg-adminCard p-2.5 rounded text-white border border-adminBorder resize-none"></textarea>
-                            <button type="submit" class="w-full bg-neonAccent text-black font-bold p-2.5 rounded uppercase">Publish New Project Live</button>
-                        </form>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <template x-for="p in projects" :key="p.id">
-                                <div class="bg-adminBg p-3 border border-adminBorder rounded-xl flex justify-between items-center">
-                                    <span class="font-bold text-white" x-text="p.title"></span>
-                                    <button @click="deleteProject(p.id)" class="text-red-400 font-bold"><i class="fa-solid fa-trash"></i></button>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase SDK Hookups Module scripts -->
+    <!-- Firebase Utilities -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const appId = 'brandcraft-studio-app';
+        
+        // PASTE YOUR REAL FIREBASE CREDENTIALS HERE FOR CROSS-DEVICE SYNC
         const firebaseConfig = {
             apiKey: "",
             authDomain: "brandcraft-studio.firebaseapp.com",
@@ -713,161 +957,167 @@
         const auth = getAuth(app);
 
         window.dbUtils = {
-            isConfigured() { return firebaseConfig.apiKey !== ""; },
-            async initAuth() { if (this.isConfigured()) return await signInAnonymously(auth); return null; },
-            getLeadsCollection() { return collection(db, 'artifacts', appId, 'public', 'data', 'leads'); },
-            getProjectsCollection() { return collection(db, 'artifacts', appId, 'public', 'data', 'projects'); },
-            getServicesCollection() { return collection(db, 'artifacts', appId, 'public', 'data', 'services'); },
-            getPlansCollection() { return collection(db, 'artifacts', appId, 'public', 'data', 'plans'); },
-            getPopularPlanDoc() { return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'popular'); },
-            onSnapshot, updateDoc, deleteDoc, doc, setDoc, getDoc
+            isConfigured() {
+                return firebaseConfig.apiKey !== "";
+            },
+            async initAuth() {
+                if (this.isConfigured()) {
+                    return await signInAnonymously(auth);
+                }
+                return null;
+            },
+            getLeadsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'leads');
+            },
+            getProjectsCollection() {
+                return collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+            },
+            getPricingDoc() {
+                return doc(db, 'artifacts', appId, 'public', 'data', 'pricing', 'main');
+            },
+            onSnapshot,
+            addDoc,
+            doc
         };
     </script>
 
-    <!-- Master Scope Engine Orchestrator scripts -->
+    <!-- Client side local storage engine -->
     <script>
-        function masterApp() {
+        function clientApp() {
             return {
-                mobileMenu: false, activeTab: 'all', activeQuizStep: 0, quizAnswers: {}, showModal: false, modalPlanName: '', clientBudget: 15000, contactSuccess: false,
-                services: [], projects: [], plans: [], popularPlanId: 'plan_2',
-                formInput: { name: '', phone: '', email: '', desc: '' },
-                isAdminView: false, isLoggedIn: false, adminUser: '', adminPass: '', adminTab: 'leads', isFirebaseLive: false, leads: [],
-                newProjTitle: '', newProjCategory: 'branding', newProjTime: '8 Days Delivery', newProjText: '', newProjGradient: 'from-violet-600 to-indigo-900',
-                showServiceForm: false, serviceFormEditMode: false, serviceForm: { id: '', title: '', icon: '', desc: '', actionLabel: '', featuresInput: '' },
-                showPlanForm: false, planFormEditMode: false, planForm: { id: '', name: '', price: '', desc: '', actionLabel: '', isCustom: false, featuresInput: '' },
+                mobileMenu: false,
+                activeTab: 'all',
+                activeQuizStep: 0,
+                quizAnswers: {},
+                showQuizResult: false,
+                quizLoading: false,
+                recommendedPlan: '',
+                showModal: false,
+                modalPlanName: '',
+                clientBudget: 15000,
+                formStep: 1,
+                contactSuccess: false,
+                
+                pricing: {
+                    kickstarter: 7999,
+                    growthEdge: 18999,
+                    eliteBrand: 29999
+                },
+                projects: [],
 
-                init() {
-                    this.loadDefaultBaselines();
-                    const checkRoute = () => {
-                        this.isAdminView = window.location.hash.includes('admin') || window.location.search.includes('admin');
+                // Form bindings
+                formName: '',
+                formEmail: '',
+                formPhone: '',
+                formDesc: '',
+                formServices: [],
+
+                async init() {
+                    this.loadLocalData();
+
+                    // Check if Firebase Live configuration exists
+                    setTimeout(async () => {
+                        if (window.dbUtils && window.dbUtils.isConfigured()) {
+                            try {
+                                await window.dbUtils.initAuth();
+                                
+                                // Sync pricing
+                                window.dbUtils.onSnapshot(window.dbUtils.getPricingDoc(), (docSnap) => {
+                                    if (docSnap.exists()) {
+                                        this.pricing = docSnap.data();
+                                    }
+                                });
+
+                                // Sync projects
+                                window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snapshot) => {
+                                    let tempProjects = [];
+                                    snapshot.forEach((doc) => {
+                                        tempProjects.push({ id: doc.id, ...doc.data() });
+                                    });
+                                    if (tempProjects.length > 0) {
+                                        this.projects = tempProjects;
+                                        localStorage.setItem('bc_local_projects', JSON.stringify(tempProjects));
+                                    }
+                                });
+                            } catch (e) {
+                                console.warn("Firebase Live configuration connection failed. Retaining active sandbox data.", e);
+                            }
+                        }
+                    }, 500);
+                },
+
+                loadLocalData() {
+                    // Seed initial showcase if storage is empty
+                    const savedProj = localStorage.getItem('bc_local_projects');
+                    if (savedProj) {
+                        this.projects = JSON.parse(savedProj);
+                    } else {
+                        const initial = [
+                            { id: '1', title: 'Zenith Fintech Labs', category: 'branding', time: '8 Days Delivery', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900', initial: 'Z' },
+                            { id: '2', title: 'Aero Logistics AI', category: 'uiux', time: '14 Days Delivery', text: 'Crafted clean responsive platform architecture optimizing delivery speeds.', gradient: 'from-cyan-600 to-emerald-900', isApp: true },
+                            { id: '3', title: 'Pulse Nutrition', category: 'social', time: '5 Days Delivery', text: 'Consistent scroll-stopping templates designed specifically for nutrition startups.', gradient: 'from-pink-600 to-rose-950', isSocial: true }
+                        ];
+                        this.projects = initial;
+                        localStorage.setItem('bc_local_projects', JSON.stringify(initial));
+                    }
+
+                    const savedPricing = localStorage.getItem('bc_local_pricing');
+                    if (savedPricing) {
+                        this.pricing = JSON.parse(savedPricing);
+                    }
+                },
+
+                openPlanModal(planName) {
+                    this.modalPlanName = planName;
+                    this.formDesc = `Interested in registering for the ${planName} scope package.`;
+                    this.showModal = true;
+                },
+
+                async submitModalBrief() {
+                    this.showModal = false;
+                    await this.submitClientBrief();
+                },
+
+                async submitClientBrief() {
+                    const selectedPlan = this.modalPlanName ? this.modalPlanName : (this.clientBudget < 10000 ? 'Kickstarter' : (this.clientBudget < 25000 ? 'Growth Edge' : 'Elite Brand'));
+                    const newLead = {
+                        id: 'lead_' + Date.now(),
+                        name: this.formName || 'Anonymous Client',
+                        email: this.formEmail || 'no-email@client.com',
+                        phone: this.formPhone || 'N/A',
+                        services: this.formServices.length > 0 ? [...this.formServices] : ['General Consulting Blueprint'],
+                        desc: this.formDesc || 'Custom strategy design query.',
+                        budget: parseInt(this.clientBudget),
+                        plan: selectedPlan,
+                        status: 'new',
+                        date: new Date().toLocaleDateString()
                     };
-                    checkRoute();
-                    window.addEventListener('hashchange', checkRoute);
-                    if (sessionStorage.getItem('brandcraft_logged') === 'true') this.isLoggedIn = true;
-                    setTimeout(async () => { await this.startEngine(); }, 500);
-                },
 
-                loadDefaultBaselines() {
-                    if (!localStorage.getItem('bc_local_services')) {
-                        const srv = [
-                            { id: 's1', title: 'Logo Design', icon: 'fa-solid fa-pen-nib', desc: 'Ek unique aur high-impact icon jo aapki brand message ko first look me client tak pohochaye.', actionLabel: 'Request Logo Concept', features: ['3 Original Design Concepts', 'High-res Vector formats (SVG, PDF)', '100% Trademark ownership parameters'] },
-                            { id: 's2', title: 'Brand Identity', icon: 'fa-solid fa-id-card', desc: 'Consistent brand book, customized corporate color palettes, mood boards, and aesthetic parameters.', actionLabel: 'Establish Brand Identity', features: ['In-depth guidelines setup', 'Corporate color styling palettes', 'Stationery mock elements layouts'] },
-                            { id: 's3', title: 'Social Media Designs', icon: 'fa-solid fa-hashtag', desc: 'Scroll-stopping templates, dynamic promotional graphics, and matching layout banners that convert users.', actionLabel: 'Upgrade Your Feed', features: ['High performance platform banners', 'Bespoke custom grid designs', 'Editable native canvas files setups'] }
-                        ];
-                        localStorage.setItem('bc_local_services', JSON.stringify(srv));
-                    }
-                    if (!localStorage.getItem('bc_local_plans')) {
-                        const pl = [
-                            { id: 'plan_1', name: 'Plan 1: Kickstarter', price: '7999', desc: 'Best for new startups trying to baseline guidelines with simple parameters.', actionLabel: 'Choose Kickstarter Pack', features: ['Professional Logo (3 Concepts)', 'Standard Corporate Stationery', '3 Custom Social media posts graphics'], isCustom: false, orderIndex: 1 },
-                            { id: 'plan_2', name: 'Plan 2: Growth Edge', price: '18999', desc: 'Designed for brands seeking dynamic overhaul makeovers.', actionLabel: 'Lock Growth Edge Deal', features: ['Master Brand Identity book', '10 specialized post layout templates', 'Infinite reviews satisfaction promise'], isCustom: false, orderIndex: 2 },
-                            { id: 'plan_3', name: 'Plan 3: Elite Brand', price: '29999', desc: 'Complete enterprise UI/UX design structures mapping.', actionLabel: 'Acquire Elite Experience', features: ['Premium Book layout guides', 'Full UI/UX Concept (5 unique screens)', '1-Month high priority support timelines'], isCustom: false, orderIndex: 3 },
-                            { id: 'plan_4', name: 'Plan 4: Bespoke Retainer', price: 'Custom Pricing', desc: 'Bespoke proposal systems mapped tailored on retainer frameworks.', actionLabel: 'Inquire Custom Proposal', features: ['Bespoke Custom Scope of Work', 'Flexible execution budgets options', 'Dedicated creative point-of-contact access'], isCustom: true, orderIndex: 4 }
-                        ];
-                        localStorage.setItem('bc_local_plans', JSON.stringify(pl));
-                    }
-                    if (!localStorage.getItem('bc_local_projects')) {
-                        const prj = [
-                            { id: 'p1', title: 'Zenith Fintech Labs', category: 'branding', time: 'Delivered in 8 Days', text: 'Highly premium minimal brand book along with detailed corporate palettes.', gradient: 'from-violet-600 to-indigo-900' },
-                            { id: 'p2', title: 'Aero Logistics AI', category: 'uiux', time: 'Interactive Figma Flow', text: 'Crafted clean responsive platform architecture optimizing logistics performance tracking.', gradient: 'from-cyan-600 to-emerald-900' }
-                        ];
-                        localStorage.setItem('bc_local_projects', JSON.stringify(prj));
-                    }
-                    this.services = JSON.parse(localStorage.getItem('bc_local_services'));
-                    this.plans = JSON.parse(localStorage.getItem('bc_local_plans')).sort((a,b)=>a.orderIndex - b.orderIndex);
-                    this.projects = JSON.parse(localStorage.getItem('bc_local_projects'));
-                    this.popularPlanId = localStorage.getItem('bc_local_popular_plan_id') || 'plan_2';
-                    this.leads = JSON.parse(localStorage.getItem('bc_local_leads') || '[]');
-                },
+                    // Persist locally so it works immediately without Firebase setup
+                    const existingLocalLeads = JSON.parse(localStorage.getItem('bc_local_leads') || '[]');
+                    existingLocalLeads.push(newLead);
+                    localStorage.setItem('bc_local_leads', JSON.stringify(existingLocalLeads));
 
-                async startEngine() {
+                    // Push to Live Firebase cloud database if config exists
                     if (window.dbUtils && window.dbUtils.isConfigured()) {
                         try {
-                            await window.dbUtils.initAuth(); this.isFirebaseLive = true;
-                            window.dbUtils.onSnapshot(window.dbUtils.getLeadsCollection(), (snap) => {
-                                let t = []; snap.forEach(d => t.push({ id: d.id, ...d.data() })); this.leads = t;
-                            });
-                            window.dbUtils.onSnapshot(window.dbUtils.getProjectsCollection(), (snap) => {
-                                let t = []; snap.forEach(d => t.push({ id: d.id, ...d.data() })); this.projects = t;
-                            });
-                            window.dbUtils.onSnapshot(window.dbUtils.getServicesCollection(), (snap) => {
-                                let t = []; snap.forEach(d => t.push({ id: d.id, ...d.data() })); if(t.length) this.services = t;
-                            });
-                            window.dbUtils.onSnapshot(window.dbUtils.getPlansCollection(), (snap) => {
-                                let t = []; snap.forEach(d => t.push({ id: d.id, ...d.data() })); if(t.length) this.plans = t.sort((a,b)=>a.orderIndex-b.orderIndex);
-                            });
-                            window.dbUtils.onSnapshot(window.dbUtils.getPopularPlanDoc(), (d) => {
-                                if(d.exists()) this.popularPlanId = d.data().popularPlanId;
-                            });
-                        } catch(e) { console.warn("Sandbox local persistence fallback system active."); }
+                            await window.dbUtils.addDoc(window.dbUtils.getLeadsCollection(), newLead);
+                        } catch (e) {
+                            console.error("Firebase live push failed.", e);
+                        }
                     }
+
+                    this.contactSuccess = true;
+                    this.clearFormInputs();
                 },
 
-                openOfferModal(p) { this.modalPlanName = p.name; this.showModal = true; },
-                async submitModalLead() { await this.saveLeadObject(this.formInput.name, this.formInput.phone, 'modal@leads.com', `Modal proposal for packet ${this.modalPlanName}`, this.clientBudget, this.modalPlanName); this.showModal = false; this.contactSuccess = true; },
-                async submitClientBrief() { await this.saveLeadObject(this.formInput.name, this.formInput.phone, this.formInput.email, this.formInput.desc, this.clientBudget, 'Inquiry Brief Panel'); this.contactSuccess = true; },
-                
-                async saveLeadObject(name, phone, email, desc, budget, plan) {
-                    const payload = { id: 'l_'+Date.now(), name, phone, email, desc, budget, plan, timestamp: new Date().toISOString() };
-                    this.leads.push(payload); localStorage.setItem('bc_local_leads', JSON.stringify(this.leads));
-                    if (this.isFirebaseLive) { try { await window.dbUtils.setDoc(window.dbUtils.doc(window.dbUtils.getLeadsCollection(), payload.id), payload); } catch(e){} }
-                    this.formInput = { name: '', phone: '', email: '', desc: '' };
-                },
-
-                handleLogin() {
-                    if (this.adminUser === 'admin' && this.adminPass === 'brandcraftadmin123') {
-                        this.isLoggedIn = true; sessionStorage.setItem('brandcraft_logged', 'true');
-                    }
-                },
-                logout() { this.isLoggedIn = false; sessionStorage.removeItem('brandcraft_logged'); },
-                async deleteLead(id) {
-                    this.leads = this.leads.filter(l=>l.id !== id); localStorage.setItem('bc_local_leads', JSON.stringify(this.leads));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.deleteDoc(window.dbUtils.doc(window.dbUtils.getLeadsCollection(), id)); }catch(e){} }
-                },
-
-                // CRUD SERVICE COMMANDS
-                openNewServiceForm() { this.serviceFormEditMode = false; this.serviceForm = { id: 'srv_'+Date.now(), title: '', icon: 'fa-solid fa-shapes', desc: '', actionLabel: 'Inquire Concept', featuresInput: '' }; this.showServiceForm = true; },
-                editService(svc) { this.serviceFormEditMode = true; this.serviceForm = { id: svc.id, title: svc.title, icon: svc.icon, desc: svc.desc, actionLabel: svc.actionLabel||'Inquire', featuresInput: svc.features?svc.features.join(', '):'' }; this.showServiceForm = true; },
-                async saveService() {
-                    const payload = { id: this.serviceForm.id, title: this.serviceForm.title, icon: this.serviceForm.icon, desc: this.serviceForm.desc, actionLabel: this.serviceForm.actionLabel, features: this.serviceForm.featuresInput.split(',').map(x=>x.trim()).filter(x=>x!=='') };
-                    if(this.serviceFormEditMode) this.services = this.services.map(s=>s.id === payload.id ? payload : s); else this.services.push(payload);
-                    localStorage.setItem('bc_local_services', JSON.stringify(this.services));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.setDoc(window.dbUtils.doc(window.dbUtils.getServicesCollection(), payload.id), payload); }catch(e){} }
-                    this.showServiceForm = false;
-                },
-                async deleteService(id) {
-                    this.services = this.services.filter(s=>s.id !== id); localStorage.setItem('bc_local_services', JSON.stringify(this.services));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.deleteDoc(window.dbUtils.doc(window.dbUtils.getServicesCollection(), id)); }catch(e){} }
-                },
-
-                // CRUD PLANS COMMANDS
-                openNewPlanForm() { this.planFormEditMode = false; this.planForm = { id: 'plan_'+Date.now(), name: '', price: '', desc: '', actionLabel: 'Book Packet', isCustom: false, featuresInput: '' }; this.showPlanForm = true; },
-                editPlan(p) { this.planFormEditMode = true; this.planForm = { id: p.id, name: p.name, price: p.price, desc: p.desc, actionLabel: p.actionLabel||'Book', isCustom: p.isCustom||false, featuresInput: p.features?p.features.join(', '):'' }; this.showPlanForm = true; },
-                async savePlan() {
-                    const payload = { id: this.planForm.id, name: this.planForm.name, price: this.planForm.price, isCustom: this.planForm.isCustom, desc: this.planForm.desc, actionLabel: this.planForm.actionLabel, features: this.planForm.featuresInput.split(',').map(x=>x.trim()).filter(x=>x!==''), orderIndex: this.planFormEditMode ? (this.plans.find(x=>x.id===this.planForm.id)?.orderIndex||5) : (this.plans.length+1) };
-                    if(this.planFormEditMode) this.plans = this.plans.map(p=>p.id === payload.id ? payload : p); else this.plans.push(payload);
-                    this.plans = this.plans.sort((a,b)=>a.orderIndex - b.orderIndex); localStorage.setItem('bc_local_plans', JSON.stringify(this.plans));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.setDoc(window.dbUtils.doc(window.dbUtils.getPlansCollection(), payload.id), payload); }catch(e){} }
-                    this.showPlanForm = false;
-                },
-                async deletePlan(id) {
-                    this.plans = this.plans.filter(p=>p.id !== id); localStorage.setItem('bc_local_plans', JSON.stringify(this.plans));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.deleteDoc(window.dbUtils.doc(window.dbUtils.getPlansCollection(), id)); }catch(e){} }
-                },
-                async savePopularPlanSelection() {
-                    localStorage.setItem('bc_local_popular_plan_id', this.popularPlanId);
-                    if(this.isFirebaseLive) { try { await window.dbUtils.setDoc(window.dbUtils.getPopularPlanDoc(), { popularPlanId: this.popularPlanId }); }catch(e){} }
-                },
-
-                // CRUD PORTFOLIO COMMANDS
-                async addProject() {
-                    const payload = { id: 'p_'+Date.now(), title: this.newProjTitle, category: this.newProjCategory, time: this.newProjTime, text: this.newProjText, gradient: this.newProjGradient };
-                    this.projects.push(payload); localStorage.setItem('bc_local_projects', JSON.stringify(this.projects));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.setDoc(window.dbUtils.doc(window.dbUtils.getProjectsCollection(), payload.id), payload); }catch(e){} }
-                    this.newProjTitle = ''; this.newProjText = '';
-                },
-                async deleteProject(id) {
-                    this.projects = this.projects.filter(p=>p.id !== id); localStorage.setItem('bc_local_projects', JSON.stringify(this.projects));
-                    if(this.isFirebaseLive) { try { await window.dbUtils.deleteDoc(window.dbUtils.doc(window.dbUtils.getProjectsCollection(), id)); }catch(e){} }
+                clearFormInputs() {
+                    this.formName = '';
+                    this.formEmail = '';
+                    this.formPhone = '';
+                    this.formDesc = '';
+                    this.formServices = [];
+                    this.modalPlanName = '';
                 }
             }
         }
